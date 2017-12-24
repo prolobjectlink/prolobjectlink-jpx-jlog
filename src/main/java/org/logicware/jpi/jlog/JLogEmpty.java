@@ -27,38 +27,33 @@ import ubc.cs.JLog.Terms.jNullList;
 
 public class JLogEmpty extends JLogList implements PrologList {
 
-    protected JLogEmpty(PrologProvider provider) {
-	super(provider);
-    }
+	protected JLogEmpty(PrologProvider provider) {
+		super(provider);
+	}
 
-    @Override
-    public PrologTerm[] getArguments() {
-	return new PrologTerm[0];
-    }
+	@Override
+	public PrologTerm[] getArguments() {
+		return new PrologTerm[0];
+	}
 
-    @Override
-    public int getArity() {
-	return 0;
-    }
+	@Override
+	public int getArity() {
+		return 0;
+	}
 
-    @Override
-    public String getFunctor() {
-	return ((jNullList) value).getName();
-    }
+	@Override
+	public String getFunctor() {
+		return ((jNullList) value).getName();
+	}
 
-    @Override
-    public String getIndicator() {
-	return getFunctor() + "/" + getArity();
-    }
+	@Override
+	public String getIndicator() {
+		return getFunctor() + "/" + getArity();
+	}
 
-    @Override
-    public boolean hasIndicator(String functor, int arity) {
-	return getFunctor().equals(functor) && getArity() == arity;
-    }
-
-    @Override
-    public PrologTerm clone() {
-	return new JLogEmpty(provider);
-    }
+	@Override
+	public boolean hasIndicator(String functor, int arity) {
+		return getFunctor().equals(functor) && getArity() == arity;
+	}
 
 }

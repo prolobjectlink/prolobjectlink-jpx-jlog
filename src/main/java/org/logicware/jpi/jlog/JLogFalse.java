@@ -26,40 +26,30 @@ import ubc.cs.JLog.Terms.jAtom;
 
 public final class JLogFalse extends JLogTerm implements PrologTerm {
 
-    static final String FALSE_STR = "false";
+	static final String FALSE_STR = "false";
 
-    protected JLogFalse(PrologProvider provider) {
-	super(FALSE_TYPE, provider, new jAtom(FALSE_STR));
-    }
+	protected JLogFalse(PrologProvider provider) {
+		super(FALSE_TYPE, provider, new jAtom(FALSE_STR));
+	}
 
-    @Override
-    public PrologTerm[] getArguments() {
-	return new PrologTerm[0];
-    }
+	public PrologTerm[] getArguments() {
+		return new PrologTerm[0];
+	}
 
-    @Override
-    public int getArity() {
-	return 0;
-    }
+	public int getArity() {
+		return 0;
+	}
 
-    @Override
-    public String getFunctor() {
-	return "" + value + "";
-    }
+	public String getFunctor() {
+		return "" + value + "";
+	}
 
-    @Override
-    public String getIndicator() {
-	return getFunctor() + "/" + getArity();
-    }
+	public String getIndicator() {
+		return getFunctor() + "/" + getArity();
+	}
 
-    @Override
-    public boolean hasIndicator(String functor, int arity) {
-	return getFunctor().equals(functor) && getArity() == arity;
-    }
-
-    @Override
-    public PrologTerm clone() {
-	return new JLogFalse(provider);
-    }
+	public boolean hasIndicator(String functor, int arity) {
+		return getFunctor().equals(functor) && getArity() == arity;
+	}
 
 }

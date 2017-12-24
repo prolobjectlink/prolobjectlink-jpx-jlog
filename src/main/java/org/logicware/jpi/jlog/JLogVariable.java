@@ -30,59 +30,48 @@ import ubc.cs.JLog.Terms.jVariable;
 
 public class JLogVariable extends JLogTerm implements PrologVariable {
 
-    public JLogVariable(PrologProvider provider) {
-	super(VARIABLE_TYPE, provider, vIdexer++);
-    }
+	public JLogVariable(PrologProvider provider) {
+		super(VARIABLE_TYPE, provider, vIdexer++);
+	}
 
-    public JLogVariable(PrologProvider provider, String name) {
-	super(VARIABLE_TYPE, provider, name, vIdexer++);
-    }
+	public JLogVariable(PrologProvider provider, String name) {
+		super(VARIABLE_TYPE, provider, name, vIdexer++);
+	}
 
-    public boolean isAnonymous() {
-	return !((jVariable) value).isNamed();
-    }
+	public boolean isAnonymous() {
+		return !((jVariable) value).isNamed();
+	}
 
-    public String getName() {
-	return ((jVariable) value).getName();
-    }
+	public String getName() {
+		return ((jVariable) value).getName();
+	}
 
-    public void setName(String name) {
-	this.value = new jVariable(name);
-    }
+	public void setName(String name) {
+		this.value = new jVariable(name);
+	}
 
-    @Override
-    public PrologTerm[] getArguments() {
-	return new JLogVariable[0];
-    }
+	public PrologTerm[] getArguments() {
+		return new JLogVariable[0];
+	}
 
-    @Override
-    public int getArity() {
-	throw new ArityError(this);
-    }
+	public int getArity() {
+		throw new ArityError(this);
+	}
 
-    @Override
-    public String getFunctor() {
-	throw new FunctorError(this);
-    }
+	public String getFunctor() {
+		throw new FunctorError(this);
+	}
 
-    @Override
-    public String getIndicator() {
-	throw new IndicatorError(this);
-    }
+	public String getIndicator() {
+		throw new IndicatorError(this);
+	}
 
-    @Override
-    public boolean hasIndicator(String functor, int arity) {
-	throw new IndicatorError(this);
-    }
+	public boolean hasIndicator(String functor, int arity) {
+		throw new IndicatorError(this);
+	}
 
-    public int getPosition() {
-	throw new UnsupportedOperationException("getPosition()");
-    }
-
-    @Override
-    public PrologTerm clone() {
-	String n = getName();
-	return new JLogVariable(provider, n);
-    }
+	public int getPosition() {
+		throw new UnsupportedOperationException("getPosition()");
+	}
 
 }

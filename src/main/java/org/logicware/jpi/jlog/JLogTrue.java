@@ -26,38 +26,28 @@ import ubc.cs.JLog.Terms.jTrue;
 
 public final class JLogTrue extends JLogTerm implements PrologTerm {
 
-    protected JLogTrue(PrologProvider provider) {
-	super(TRUE_TYPE, provider, jTrue.TRUE);
-    }
+	protected JLogTrue(PrologProvider provider) {
+		super(TRUE_TYPE, provider, jTrue.TRUE);
+	}
 
-    @Override
-    public PrologTerm[] getArguments() {
-	return new PrologTerm[0];
-    }
+	public PrologTerm[] getArguments() {
+		return new PrologTerm[0];
+	}
 
-    @Override
-    public int getArity() {
-	return 0;
-    }
+	public int getArity() {
+		return 0;
+	}
 
-    @Override
-    public String getFunctor() {
-	return "" + value + "";
-    }
+	public String getFunctor() {
+		return "" + value + "";
+	}
 
-    @Override
-    public String getIndicator() {
-	return getFunctor() + "/" + getArity();
-    }
+	public String getIndicator() {
+		return getFunctor() + "/" + getArity();
+	}
 
-    @Override
-    public boolean hasIndicator(String functor, int arity) {
-	return getFunctor().equals(functor) && getArity() == arity;
-    }
-
-    @Override
-    public PrologTerm clone() {
-	return new JLogTrue(provider);
-    }
+	public boolean hasIndicator(String functor, int arity) {
+		return getFunctor().equals(functor) && getArity() == arity;
+	}
 
 }

@@ -32,33 +32,33 @@ import ubc.cs.JLog.Terms.jTerm;
 
 public abstract class JLogCompound extends JLogTerm {
 
-    protected JLogCompound(int type, PrologProvider provider) {
-	super(type, provider);
-    }
-
-    protected JLogCompound(int type, PrologProvider provider, jTerm value) {
-	super(type, provider, value);
-    }
-
-    protected static final String SIMPLE_ATOM_REGEX = ".|[a-z][A-Za-z0-9_]*";
-
-    protected final jPredicateTerms emptyBody = new jPredicateTerms();
-    protected final jEquivalenceMapping equivalence = new jEquivalenceMapping();
-
-    protected final jList adaptList(PrologTerm[] arguments) {
-	jList pList = jNullList.NULL_LIST;
-	for (int i = arguments.length - 1; i >= 0; --i) {
-	    pList = new jListPair(fromTerm(arguments[i], jTerm.class), pList);
+	protected JLogCompound(int type, PrologProvider provider) {
+		super(type, provider);
 	}
-	return pList;
-    }
 
-    protected final jCompoundTerm adaptCompound(PrologTerm[] arguments) {
-	jCompoundTerm compound = new jCompoundTerm(arguments.length);
-	for (PrologTerm iPrologTerm : arguments) {
-	    compound.addTerm(fromTerm(iPrologTerm, jTerm.class));
+	protected JLogCompound(int type, PrologProvider provider, jTerm value) {
+		super(type, provider, value);
 	}
-	return compound;
-    }
+
+	protected static final String SIMPLE_ATOM_REGEX = ".|[a-z][A-Za-z0-9_]*";
+
+	protected final jPredicateTerms emptyBody = new jPredicateTerms();
+	protected final jEquivalenceMapping equiMap = new jEquivalenceMapping();
+
+	protected final jList adaptList(PrologTerm[] arguments) {
+		jList pList = jNullList.NULL_LIST;
+		for (int i = arguments.length - 1; i >= 0; --i) {
+			pList = new jListPair(fromTerm(arguments[i], jTerm.class), pList);
+		}
+		return pList;
+	}
+
+	protected final jCompoundTerm adaptCompound(PrologTerm[] arguments) {
+		jCompoundTerm compound = new jCompoundTerm(arguments.length);
+		for (PrologTerm iPrologTerm : arguments) {
+			compound.addTerm(fromTerm(iPrologTerm, jTerm.class));
+		}
+		return compound;
+	}
 
 }

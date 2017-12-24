@@ -38,110 +38,110 @@ import ubc.cs.JLog.Terms.jVariable;
  */
 final class JLogTermUtil {
 
-    // static final boolean unify(JLogTerm thisTerm, JLogTerm otherTerm) {
-    // return thisTerm.unify(otherTerm, new Stack<PrologTerm>());
-    // }
-    //
-    // static final boolean unify(JLogTerm thisTerm, JLogTerm otherTerm,
-    // Stack<PrologTerm> stack) {
-    // return thisTerm.unify(otherTerm, stack);
-    // }
+	// static final boolean unify(JLogTerm thisTerm, JLogTerm otherTerm) {
+	// return thisTerm.unify(otherTerm, new Stack<PrologTerm>());
+	// }
+	//
+	// static final boolean unify(JLogTerm thisTerm, JLogTerm otherTerm,
+	// Stack<PrologTerm> stack) {
+	// return thisTerm.unify(otherTerm, stack);
+	// }
 
-    static final boolean unify(jTerm thisTerm, jTerm otherTerm) {
-	return unify(thisTerm, otherTerm, new Stack<jVariable>());
-    }
-
-    static final boolean unify(jTerm thisTerm, jTerm otherTerm, Stack<jVariable> stack) {
-
-	// if left term is variable
-	if (thisTerm instanceof jVariable) {
-	    jVariable thisVariable = (jVariable) thisTerm;
-
-	    // if left term is free variable
-	    if (!thisVariable.isBound()) {
-		thisVariable.setBinding(otherTerm);
-		stack.push(thisVariable);
-		return true;
-	    }
-
-	    // if left term is variable bound
-	    return unify(thisVariable.getTerm(), otherTerm, stack);
+	static final boolean unify(jTerm thisTerm, jTerm otherTerm) {
+		return unify(thisTerm, otherTerm, new Stack<jVariable>());
 	}
 
-	// if right term is variable
-	else if (otherTerm instanceof jVariable) {
-	    jVariable otherVariable = (jVariable) otherTerm;
+	static final boolean unify(jTerm thisTerm, jTerm otherTerm, Stack<jVariable> stack) {
 
-	    // if right term is free variable
-	    if (!otherVariable.isBound()) {
-		otherVariable.setBinding(thisTerm);
-		stack.push(otherVariable);
-		return true;
-	    }
+		// if left term is variable
+		if (thisTerm instanceof jVariable) {
+			jVariable thisVariable = (jVariable) thisTerm;
 
-	    // if right term is variable bound
-	    return unify(otherVariable.getTerm(), thisTerm, stack);
-	}
+			// if left term is free variable
+			if (!thisVariable.isBound()) {
+				thisVariable.setBinding(otherTerm);
+				stack.push(thisVariable);
+				return true;
+			}
 
-	// if at least term is a integer then check equivalence
-	else if ((thisTerm instanceof jInteger) || (otherTerm instanceof jInteger)) {
-	    return thisTerm.equals(otherTerm);
-	}
-
-	// if at least term is a real then check equivalence
-	else if ((thisTerm instanceof jReal) || (otherTerm instanceof jReal)) {
-	    return thisTerm.equals(otherTerm);
-	}
-
-	else if ((thisTerm instanceof jCompoundTerm) && (otherTerm instanceof jCompoundTerm)) {
-	    jCompoundTerm thisAtom = (jCompoundTerm) thisTerm;
-	    jCompoundTerm otherAtom = (jCompoundTerm) otherTerm;
-	    int thisArity = thisAtom.size();
-	    int otherArity = otherAtom.size();
-	    String thisFunctor = thisAtom.getName();
-	    String otherFunctor = otherAtom.getName();
-	    if (thisFunctor.equals(otherFunctor) && thisArity == otherArity) {
-		for (int i = 0; i < thisArity; i++) {
-		    if (!unify(thisAtom.elementAt(i), otherAtom.elementAt(i), stack)) {
-			return false;
-		    }
+			// if left term is variable bound
+			return unify(thisVariable.getTerm(), otherTerm, stack);
 		}
-		return true;
-	    }
-	    return false;
-	}
 
-	else if ((thisTerm instanceof jAtom) && (otherTerm instanceof jAtom)) {
-	    // jAtom thisAtom = (jAtom) thisTerm;
-	    // jAtom otherAtom = (jAtom) otherTerm;
-	    // return thisAtom.equals(otherAtom);
-	    return thisTerm.getName().equals(otherTerm.getName());
-	    // return thisTerm.equals(otherTerm);
-	}
+		// if right term is variable
+		else if (otherTerm instanceof jVariable) {
+			jVariable otherVariable = (jVariable) otherTerm;
 
-	// if both terms are predicate
-	else if ((thisTerm instanceof jPredicate) && (otherTerm instanceof jPredicate)) {
+			// if right term is free variable
+			if (!otherVariable.isBound()) {
+				otherVariable.setBinding(thisTerm);
+				stack.push(otherVariable);
+				return true;
+			}
 
-	    jPredicate thisPredicate = (jPredicate) thisTerm;
-	    jPredicate otherPredicate = (jPredicate) otherTerm;
-
-	    int thisArity = thisPredicate.getArity();
-	    int otherArity = otherPredicate.getArity();
-	    String thisFunctor = thisPredicate.getName();
-	    String otherFunctor = otherPredicate.getName();
-	    if (thisFunctor.equals(otherFunctor) && thisArity == otherArity) {
-		jCompoundTerm thisArguments = thisPredicate.getArguments();
-		jCompoundTerm otherArguments = otherPredicate.getArguments();
-		for (int i = 0; i < thisArity; i++) {
-		    if (!unify(thisArguments, otherArguments, stack)) {
-			return false;
-		    }
+			// if right term is variable bound
+			return unify(otherVariable.getTerm(), thisTerm, stack);
 		}
-		return true;
-	    }
-	}
 
-	return false;
-    }
+		// if at least term is a integer then check equivalence
+		else if ((thisTerm instanceof jInteger) || (otherTerm instanceof jInteger)) {
+			return thisTerm.equals(otherTerm);
+		}
+
+		// if at least term is a real then check equivalence
+		else if ((thisTerm instanceof jReal) || (otherTerm instanceof jReal)) {
+			return thisTerm.equals(otherTerm);
+		}
+
+		else if ((thisTerm instanceof jCompoundTerm) && (otherTerm instanceof jCompoundTerm)) {
+			jCompoundTerm thisAtom = (jCompoundTerm) thisTerm;
+			jCompoundTerm otherAtom = (jCompoundTerm) otherTerm;
+			int thisArity = thisAtom.size();
+			int otherArity = otherAtom.size();
+			String thisFunctor = thisAtom.getName();
+			String otherFunctor = otherAtom.getName();
+			if (thisFunctor.equals(otherFunctor) && thisArity == otherArity) {
+				for (int i = 0; i < thisArity; i++) {
+					if (!unify(thisAtom.elementAt(i), otherAtom.elementAt(i), stack)) {
+						return false;
+					}
+				}
+				return true;
+			}
+			return false;
+		}
+
+		else if ((thisTerm instanceof jAtom) && (otherTerm instanceof jAtom)) {
+			// jAtom thisAtom = (jAtom) thisTerm;
+			// jAtom otherAtom = (jAtom) otherTerm;
+			// return thisAtom.equals(otherAtom);
+			return thisTerm.getName().equals(otherTerm.getName());
+			// return thisTerm.equals(otherTerm);
+		}
+
+		// if both terms are predicate
+		else if ((thisTerm instanceof jPredicate) && (otherTerm instanceof jPredicate)) {
+
+			jPredicate thisPredicate = (jPredicate) thisTerm;
+			jPredicate otherPredicate = (jPredicate) otherTerm;
+
+			int thisArity = thisPredicate.getArity();
+			int otherArity = otherPredicate.getArity();
+			String thisFunctor = thisPredicate.getName();
+			String otherFunctor = otherPredicate.getName();
+			if (thisFunctor.equals(otherFunctor) && thisArity == otherArity) {
+				jCompoundTerm thisArguments = thisPredicate.getArguments();
+				jCompoundTerm otherArguments = otherPredicate.getArguments();
+				for (int i = 0; i < thisArity; i++) {
+					if (!unify(thisArguments, otherArguments, stack)) {
+						return false;
+					}
+				}
+				return true;
+			}
+		}
+
+		return false;
+	}
 
 }

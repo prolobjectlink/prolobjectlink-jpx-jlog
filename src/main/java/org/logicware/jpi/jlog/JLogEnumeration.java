@@ -27,24 +27,24 @@ import ubc.cs.JLog.Terms.jTerm;
 
 final class JLogEnumeration implements Enumeration<jTerm> {
 
-    private Enumeration<?> e;
+	private Enumeration<?> e;
 
-    JLogEnumeration(jList list) {
-	if (list != null) {
-	    this.e = list.elements(new iTermToObject() {
-		public Object createObjectFromTerm(jTerm term) {
-		    return term;
+	JLogEnumeration(jList list) {
+		if (list != null) {
+			this.e = list.elements(new iTermToObject() {
+				public Object createObjectFromTerm(jTerm term) {
+					return term;
+				}
+			});
 		}
-	    });
 	}
-    }
 
-    public boolean hasMoreElements() {
-	return e != null && e.hasMoreElements();
-    }
+	public boolean hasMoreElements() {
+		return e != null && e.hasMoreElements();
+	}
 
-    public jTerm nextElement() {
-	return e != null ? (jTerm) e.nextElement() : null;
-    }
+	public jTerm nextElement() {
+		return e != null ? (jTerm) e.nextElement() : null;
+	}
 
 }

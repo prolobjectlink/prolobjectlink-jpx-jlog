@@ -27,20 +27,18 @@ import org.logicware.jpi.jlog.JLogProvider;
 
 public final class JPIJLogContainers extends JPIContainers {
 
-    static final Containers instance = new JPIJLogContainers();
+	static final Containers instance = new JPIJLogContainers();
 
-    protected JPIJLogContainers() {
-	super(new Properties(), new JLogProvider());
-    }
+	protected JPIJLogContainers() {
+		super(new Properties(), new JLogProvider());
+	}
 
-    @Override
-    public Containers getInstance() {
-	return instance;
-    }
+	public Containers getInstance() {
+		return instance;
+	}
 
-    @Override
-    public ContainerFactory createContainerFactory() {
-	return new JPIJLogContainerFactory(getProperties(), getProvider());
-    }
+	public ContainerFactory createContainerFactory() {
+		return new JPIJLogContainerFactory(getProperties(), getProvider());
+	}
 
 }

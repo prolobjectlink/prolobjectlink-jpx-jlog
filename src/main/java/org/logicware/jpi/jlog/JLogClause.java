@@ -25,11 +25,11 @@ import org.logicware.jpi.PrologTerm;
 
 public class JLogClause extends AbstractClause implements PrologClause {
 
-    protected JLogClause(PrologTerm head, boolean dynamic, boolean multifile, boolean discontiguous) {
-	super(head, dynamic, multifile, discontiguous);
-    }
+	protected JLogClause(PrologTerm head, boolean dynamic, boolean multifile, boolean discontiguous) {
+		super(head, dynamic, multifile, discontiguous);
+	}
 
-    protected JLogClause(PrologTerm head, PrologTerm body, boolean dynamic, boolean multifile, boolean discontiguous) {
-	super(head, body, dynamic, multifile, discontiguous);
-    }
+	protected JLogClause(PrologTerm head, PrologTerm body, boolean dynamic, boolean multifile, boolean discontiguous) {
+		super(head, body, dynamic, multifile, discontiguous);
+	}
 }

@@ -29,77 +29,79 @@ import ubc.cs.JLog.Terms.jTerm;
 
 public class JLogStructure extends JLogCompound implements PrologStructure {
 
-    protected JLogStructure(PrologProvider provider, String functor, PrologTerm... arguments) {
-	super(STRUCTURE_TYPE, provider);
-	value = new jPredicate(functor, adaptCompound(arguments));
-    }
-
-    protected JLogStructure(PrologProvider provider, String functor, jCompoundTerm arguments) {
-	super(STRUCTURE_TYPE, provider);
-	value = new jPredicate(functor, arguments);
-    }
-
-    protected JLogStructure(PrologProvider provider, String functor, jTerm... arguments) {
-	super(STRUCTURE_TYPE, provider);
-	jCompoundTerm compound = new jCompoundTerm(arguments.length);
-	for (int i = 0; i < arguments.length; i++) {
-	    compound.addTerm(arguments[i]);
+	protected JLogStructure(PrologProvider provider, String functor, PrologTerm... arguments) {
+		super(STRUCTURE_TYPE, provider);
+		value = new jPredicate(functor, adaptCompound(arguments));
 	}
-	value = new jPredicate(functor, compound);
-    }
 
-    private void checkIndexOutOfBound(int index, int lenght) {
-	if (index < 0 || index > lenght) {
-	    throw new ArrayIndexOutOfBoundsException(index);
+	protected JLogStructure(PrologProvider provider, String functor, jCompoundTerm arguments) {
+		super(STRUCTURE_TYPE, provider);
+		value = new jPredicate(functor, arguments);
 	}
-    }
 
-    public PrologTerm getArgument(int index) {
-	jPredicate structure = (jPredicate) value;
-	jCompoundTerm compound = structure.getArguments();
-	checkIndexOutOfBound(index, compound.size());
-	return toTerm(compound.elementAt(index), PrologTerm.class);
-    }
-
-    @Override
-    public PrologTerm[] getArguments() {
-	jPredicate structure = (jPredicate) value;
-	int arity = structure.getArity();
-	PrologTerm[] arguments = new PrologTerm[arity];
-	jCompoundTerm compound = structure.getArguments();
-	for (int i = 0; i < arity; i++) {
-	    arguments[i] = toTerm(compound.elementAt(i), PrologTerm.class);
+	protected JLogStructure(PrologProvider provider, String functor, jTerm... arguments) {
+		super(STRUCTURE_TYPE, provider);
+		jCompoundTerm compound = new jCompoundTerm(arguments.length);
+		for (int i = 0; i < arguments.length; i++) {
+			compound.addTerm(arguments[i]);
+		}
+		value = new jPredicate(functor, compound);
 	}
-	return arguments;
-    }
 
-    @Override
-    public int getArity() {
-	jPredicate structure = (jPredicate) value;
-	return structure.getArity();
-    }
+	protected JLogStructure(PrologProvider provider, PrologTerm left, String operator, PrologTerm right) {
+		super(STRUCTURE_TYPE, provider);
+		PrologTerm[] operands = { left, right };
+		value = new jPredicate(operator, adaptCompound(operands));
+	}
 
-    @Override
-    public String getFunctor() {
-	jPredicate structure = (jPredicate) value;
-	return structure.getName();
-    }
+	protected JLogStructure(PrologProvider provider, jTerm left, String functor, jTerm right) {
+		super(STRUCTURE_TYPE, provider);
+		jCompoundTerm compound = new jCompoundTerm(2);
+		compound.addTerm(left);
+		compound.addTerm(right);
+		value = new jPredicate(functor, compound);
+	}
 
-    @Override
-    public String getIndicator() {
-	return getFunctor() + "/" + getArity();
-    }
+	private void checkIndexOutOfBound(int index, int lenght) {
+		if (index < 0 || index > lenght) {
+			throw new ArrayIndexOutOfBoundsException(index);
+		}
+	}
 
-    @Override
-    public boolean hasIndicator(String functor, int arity) {
-	return getFunctor().equals(functor) && getArity() == arity;
-    }
+	public PrologTerm getArgument(int index) {
+		jPredicate structure = (jPredicate) value;
+		jCompoundTerm compound = structure.getArguments();
+		checkIndexOutOfBound(index, compound.size());
+		return toTerm(compound.elementAt(index), PrologTerm.class);
+	}
 
-    @Override
-    public PrologTerm clone() {
-	String f = getFunctor();
-	PrologTerm[] a = getArguments();
-	return new JLogStructure(provider, f, a);
-    }
+	public PrologTerm[] getArguments() {
+		jPredicate structure = (jPredicate) value;
+		int arity = structure.getArity();
+		PrologTerm[] arguments = new PrologTerm[arity];
+		jCompoundTerm compound = structure.getArguments();
+		for (int i = 0; i < arity; i++) {
+			arguments[i] = toTerm(compound.elementAt(i), PrologTerm.class);
+		}
+		return arguments;
+	}
+
+	public int getArity() {
+		jPredicate structure = (jPredicate) value;
+		return structure.getArity();
+	}
+
+	public String getFunctor() {
+		jPredicate structure = (jPredicate) value;
+		return structure.getName();
+	}
+
+	public String getIndicator() {
+		return getFunctor() + "/" + getArity();
+	}
+
+	public boolean hasIndicator(String functor, int arity) {
+		return getFunctor().equals(functor) && getArity() == arity;
+	}
 
 }

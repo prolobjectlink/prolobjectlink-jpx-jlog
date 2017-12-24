@@ -29,24 +29,22 @@ import org.logicware.jpi.jlog.JLogProvider;
 
 public final class JPIJLogDocuments extends JPIDocuments {
 
-    static final Documents instance = new JPIJLogDocuments();
+	static final Documents instance = new JPIJLogDocuments();
 
-    protected JPIJLogDocuments() {
-	super(new Properties(), new JLogProvider());
-    }
+	protected JPIJLogDocuments() {
+		super(new Properties(), new JLogProvider());
+	}
 
-    @Override
-    public Documents getInstance() {
-	return instance;
-    }
+	public Documents getInstance() {
+		return instance;
+	}
 
-    public Cache createCache() {
-	return new JPICache(getProvider());
-    }
+	public Cache createCache() {
+		return new JPICache(getProvider());
+	}
 
-    @Override
-    public ContainerFactory createContainerFactory() {
-	return new JPIJLogContainerFactory(getProperties(), getProvider());
-    }
+	public ContainerFactory createContainerFactory() {
+		return new JPIJLogContainerFactory(getProperties(), getProvider());
+	}
 
 }

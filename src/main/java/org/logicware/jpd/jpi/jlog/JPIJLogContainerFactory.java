@@ -27,20 +27,20 @@ import org.logicware.jpi.jlog.JLogProvider;
 
 public final class JPIJLogContainerFactory extends JPIContainerFactory {
 
-    public JPIJLogContainerFactory() {
-	this(new Properties());
-    }
+	public JPIJLogContainerFactory() {
+		this(new Properties());
+	}
 
-    public JPIJLogContainerFactory(Properties properties) {
-	super(properties, new JLogProvider());
-    }
+	public JPIJLogContainerFactory(Properties properties) {
+		super(properties, new JLogProvider());
+	}
 
-    public JPIJLogContainerFactory(Properties properties, PrologProvider provider) {
-	super(properties, provider);
-    }
+	public JPIJLogContainerFactory(Properties properties, PrologProvider provider) {
+		super(properties, provider);
+	}
 
-    public ContainerFactory createContainerFactory() {
-	return this;
-    }
+	public ContainerFactory createContainerFactory() {
+		return this;
+	}
 
 }

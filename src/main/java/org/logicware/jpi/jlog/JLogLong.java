@@ -33,75 +33,64 @@ import ubc.cs.JLog.Terms.jInteger;
 
 public class JLogLong extends JLogTerm implements PrologLong {
 
-    public JLogLong(PrologProvider provider) {
-	super(LONG_TYPE, provider, new jInteger(0));
-    }
+	public JLogLong(PrologProvider provider) {
+		super(LONG_TYPE, provider, new jInteger(0));
+	}
 
-    public JLogLong(PrologProvider provider, Number value) {
-	super(LONG_TYPE, provider, new jInteger(value.intValue()));
-    }
+	public JLogLong(PrologProvider provider, Number value) {
+		super(LONG_TYPE, provider, new jInteger(value.intValue()));
+	}
 
-    public PrologInteger getPrologInteger() {
-	return new JLogInteger(provider, getIntValue());
-    }
+	public PrologInteger getPrologInteger() {
+		return new JLogInteger(provider, getIntValue());
+	}
 
-    public PrologFloat getPrologFloat() {
-	return new JLogFloat(provider, getFloatValue());
-    }
+	public PrologFloat getPrologFloat() {
+		return new JLogFloat(provider, getFloatValue());
+	}
 
-    public PrologDouble getPrologDouble() {
-	return new JLogDouble(provider, getDoubleValue());
-    }
+	public PrologDouble getPrologDouble() {
+		return new JLogDouble(provider, getDoubleValue());
+	}
 
-    public PrologLong getPrologLong() {
-	return new JLogLong(provider, getLongValue());
-    }
+	public PrologLong getPrologLong() {
+		return new JLogLong(provider, getLongValue());
+	}
 
-    public long getLongValue() {
-	return (long) getIntValue();
-    }
+	public long getLongValue() {
+		return (long) getIntValue();
+	}
 
-    public double getDoubleValue() {
-	return (double) getIntValue();
-    }
+	public double getDoubleValue() {
+		return (double) getIntValue();
+	}
 
-    public int getIntValue() {
-	return ((jInteger) value).getIntegerValue();
-    }
+	public int getIntValue() {
+		return ((jInteger) value).getIntegerValue();
+	}
 
-    public float getFloatValue() {
-	return (float) getIntValue();
-    }
+	public float getFloatValue() {
+		return (float) getIntValue();
+	}
 
-    @Override
-    public PrologTerm[] getArguments() {
-	return new JLogLong[0];
-    }
+	public PrologTerm[] getArguments() {
+		return new JLogLong[0];
+	}
 
-    @Override
-    public int getArity() {
-	throw new ArityError(this);
-    }
+	public int getArity() {
+		throw new ArityError(this);
+	}
 
-    @Override
-    public String getFunctor() {
-	throw new FunctorError(this);
-    }
+	public String getFunctor() {
+		throw new FunctorError(this);
+	}
 
-    @Override
-    public String getIndicator() {
-	throw new IndicatorError(this);
-    }
+	public String getIndicator() {
+		throw new IndicatorError(this);
+	}
 
-    @Override
-    public boolean hasIndicator(String functor, int arity) {
-	throw new IndicatorError(this);
-    }
-
-    @Override
-    public PrologTerm clone() {
-	long l = getLongValue();
-	return new JLogLong(provider, l);
-    }
+	public boolean hasIndicator(String functor, int arity) {
+		throw new IndicatorError(this);
+	}
 
 }

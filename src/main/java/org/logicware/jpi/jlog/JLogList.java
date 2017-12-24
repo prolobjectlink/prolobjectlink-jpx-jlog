@@ -33,136 +33,125 @@ import ubc.cs.JLog.Terms.jTerm;
 
 public class JLogList extends JLogCompound implements PrologList {
 
-    protected JLogList(PrologProvider provider) {
-	super(LIST_TYPE, provider, jNullList.NULL_LIST);
-    }
-
-    protected JLogList(PrologProvider provider, PrologTerm[] arguments) {
-	super(LIST_TYPE, provider);
-	value = adaptList(arguments);
-    }
-
-    protected JLogList(PrologProvider provider, jTerm[] arguments) {
-	super(LIST_TYPE, provider);
-	value = jNullList.NULL_LIST;
-	for (int i = arguments.length - 1; i >= 0; --i) {
-	    value = new jListPair(arguments[i], value);
-	}
-    }
-
-    protected JLogList(PrologProvider provider, jTerm[] arguments, jTerm tail) {
-	super(LIST_TYPE, provider);
-	value = tail;
-	for (int i = arguments.length - 1; i >= 0; --i) {
-	    value = new jListPair(arguments[i], value);
-	}
-    }
-
-    protected JLogList(PrologProvider provider, PrologTerm[] arguments, PrologTerm tail) {
-	super(LIST_TYPE, provider);
-	value = fromTerm(tail, jTerm.class);
-	for (int i = arguments.length - 1; i >= 0; --i) {
-	    value = new jListPair(fromTerm(arguments[i], jTerm.class), value);
-	}
-    }
-
-    protected JLogList(PrologProvider provider, PrologTerm head, PrologTerm tail) {
-	super(LIST_TYPE, provider);
-	value = new jListPair(fromTerm(head, jTerm.class), fromTerm(tail, jTerm.class));
-    }
-
-    public int size() {
-	int size = 0;
-	jList list = ((jList) value);
-	Enumeration<?> enumeration = new JLogEnumeration(list);
-	while (enumeration.hasMoreElements()) {
-	    enumeration.nextElement();
-	    size++;
-	}
-	return size;
-    }
-
-    public void clear() {
-	value = jNullList.NULL_LIST;
-    }
-
-    public boolean isEmpty() {
-	return size() == 0;
-    }
-
-    public Iterator<PrologTerm> iterator() {
-	jListPair list = (jListPair) value;
-	return new JLogListIter(list);
-    }
-
-    public PrologTerm getHead() {
-	jListPair list = (jListPair) value;
-	return toTerm(list.getHead(), PrologTerm.class);
-    }
-
-    public PrologTerm getTail() {
-	jListPair list = (jListPair) value;
-	return toTerm(list.getTail(), PrologTerm.class);
-    }
-
-    @Override
-    public int getArity() {
-	return 2;
-    }
-
-    @Override
-    public String getFunctor() {
-	jListPair list = (jListPair) value;
-	return list.getName();
-    }
-
-    @Override
-    public String getIndicator() {
-	return getFunctor() + "/" + getArity();
-    }
-
-    @Override
-    public boolean hasIndicator(String functor, int arity) {
-	return getFunctor().equals(functor) && getArity() == arity;
-    }
-
-    @Override
-    public PrologTerm[] getArguments() {
-	int index = 0;
-	PrologTerm[] arguments = new PrologTerm[size()];
-	Iterator<PrologTerm> i = iterator();
-	while (i.hasNext()) {
-	    arguments[index++] = i.next();
-	}
-	return arguments;
-    }
-
-    @Override
-    public PrologTerm clone() {
-	PrologTerm[] array = getArguments();
-	return new JLogList(provider, array);
-    }
-
-    private final class JLogListIter implements Iterator<PrologTerm> {
-
-	private Enumeration<? extends jTerm> e;
-
-	private JLogListIter(jListPair list) {
-	    e = new JLogEnumeration(list);
+	protected JLogList(PrologProvider provider) {
+		super(LIST_TYPE, provider, jNullList.NULL_LIST);
 	}
 
-	public boolean hasNext() {
-	    return e.hasMoreElements();
+	protected JLogList(PrologProvider provider, PrologTerm[] arguments) {
+		super(LIST_TYPE, provider);
+		value = adaptList(arguments);
 	}
 
-	public PrologTerm next() {
-	    return toTerm(e.nextElement(), PrologTerm.class);
+	protected JLogList(PrologProvider provider, jTerm[] arguments) {
+		super(LIST_TYPE, provider);
+		value = jNullList.NULL_LIST;
+		for (int i = arguments.length - 1; i >= 0; --i) {
+			value = new jListPair(arguments[i], value);
+		}
 	}
 
-	public void remove() {
-	    throw new UnsupportedOperationException();
+	protected JLogList(PrologProvider provider, jTerm[] arguments, jTerm tail) {
+		super(LIST_TYPE, provider);
+		value = tail;
+		for (int i = arguments.length - 1; i >= 0; --i) {
+			value = new jListPair(arguments[i], value);
+		}
 	}
 
-    }
+	protected JLogList(PrologProvider provider, PrologTerm[] arguments, PrologTerm tail) {
+		super(LIST_TYPE, provider);
+		value = fromTerm(tail, jTerm.class);
+		for (int i = arguments.length - 1; i >= 0; --i) {
+			value = new jListPair(fromTerm(arguments[i], jTerm.class), value);
+		}
+	}
+
+	protected JLogList(PrologProvider provider, PrologTerm head, PrologTerm tail) {
+		super(LIST_TYPE, provider);
+		value = new jListPair(fromTerm(head, jTerm.class), fromTerm(tail, jTerm.class));
+	}
+
+	public int size() {
+		int size = 0;
+		jList list = ((jList) value);
+		Enumeration<?> enumeration = new JLogEnumeration(list);
+		while (enumeration.hasMoreElements()) {
+			enumeration.nextElement();
+			size++;
+		}
+		return size;
+	}
+
+	public void clear() {
+		value = jNullList.NULL_LIST;
+	}
+
+	public boolean isEmpty() {
+		return size() == 0;
+	}
+
+	public Iterator<PrologTerm> iterator() {
+		jListPair list = (jListPair) value;
+		return new JLogListIter(list);
+	}
+
+	public PrologTerm getHead() {
+		jListPair list = (jListPair) value;
+		return toTerm(list.getHead(), PrologTerm.class);
+	}
+
+	public PrologTerm getTail() {
+		jListPair list = (jListPair) value;
+		return toTerm(list.getTail(), PrologTerm.class);
+	}
+
+	public int getArity() {
+		return 2;
+	}
+
+	public String getFunctor() {
+		jListPair list = (jListPair) value;
+		return list.getName();
+	}
+
+	public String getIndicator() {
+		return getFunctor() + "/" + getArity();
+	}
+
+	public boolean hasIndicator(String functor, int arity) {
+		return getFunctor().equals(functor) && getArity() == arity;
+	}
+
+	public PrologTerm[] getArguments() {
+		int index = 0;
+		PrologTerm[] arguments = new PrologTerm[size()];
+		Iterator<PrologTerm> i = iterator();
+		while (i.hasNext()) {
+			arguments[index++] = i.next();
+		}
+		return arguments;
+	}
+
+	private final class JLogListIter implements Iterator<PrologTerm> {
+
+		private Enumeration<? extends jTerm> e;
+
+		private JLogListIter(jListPair list) {
+			e = new JLogEnumeration(list);
+		}
+
+		public boolean hasNext() {
+			return e.hasMoreElements();
+		}
+
+		public PrologTerm next() {
+			return toTerm(e.nextElement(), PrologTerm.class);
+		}
+
+		public void remove() {
+			throw new UnsupportedOperationException();
+		}
+
+	}
 
 }

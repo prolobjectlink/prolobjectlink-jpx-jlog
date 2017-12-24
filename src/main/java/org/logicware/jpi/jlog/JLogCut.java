@@ -26,40 +26,30 @@ import ubc.cs.JLog.Builtins.jCut;
 
 public class JLogCut extends JLogTerm implements PrologTerm {
 
-    static final jCut JCUT = new jCut();
+	static final jCut JCUT = new jCut();
 
-    protected JLogCut(PrologProvider provider) {
-	super(CUT_TYPE, provider, JCUT);
-    }
+	protected JLogCut(PrologProvider provider) {
+		super(CUT_TYPE, provider, JCUT);
+	}
 
-    @Override
-    public PrologTerm[] getArguments() {
-	return new PrologTerm[0];
-    }
+	public PrologTerm[] getArguments() {
+		return new PrologTerm[0];
+	}
 
-    @Override
-    public int getArity() {
-	return 0;
-    }
+	public int getArity() {
+		return 0;
+	}
 
-    @Override
-    public String getFunctor() {
-	return "" + value + "";
-    }
+	public String getFunctor() {
+		return "" + value + "";
+	}
 
-    @Override
-    public String getIndicator() {
-	return getFunctor() + "/" + getArity();
-    }
+	public String getIndicator() {
+		return getFunctor() + "/" + getArity();
+	}
 
-    @Override
-    public boolean hasIndicator(String functor, int arity) {
-	return getFunctor().equals(functor) && getArity() == arity;
-    }
-
-    @Override
-    public PrologTerm clone() {
-	return new JLogCut(provider);
-    }
+	public boolean hasIndicator(String functor, int arity) {
+		return getFunctor().equals(functor) && getArity() == arity;
+	}
 
 }

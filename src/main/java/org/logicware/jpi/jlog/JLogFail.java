@@ -26,38 +26,28 @@ import ubc.cs.JLog.Terms.jFail;
 
 public final class JLogFail extends JLogTerm implements PrologTerm {
 
-    protected JLogFail(PrologProvider provider) {
-	super(FAIL_TYPE, provider, jFail.FAIL);
-    }
+	protected JLogFail(PrologProvider provider) {
+		super(FAIL_TYPE, provider, jFail.FAIL);
+	}
 
-    @Override
-    public PrologTerm[] getArguments() {
-	return new PrologTerm[0];
-    }
+	public PrologTerm[] getArguments() {
+		return new PrologTerm[0];
+	}
 
-    @Override
-    public int getArity() {
-	return 0;
-    }
+	public int getArity() {
+		return 0;
+	}
 
-    @Override
-    public String getFunctor() {
-	return "" + value + "";
-    }
+	public String getFunctor() {
+		return "" + value + "";
+	}
 
-    @Override
-    public String getIndicator() {
-	return getFunctor() + "/" + getArity();
-    }
+	public String getIndicator() {
+		return getFunctor() + "/" + getArity();
+	}
 
-    @Override
-    public boolean hasIndicator(String functor, int arity) {
-	return getFunctor().equals(functor) && getArity() == arity;
-    }
-
-    @Override
-    public PrologTerm clone() {
-	return new JLogFail(provider);
-    }
+	public boolean hasIndicator(String functor, int arity) {
+		return getFunctor().equals(functor) && getArity() == arity;
+	}
 
 }

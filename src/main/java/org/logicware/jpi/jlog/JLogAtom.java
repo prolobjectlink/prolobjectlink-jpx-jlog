@@ -27,47 +27,36 @@ import ubc.cs.JLog.Terms.jAtom;
 
 public final class JLogAtom extends JLogTerm implements PrologAtom {
 
-    public JLogAtom(PrologProvider provider, String value) {
-	super(ATOM_TYPE, provider, new jAtom(value));
-    }
+	public JLogAtom(PrologProvider provider, String value) {
+		super(ATOM_TYPE, provider, new jAtom(value));
+	}
 
-    public String getStringValue() {
-	return getFunctor();
-    }
+	public String getStringValue() {
+		return getFunctor();
+	}
 
-    public void setStringValue(String value) {
-	this.value = new jAtom(value);
-    }
+	public void setStringValue(String value) {
+		this.value = new jAtom(value);
+	}
 
-    @Override
-    public PrologTerm[] getArguments() {
-	return new JLogAtom[0];
-    }
+	public PrologTerm[] getArguments() {
+		return new JLogAtom[0];
+	}
 
-    @Override
-    public int getArity() {
-	return 0;
-    }
+	public int getArity() {
+		return 0;
+	}
 
-    @Override
-    public String getFunctor() {
-	return "" + value + "";
-    }
+	public String getFunctor() {
+		return "" + value + "";
+	}
 
-    @Override
-    public String getIndicator() {
-	return getFunctor() + "/" + getArity();
-    }
+	public String getIndicator() {
+		return getFunctor() + "/" + getArity();
+	}
 
-    @Override
-    public boolean hasIndicator(String functor, int arity) {
-	return getFunctor().equals(functor) && getArity() == arity;
-    }
-
-    @Override
-    public PrologTerm clone() {
-	String s = getFunctor();
-	return new JLogAtom(provider, s);
-    }
+	public boolean hasIndicator(String functor, int arity) {
+		return getFunctor().equals(functor) && getArity() == arity;
+	}
 
 }

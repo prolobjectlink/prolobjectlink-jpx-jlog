@@ -26,40 +26,30 @@ import ubc.cs.JLog.Terms.jAtom;
 
 public final class JLogNil extends JLogTerm implements PrologTerm {
 
-    static final String NIL_STR = "nil";
+	static final String NIL_STR = "nil";
 
-    protected JLogNil(PrologProvider provider) {
-	super(NIL_TYPE, provider, new jAtom(NIL_STR));
-    }
+	protected JLogNil(PrologProvider provider) {
+		super(NIL_TYPE, provider, new jAtom(NIL_STR));
+	}
 
-    @Override
-    public PrologTerm[] getArguments() {
-	return new PrologTerm[0];
-    }
+	public PrologTerm[] getArguments() {
+		return new PrologTerm[0];
+	}
 
-    @Override
-    public int getArity() {
-	return 0;
-    }
+	public int getArity() {
+		return 0;
+	}
 
-    @Override
-    public String getFunctor() {
-	return "" + value + "";
-    }
+	public String getFunctor() {
+		return "" + value + "";
+	}
 
-    @Override
-    public String getIndicator() {
-	return getFunctor() + "/" + getArity();
-    }
+	public String getIndicator() {
+		return getFunctor() + "/" + getArity();
+	}
 
-    @Override
-    public boolean hasIndicator(String functor, int arity) {
-	return getFunctor().equals(functor) && getArity() == arity;
-    }
-
-    @Override
-    public PrologTerm clone() {
-	return new JLogNil(provider);
-    }
+	public boolean hasIndicator(String functor, int arity) {
+		return getFunctor().equals(functor) && getArity() == arity;
+	}
 
 }

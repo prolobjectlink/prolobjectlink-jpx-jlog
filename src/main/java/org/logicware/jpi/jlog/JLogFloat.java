@@ -33,75 +33,64 @@ import ubc.cs.JLog.Terms.jReal;
 
 public final class JLogFloat extends JLogTerm implements PrologFloat {
 
-    public JLogFloat(PrologProvider provider) {
-	super(FLOAT_TYPE, provider, new jReal(0));
-    }
+	public JLogFloat(PrologProvider provider) {
+		super(FLOAT_TYPE, provider, new jReal(0));
+	}
 
-    public JLogFloat(PrologProvider provider, Number value) {
-	super(FLOAT_TYPE, provider, new jReal(value.floatValue()));
-    }
+	public JLogFloat(PrologProvider provider, Number value) {
+		super(FLOAT_TYPE, provider, new jReal(value.floatValue()));
+	}
 
-    public PrologInteger getPrologInteger() {
-	return new JLogInteger(provider, getIntValue());
-    }
+	public PrologInteger getPrologInteger() {
+		return new JLogInteger(provider, getIntValue());
+	}
 
-    public PrologFloat getPrologFloat() {
-	return new JLogFloat(provider, getFloatValue());
-    }
+	public PrologFloat getPrologFloat() {
+		return new JLogFloat(provider, getFloatValue());
+	}
 
-    public PrologDouble getPrologDouble() {
-	return new JLogDouble(provider, getDoubleValue());
-    }
+	public PrologDouble getPrologDouble() {
+		return new JLogDouble(provider, getDoubleValue());
+	}
 
-    public PrologLong getPrologLong() {
-	return new JLogLong(provider, getLongValue());
-    }
+	public PrologLong getPrologLong() {
+		return new JLogLong(provider, getLongValue());
+	}
 
-    public long getLongValue() {
-	return (long) getFloatValue();
-    }
+	public long getLongValue() {
+		return (long) getFloatValue();
+	}
 
-    public double getDoubleValue() {
-	return (double) getFloatValue();
-    }
+	public double getDoubleValue() {
+		return (double) getFloatValue();
+	}
 
-    public int getIntValue() {
-	return (int) getFloatValue();
-    }
+	public int getIntValue() {
+		return (int) getFloatValue();
+	}
 
-    public float getFloatValue() {
-	return ((jReal) value).getRealValue();
-    }
+	public float getFloatValue() {
+		return ((jReal) value).getRealValue();
+	}
 
-    @Override
-    public PrologTerm[] getArguments() {
-	return new JLogFloat[0];
-    }
+	public PrologTerm[] getArguments() {
+		return new JLogFloat[0];
+	}
 
-    @Override
-    public int getArity() {
-	throw new ArityError(this);
-    }
+	public int getArity() {
+		throw new ArityError(this);
+	}
 
-    @Override
-    public String getFunctor() {
-	throw new FunctorError(this);
-    }
+	public String getFunctor() {
+		throw new FunctorError(this);
+	}
 
-    @Override
-    public String getIndicator() {
-	throw new IndicatorError(this);
-    }
+	public String getIndicator() {
+		throw new IndicatorError(this);
+	}
 
-    @Override
-    public boolean hasIndicator(String functor, int arity) {
-	throw new IndicatorError(this);
-    }
-
-    @Override
-    public PrologTerm clone() {
-	float f = getFloatValue();
-	return new JLogFloat(provider, f);
-    }
+	public boolean hasIndicator(String functor, int arity) {
+		throw new IndicatorError(this);
+	}
 
 }
