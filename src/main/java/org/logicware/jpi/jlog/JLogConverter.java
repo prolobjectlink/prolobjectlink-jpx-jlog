@@ -19,8 +19,25 @@
  */
 package org.logicware.jpi.jlog;
 
+import static org.logicware.jpi.PrologTermType.ATOM_TYPE;
+import static org.logicware.jpi.PrologTermType.CUT_TYPE;
+import static org.logicware.jpi.PrologTermType.DOUBLE_TYPE;
+import static org.logicware.jpi.PrologTermType.EMPTY_TYPE;
+import static org.logicware.jpi.PrologTermType.FAIL_TYPE;
+import static org.logicware.jpi.PrologTermType.FALSE_TYPE;
+import static org.logicware.jpi.PrologTermType.FLOAT_TYPE;
+import static org.logicware.jpi.PrologTermType.INTEGER_TYPE;
+import static org.logicware.jpi.PrologTermType.LIST_TYPE;
+import static org.logicware.jpi.PrologTermType.LONG_TYPE;
+import static org.logicware.jpi.PrologTermType.NIL_TYPE;
+import static org.logicware.jpi.PrologTermType.STRUCTURE_TYPE;
+import static org.logicware.jpi.PrologTermType.TRUE_TYPE;
+import static org.logicware.jpi.PrologTermType.VARIABLE_TYPE;
+
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.Objects;
 
 import org.logicware.jpi.AbstractConverter;
 import org.logicware.jpi.PrologAtom;
@@ -98,15 +115,6 @@ public class JLogConverter extends AbstractConverter<jTerm> implements PrologCon
 			return new JLogInteger(provider, ((jInteger) prologTerm).getIntegerValue());
 		case jTerm.TYPE_REAL:
 			return new JLogDouble(provider, ((jReal) prologTerm).getRealValue());
-		case jTerm.TYPE_BUILTINPREDICATE:
-			jBuiltinPredicate builtin = (jBuiltinPredicate) prologTerm;
-			if (builtin.equivalence(jTrue.TRUE, equivalence)) {
-				return new JLogTrue(provider);
-			} else if (builtin.equivalence(jFail.FAIL, equivalence)) {
-				return new JLogFail(provider);
-			} else if (builtin.equivalence(JLogCut.JCUT, equivalence)) {
-				return new JLogCut(provider);
-			}
 		case jTerm.TYPE_VARIABLE:
 			String name = ((jVariable) prologTerm).getName();
 			PrologVariable variable = sharedVariables.get(name);
@@ -119,9 +127,9 @@ public class JLogConverter extends AbstractConverter<jTerm> implements PrologCon
 			jTerm[] array = new jTerm[0];
 			jList jlist = (jList) prologTerm;
 			ArrayList<jTerm> arguments = new ArrayList<jTerm>();
-			Enumeration<jTerm> e = new JLogEnumeration(jlist);
-			while (e.hasMoreElements()) {
-				arguments.add(e.nextElement());
+			Iterator<jTerm> i = new JLogIterator(jlist);
+			while (i.hasNext()) {
+				arguments.add(i.next());
 			}
 			return new JLogList(provider, arguments.toArray(array));
 		case jTerm.TYPE_COMPARE:
@@ -129,17 +137,28 @@ public class JLogConverter extends AbstractConverter<jTerm> implements PrologCon
 		case jTerm.TYPE_ARITHMETIC:
 		case jTerm.TYPE_UNARYOPERATOR:
 		case jTerm.TYPE_NUMERICCOMPARE:
-		case jTerm.TYPE_UNARYARITHMETIC: {
+		case jTerm.TYPE_UNARYARITHMETIC:
 			jBinaryBuiltinPredicate binary = (jBinaryBuiltinPredicate) prologTerm;
 			return new JLogStructure(provider, binary.getLHS(), binary.getName(), binary.getRHS());
-		}
-		case jTerm.TYPE_PREDICATE: {
+		case jTerm.TYPE_BUILTINPREDICATE:
+			jBuiltinPredicate builtin = (jBuiltinPredicate) prologTerm;
+			if (builtin.equivalence(jTrue.TRUE, equivalence)) {
+				return new JLogTrue(provider);
+			} else if (builtin.equivalence(jFail.FAIL, equivalence)) {
+				return new JLogFail(provider);
+			} else if (builtin.equivalence(JLogCut.JCUT, equivalence)) {
+				return new JLogCut(provider);
+			} else if (builtin.getArity() == 2) {
+				jBinaryBuiltinPredicate b = (jBinaryBuiltinPredicate) prologTerm;
+				return new JLogStructure(provider, b.getLHS(), b.getName(), b.getRHS());
+			}
+			throw new UnknownTermError(prologTerm);
+		case jTerm.TYPE_PREDICATE:
 			jPredicate predicate = (jPredicate) prologTerm;
 			jCompoundTerm compound = predicate.getArguments();
 			String functor = predicate.getName();
 			return new JLogStructure(provider, functor, compound);
-		}
-		case jTerm.TYPE_PREDICATETERMS: {
+		case jTerm.TYPE_PREDICATETERMS:
 			jPredicateTerms terms = (jPredicateTerms) prologTerm;
 			Enumeration<?> k = terms.enumTerms();
 			if (k.hasMoreElements()) {
@@ -155,37 +174,38 @@ public class JLogConverter extends AbstractConverter<jTerm> implements PrologCon
 				return body;
 			}
 			return new JLogTrue(provider);
+
+		default:
+			throw new UnknownTermError(prologTerm);
 		}
-		}
-		throw new UnknownTermError(prologTerm);
 	}
 
 	public jTerm fromTerm(PrologTerm term) {
 		switch (term.getType()) {
-		case PrologTerm.NIL_TYPE:
+		case NIL_TYPE:
 			return new jAtom("nil");
-		case PrologTerm.CUT_TYPE:
+		case CUT_TYPE:
 			return new jAtom("!");
-		case PrologTerm.FAIL_TYPE:
+		case FAIL_TYPE:
 			return jFail.FAIL;
-		case PrologTerm.TRUE_TYPE:
+		case TRUE_TYPE:
 			return jTrue.TRUE;
-		case PrologTerm.FALSE_TYPE:
+		case FALSE_TYPE:
 			return new jAtom("false");
-		case PrologTerm.EMPTY_TYPE:
+		case EMPTY_TYPE:
 			return jNullList.NULL_LIST;
-		case PrologTerm.ATOM_TYPE:
+		case ATOM_TYPE:
 			String value = ((PrologAtom) term).getStringValue();
 			return new jAtom(value);
-		case PrologTerm.FLOAT_TYPE:
+		case FLOAT_TYPE:
 			return new jReal(((PrologFloat) term).getFloatValue());
-		case PrologTerm.INTEGER_TYPE:
+		case INTEGER_TYPE:
 			return new jInteger(((PrologInteger) term).getIntValue());
-		case PrologTerm.DOUBLE_TYPE:
+		case DOUBLE_TYPE:
 			return new jReal(((PrologDouble) term).getFloatValue());
-		case PrologTerm.LONG_TYPE:
+		case LONG_TYPE:
 			return new jInteger(((PrologLong) term).getIntValue());
-		case PrologTerm.VARIABLE_TYPE:
+		case VARIABLE_TYPE:
 			String name = ((PrologVariable) term).getName();
 			jTerm variable = sharedPrologVariables.get(name);
 			if (variable == null) {
@@ -193,15 +213,16 @@ public class JLogConverter extends AbstractConverter<jTerm> implements PrologCon
 				sharedPrologVariables.put(name, variable);
 			}
 			return variable;
-		case PrologTerm.LIST_TYPE:
+		case LIST_TYPE:
 			PrologTerm[] arguments = ((PrologList) term).getArguments();
 			return adaptList(arguments);
-		case PrologTerm.STRUCTURE_TYPE:
+		case STRUCTURE_TYPE:
 			String functor = term.getFunctor();
 			arguments = ((PrologStructure) term).getArguments();
 			return new jPredicate(functor, adaptCompound(arguments));
+		default:
+			throw new UnknownTermError(term);
 		}
-		throw new UnknownTermError(term);
 	}
 
 	public jTerm[] fromTermArray(PrologTerm[] terms) {
@@ -213,12 +234,48 @@ public class JLogConverter extends AbstractConverter<jTerm> implements PrologCon
 	}
 
 	public jTerm fromTerm(PrologTerm head, PrologTerm[] body) {
-		// TODO Auto-generated method stub
-		return null;
+		jTerm clauseHead = fromTerm(head);
+		if (body != null && body.length > 0) {
+			jTerm clauseBody = fromTerm(body[body.length - 1]);
+			for (int i = body.length - 2; i >= 0; --i) {
+				jCompoundTerm args = new jCompoundTerm(2);
+				args.addTerm(fromTerm(body[i]));
+				args.addTerm(clauseBody);
+				clauseBody = new jPredicate(",", args);
+			}
+			jCompoundTerm args = new jCompoundTerm(2);
+			args.addTerm(clauseHead);
+			args.addTerm(clauseBody);
+			return new jPredicate(":-", args);
+		}
+		return clauseHead;
 	}
 
 	public PrologProvider createProvider() {
 		return new JLogProvider(this);
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hashCode(emptyBody);
+		result = prime * result + Objects.hashCode(equivalence);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		JLogConverter other = (JLogConverter) obj;
+		if (!Objects.equals(emptyBody, other.emptyBody))
+			return false;
+		return Objects.equals(equivalence, other.equivalence);
 	}
 
 }

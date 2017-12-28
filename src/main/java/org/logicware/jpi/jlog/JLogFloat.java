@@ -19,6 +19,8 @@
  */
 package org.logicware.jpi.jlog;
 
+import static org.logicware.jpi.PrologTermType.FLOAT_TYPE;
+
 import org.logicware.jpi.ArityError;
 import org.logicware.jpi.FunctorError;
 import org.logicware.jpi.IndicatorError;

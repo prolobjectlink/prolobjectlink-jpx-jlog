@@ -19,7 +19,12 @@
  */
 package org.logicware.jpi.jlog;
 
+import static org.logicware.jpi.jlog.JLogTerm.SIMPLE_ATOM_REGEX;
+
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 import org.logicware.jpi.AbstractProvider;
 import org.logicware.jpi.PrologAtom;
@@ -53,6 +58,7 @@ public final class JLogProvider extends AbstractProvider implements PrologProvid
 
 	protected static final String DOT = ".";
 	protected static final String BUILTINS = "builtins";
+	protected static final Map<String, String> FUNCTORS = new HashMap<String, String>();
 
 	public JLogProvider() {
 		this(new JLogConverter());
@@ -110,7 +116,21 @@ public final class JLogProvider extends AbstractProvider implements PrologProvid
 		jPredicateTerms terms = new pParseStream(s, kb, pr, or).parseQuery();
 		PrologTerm[] prologTerms = new PrologTerm[terms.size()];
 		for (int i = 0; i < prologTerms.length; i++) {
-			prologTerms[i] = toTerm(terms.elementAt(i), PrologTerm.class);
+			PrologTerm term = toTerm(terms.elementAt(i), PrologTerm.class);
+			if (term != null && term.isCompound()) {
+				String functor = term.getFunctor();
+				PrologTerm[] args = term.getArguments();
+				if (!functor.matches(SIMPLE_ATOM_REGEX)) {
+					StringBuilder buffer = new StringBuilder();
+					buffer.append("'");
+					buffer.append(functor);
+					buffer.append("'");
+					String quoted = "" + buffer + "";
+					FUNCTORS.put(functor, quoted);
+					term = newStructure(quoted, args);
+				}
+			}
+			prologTerms[i] = term;
 		}
 		return prologTerms;
 	}
@@ -191,7 +211,7 @@ public final class JLogProvider extends AbstractProvider implements PrologProvid
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((engine != null) ? 0 : engine.hashCode());
+		result = prime * result + Objects.hashCode(engine);
 		return result;
 	}
 
@@ -204,12 +224,7 @@ public final class JLogProvider extends AbstractProvider implements PrologProvid
 		if (getClass() != obj.getClass())
 			return false;
 		JLogProvider other = (JLogProvider) obj;
-		if (engine == null) {
-			if (other.engine != null)
-				return false;
-		} else if (!engine.equals(other.engine))
-			return false;
-		return true;
+		return Objects.equals(engine, other.engine);
 	}
 
 }

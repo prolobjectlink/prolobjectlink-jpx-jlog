@@ -19,6 +19,8 @@
  */
 package org.logicware.jpi.jlog;
 
+import static org.logicware.jpi.PrologTermType.STRUCTURE_TYPE;
+
 import org.logicware.jpi.PrologProvider;
 import org.logicware.jpi.PrologStructure;
 import org.logicware.jpi.PrologTerm;
@@ -27,7 +29,7 @@ import ubc.cs.JLog.Terms.jCompoundTerm;
 import ubc.cs.JLog.Terms.jPredicate;
 import ubc.cs.JLog.Terms.jTerm;
 
-public class JLogStructure extends JLogCompound implements PrologStructure {
+public class JLogStructure extends JLogTerm implements PrologStructure {
 
 	protected JLogStructure(PrologProvider provider, String functor, PrologTerm... arguments) {
 		super(STRUCTURE_TYPE, provider);

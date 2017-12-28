@@ -19,6 +19,9 @@
  */
 package org.logicware.jpi.jlog;
 
+import static org.logicware.jpi.jlog.JLogProvider.FUNCTORS;
+import static org.logicware.jpi.jlog.JLogTerm.SIMPLE_ATOM_REGEX;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -27,6 +30,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.logicware.jpi.AbstractQuery;
 import org.logicware.jpi.PrologEngine;
@@ -58,12 +62,31 @@ public final class JLogQuery extends AbstractQuery implements PrologQuery {
 	protected static final String DOT = ".";
 	protected static final String NECK = ":-";
 	protected static final String COMMA = ",";
-	protected static final String SIMPLE_ATOM_REGEX = ".|[a-z][A-Za-z0-9_]*";
 
 	protected static final PrologProvider provider = new JLogProvider();
 
-	JLogQuery(PrologEngine engine, String str) {
+	protected JLogQuery(PrologEngine engine, String str) {
 		super(engine);
+
+		for (Entry<String, String> entry : FUNCTORS.entrySet()) {
+
+			// retrieve cached functors
+			String key = entry.getKey();
+			String value = entry.getValue();
+
+			// first and unique term pattern
+			String firstRegex = "(" + key + "";
+			if (str.contains(firstRegex)) {
+				str = str.replaceAll(key, value);
+			}
+
+			// non-first term pattern
+			String nonFirstRegex = "," + key + "";
+			if (str.contains(nonFirstRegex)) {
+				str = str.replaceAll(key, value);
+			}
+
+		}
 
 		// saving variable order
 		JLogEngine pe = engine.unwrap(JLogEngine.class);
@@ -76,7 +99,48 @@ public final class JLogQuery extends AbstractQuery implements PrologQuery {
 		terms.enumerateVariables(vector, true);
 
 		// adapt program to string
-		String source = adapt(pe.engine);
+		String source = toString(pe.engine);
+
+		// first functor occurrence
+		int index = source.indexOf('(');
+		if (index > -1) {
+			String functor = source.substring(0, index);
+			String arguments = source.substring(index);
+			if (!functor.startsWith("'") && !functor.endsWith("'") && !functor.matches(SIMPLE_ATOM_REGEX)) {
+				StringBuilder buffer = new StringBuilder();
+				buffer.append('\'');
+				buffer.append(functor);
+				buffer.append('\'');
+				String quoted = "" + buffer + "";
+				buffer.append(arguments);
+				FUNCTORS.put(functor, quoted);
+				source = source.replaceAll(functor, quoted);
+			}
+		}
+
+		// jlog need treatment for complex functors
+		for (Entry<String, String> entry : FUNCTORS.entrySet()) {
+
+			// retrieve cached functors
+			String key = entry.getKey();
+			String value = entry.getValue();
+
+			// first and unique term
+			String firstRegex = "(" + key + "";
+			if (source.contains(firstRegex)) {
+				source = source.replaceAll(key, value);
+			}
+
+			// non-first term
+			String nonFirstRegex = "," + key + "";
+			if (source.contains(nonFirstRegex)) {
+				source = source.replaceAll(key, value);
+			}
+
+		}
+
+		System.out.println(source);
+
 		jlogApi = new jPrologAPI(source);
 		try {
 			solution = jlogApi.query(s);
@@ -86,11 +150,32 @@ public final class JLogQuery extends AbstractQuery implements PrologQuery {
 
 	}
 
-	JLogQuery(PrologEngine engine, PrologTerm[] terms) {
+	protected JLogQuery(PrologEngine engine, PrologTerm[] terms) {
 		super(engine);
 
 		String str = Arrays.toString(terms).substring(1);
 		str = str.substring(0, str.length() - 1) + DOT;
+
+		// jlog need treatment for complex functors
+		for (Entry<String, String> entry : FUNCTORS.entrySet()) {
+
+			// retrieve cached functors
+			String key = entry.getKey();
+			String value = entry.getValue();
+
+			// first and unique term
+			String firstRegex = "(" + key + "";
+			if (str.contains(firstRegex)) {
+				str = str.replaceAll(key, value);
+			}
+
+			// non-first term
+			String nonFirstRegex = "," + key + "";
+			if (str.contains(nonFirstRegex)) {
+				str = str.replaceAll(key, value);
+			}
+
+		}
 
 		// saving variable order
 		JLogEngine pe = engine.unwrap(JLogEngine.class);
@@ -102,7 +187,50 @@ public final class JLogQuery extends AbstractQuery implements PrologQuery {
 		jpts.enumerateVariables(vector, true);
 
 		// adapt program to string
-		String source = adapt(pe.engine);
+		String source = toString(pe.engine);
+
+		// first functor occurrence
+		int index = source.indexOf('(');
+		if (index > -1) {
+			String functor = source.substring(0, index);
+			String arguments = source.substring(index);
+			if (!functor.startsWith("'") && !functor.endsWith("'") && !functor.matches(SIMPLE_ATOM_REGEX)) {
+				StringBuilder buffer = new StringBuilder();
+				buffer.append('\'');
+				buffer.append(functor);
+				buffer.append('\'');
+				String quoted = "" + buffer + "";
+				buffer.append(arguments);
+				FUNCTORS.put(functor, quoted);
+				source = source.replaceAll(functor, quoted);
+			}
+		}
+
+		// other functors
+
+		// jlog need treatment for complex functors
+		for (Entry<String, String> entry : FUNCTORS.entrySet()) {
+
+			// retrieve cached functors
+			String key = entry.getKey();
+			String value = entry.getValue();
+
+			// first and unique term
+			String firstRegex = "(" + key + "";
+			if (source.contains(firstRegex)) {
+				source = source.replaceAll(key, value);
+			}
+
+			// non-first term
+			String nonFirstRegex = "," + key + "";
+			if (source.contains(nonFirstRegex)) {
+				source = source.replaceAll(key, value);
+			}
+
+		}
+
+		System.out.println(source);
+
 		jlogApi = new jPrologAPI(source);
 		try {
 			solution = jlogApi.query(str);
@@ -112,25 +240,7 @@ public final class JLogQuery extends AbstractQuery implements PrologQuery {
 
 	}
 
-	boolean quoted(String functor) {
-		if (!functor.isEmpty()) {
-			char beginChar = functor.charAt(0);
-			char endChar = functor.charAt(functor.length() - 1);
-			return beginChar == '\'' && endChar == '\'';
-		}
-		return false;
-	}
-
-	String removeQuoted(String functor) {
-		if (quoted(functor)) {
-			String newFunctor = "";
-			newFunctor += functor.substring(1, functor.length() - 1);
-			return newFunctor;
-		}
-		return functor;
-	}
-
-	PrologTerm adapt(Object object) {
+	private PrologTerm toTerm(Object object) {
 
 		// null pointer
 		if (object == null) {
@@ -140,11 +250,44 @@ public final class JLogQuery extends AbstractQuery implements PrologQuery {
 		// string data type
 		else if (object instanceof String) {
 			String string = (String) object;
-			String unQuotedString = removeQuoted(string);
-			if (unQuotedString.matches(SIMPLE_ATOM_REGEX)) {
-				return new JLogAtom(provider, unQuotedString);
+			int index = string.indexOf('(');
+			if (index > -1) {
+				String functor = string.substring(0, index);
+				String arguments = string.substring(index);
+				if (!functor.matches(SIMPLE_ATOM_REGEX)) {
+					StringBuilder buffer = new StringBuilder();
+					buffer.append('\'');
+					buffer.append(functor);
+					buffer.append('\'');
+					String quoted = "" + buffer + "";
+					buffer.append(arguments);
+					string = "" + buffer + "";
+					FUNCTORS.put(functor, quoted);
+
+					// jlog need treatment for complex functors
+					for (Entry<String, String> entry : FUNCTORS.entrySet()) {
+
+						// retrieve cached functors
+						String key = entry.getKey();
+						String value = entry.getValue();
+
+						// first and unique term pattern
+						String firstRegex = "(" + key + "";
+						if (string.contains(firstRegex)) {
+							string = string.replaceAll(key, value);
+						}
+
+						// non-first term pattern
+						String nonFirstRegex = "," + key + "";
+						if (string.contains(nonFirstRegex)) {
+							string = string.replaceAll(key, value);
+						}
+
+					}
+				}
 			}
-			return new JLogAtom(provider, string);
+
+			return provider.parsePrologTerm(string);
 		}
 
 		// primitives and wrappers data types
@@ -165,16 +308,16 @@ public final class JLogQuery extends AbstractQuery implements PrologQuery {
 			Object[] objects = (Object[]) object;
 			PrologTerm[] terms = new PrologTerm[objects.length];
 			for (int i = 0; i < objects.length; i++) {
-				terms[i] = adapt(objects[i]);
+				terms[i] = toTerm(objects[i]);
 			}
 			return new JLogList(provider, terms);
 		} else if (object instanceof jTerm) {
-			return adapt((jTerm) object);
+			return toTerm((jTerm) object);
 		}
 		return null;
 	}
 
-	protected String adapt(jPrologServices engine) {
+	private String toString(jPrologServices engine) {
 		jKnowledgeBase kb = engine.getKnowledgeBase();
 		StringWriter stringWriter = new StringWriter();
 		PrintWriter writer = new PrintWriter(stringWriter);
@@ -232,7 +375,7 @@ public final class JLogQuery extends AbstractQuery implements PrologQuery {
 				Object object = e.nextElement();
 				if (object instanceof jVariable) {
 					String key = ((jVariable) object).getName();
-					array[index++] = adapt(solution.get(key));
+					array[index++] = toTerm(solution.get(key));
 				}
 			}
 			return array;
@@ -242,15 +385,15 @@ public final class JLogQuery extends AbstractQuery implements PrologQuery {
 
 	public Map<String, PrologTerm> oneVariablesSolution() {
 		if (hasSolution()) {
-			Map<String, PrologTerm> map = new HashMap<String, PrologTerm>(solution.size());
+			Map<String, PrologTerm> varMap = new HashMap<String, PrologTerm>(solution.size());
 			for (Enumeration<?> e = vector.enumerate(); e.hasMoreElements();) {
 				Object object = e.nextElement();
 				if (object instanceof jVariable) {
 					String key = ((jVariable) object).getName();
-					map.put(key, adapt(solution.get(key)));
+					varMap.put(key, toTerm(solution.get(key)));
 				}
 			}
-			return map;
+			return varMap;
 		}
 		return new HashMap<String, PrologTerm>(0);
 	}
@@ -262,9 +405,9 @@ public final class JLogQuery extends AbstractQuery implements PrologQuery {
 	}
 
 	public Map<String, PrologTerm> nextVariablesSolution() {
-		Map<String, PrologTerm> map = oneVariablesSolution();
+		Map<String, PrologTerm> varMap = oneVariablesSolution();
 		solution = jlogApi.retry();
-		return map;
+		return varMap;
 	}
 
 	public PrologTerm[][] nSolutions(int n) {
@@ -352,6 +495,37 @@ public final class JLogQuery extends AbstractQuery implements PrologQuery {
 		if (solution != null) {
 			solution.clear();
 		}
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((solution == null) ? 0 : solution.hashCode());
+		result = prime * result + ((vector == null) ? 0 : vector.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		JLogQuery other = (JLogQuery) obj;
+		if (solution == null) {
+			if (other.solution != null)
+				return false;
+		} else if (!solution.equals(other.solution))
+			return false;
+		if (vector == null) {
+			if (other.vector != null)
+				return false;
+		} else if (!vector.equals(other.vector))
+			return false;
+		return true;
 	}
 
 }

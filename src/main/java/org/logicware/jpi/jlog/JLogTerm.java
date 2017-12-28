@@ -19,6 +19,22 @@
  */
 package org.logicware.jpi.jlog;
 
+import static org.logicware.jpi.PrologTermType.ATOM_TYPE;
+import static org.logicware.jpi.PrologTermType.DOUBLE_TYPE;
+import static org.logicware.jpi.PrologTermType.EMPTY_TYPE;
+import static org.logicware.jpi.PrologTermType.FLOAT_TYPE;
+import static org.logicware.jpi.PrologTermType.INTEGER_TYPE;
+import static org.logicware.jpi.PrologTermType.LIST_TYPE;
+import static org.logicware.jpi.PrologTermType.LONG_TYPE;
+import static org.logicware.jpi.PrologTermType.STRUCTURE_TYPE;
+import static org.logicware.jpi.PrologTermType.VARIABLE_TYPE;
+import static ubc.cs.JLog.Foundation.iType.TYPE_ATOM;
+import static ubc.cs.JLog.Foundation.iType.TYPE_INTEGER;
+import static ubc.cs.JLog.Foundation.iType.TYPE_LIST;
+import static ubc.cs.JLog.Foundation.iType.TYPE_PREDICATE;
+import static ubc.cs.JLog.Foundation.iType.TYPE_REAL;
+import static ubc.cs.JLog.Foundation.iType.TYPE_VARIABLE;
+
 import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -34,11 +50,15 @@ import ubc.cs.JLog.Foundation.jEquivalenceMapping;
 import ubc.cs.JLog.Foundation.jKnowledgeBase;
 import ubc.cs.JLog.Foundation.jPrologFileServices;
 import ubc.cs.JLog.Foundation.jPrologServices;
-import ubc.cs.JLog.Foundation.jType;
 import ubc.cs.JLog.Parser.pOperatorEntry;
 import ubc.cs.JLog.Parser.pOperatorRegistry;
 import ubc.cs.JLog.Parser.pPredicateRegistry;
+import ubc.cs.JLog.Terms.jCompoundTerm;
 import ubc.cs.JLog.Terms.jInteger;
+import ubc.cs.JLog.Terms.jList;
+import ubc.cs.JLog.Terms.jListPair;
+import ubc.cs.JLog.Terms.jNullList;
+import ubc.cs.JLog.Terms.jPredicateTerms;
 import ubc.cs.JLog.Terms.jReal;
 import ubc.cs.JLog.Terms.jTerm;
 import ubc.cs.JLog.Terms.jVariable;
@@ -50,7 +70,26 @@ public abstract class JLogTerm extends AbstractTerm implements PrologTerm {
 	protected PrologTerm vValue;
 	protected static int vIdexer = 0;
 
+	protected final jPredicateTerms emptyBody = new jPredicateTerms();
 	protected final jEquivalenceMapping equivalence = new jEquivalenceMapping();
+
+	protected static final String SIMPLE_ATOM_REGEX = ".|[a-z][A-Za-z0-9_]*";
+
+	protected final jList adaptList(PrologTerm[] arguments) {
+		jList pList = jNullList.NULL_LIST;
+		for (int i = arguments.length - 1; i >= 0; --i) {
+			pList = new jListPair(fromTerm(arguments[i], jTerm.class), pList);
+		}
+		return pList;
+	}
+
+	protected final jCompoundTerm adaptCompound(PrologTerm[] arguments) {
+		jCompoundTerm compound = new jCompoundTerm(arguments.length);
+		for (PrologTerm iPrologTerm : arguments) {
+			compound.addTerm(fromTerm(iPrologTerm, jTerm.class));
+		}
+		return compound;
+	}
 
 	protected JLogTerm(int type, PrologProvider provider) {
 		super(type, provider);
@@ -144,7 +183,11 @@ public abstract class JLogTerm extends AbstractTerm implements PrologTerm {
 				if (object instanceof pOperatorEntry) {
 					pOperatorEntry entry = (pOperatorEntry) object;
 					String operator = entry.getName();
-					if (operator.equals(getFunctor())) {
+					String functor = getFunctor();
+					if (functor.startsWith("'") && functor.endsWith("'")) {
+						functor = functor.substring(1, functor.length() - 1);
+					}
+					if (operator.equals(functor)) {
 						return true;
 					}
 				}
@@ -154,27 +197,12 @@ public abstract class JLogTerm extends AbstractTerm implements PrologTerm {
 	}
 
 	public boolean isAtomic() {
-		switch (value.type) {
-		case jType.TYPE_ATOM:
-			return true;
-		case jType.TYPE_INTEGER:
-			return true;
-		case jType.TYPE_REAL:
-			return true;
-		case jType.TYPE_VARIABLE:
-			return true;
-		}
-		return false;
+		return value.type == TYPE_ATOM || value.type == TYPE_INTEGER || value.type == TYPE_REAL
+				|| value.type == TYPE_VARIABLE;
 	}
 
 	public boolean isCompound() {
-		switch (value.type) {
-		case jType.TYPE_PREDICATE:
-			return true;
-		case jType.TYPE_LIST:
-			return true;
-		}
-		return false;
+		return value.type == TYPE_PREDICATE || value.type == TYPE_LIST;
 	}
 
 	public final boolean unify(PrologTerm term) {
@@ -444,6 +472,9 @@ public abstract class JLogTerm extends AbstractTerm implements PrologTerm {
 				return 1;
 			}
 			break;
+
+		default:
+			return 0;
 
 		}
 

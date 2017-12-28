@@ -19,6 +19,8 @@
  */
 package org.logicware.jpi.jlog;
 
+import static org.logicware.jpi.PrologTermType.FAIL_TYPE;
+
 import org.logicware.jpi.PrologProvider;
 import org.logicware.jpi.PrologTerm;
 

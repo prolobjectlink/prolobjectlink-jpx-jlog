@@ -19,6 +19,8 @@
  */
 package org.logicware.jpi.jlog;
 
+import static org.logicware.jpi.jlog.JLogProvider.FUNCTORS;
+import static ubc.cs.JLog.Foundation.iType.TYPE_PREDICATE;
 import static ubc.cs.JLog.Parser.pOperatorEntry.FX;
 import static ubc.cs.JLog.Parser.pOperatorEntry.FY;
 import static ubc.cs.JLog.Parser.pOperatorEntry.XF;
@@ -32,12 +34,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.StringTokenizer;
 
@@ -91,7 +93,7 @@ public final class JLogEngine extends AbstractEngine implements PrologEngine {
 
 	protected final jPredicateTerms emptyBody = new jPredicateTerms();
 
-	JLogEngine(PrologProvider provider) {
+	protected JLogEngine(PrologProvider provider) {
 		super(provider);
 		kb = new jKnowledgeBase();
 		or = new pOperatorRegistry();
@@ -105,87 +107,37 @@ public final class JLogEngine extends AbstractEngine implements PrologEngine {
 		}
 	}
 
-	String toString(jPrologServices engine) {
-		jKnowledgeBase ikb = engine.getKnowledgeBase();
-		StringWriter stringWriter = new StringWriter();
-		PrintWriter writer = new PrintWriter(stringWriter);
-		Enumeration<?> enumeration = ikb.enumDefinitions();
-		while (enumeration.hasMoreElements()) {
-			jRuleDefinitions object = (jRuleDefinitions) enumeration.nextElement();
-			Enumeration<?> r = object.enumRules();
-			while (r.hasMoreElements()) {
-				Object object2 = r.nextElement();
-				if (!(object2 instanceof jBuiltinRule)) {
-					jRule jRule = (jRule) object2;
-
-					// rule head
-					jPredicate ruleHead = jRule.getHead();
-					writer.print(ruleHead);
-
-					// rule body
-					jPredicateTerms ruleBody = jRule.getBase();
-					Enumeration<?> k = ruleBody.enumTerms();
-					if (k.hasMoreElements()) {
-						writer.print(NECK);
-						while (k.hasMoreElements()) {
-							jTerm term = (jTerm) k.nextElement();
-							writer.print(term);
-							if (k.hasMoreElements()) {
-								writer.print(COMMA);
-							}
-						}
-					}
-
-					// rule end
-					writer.println(DOT);
-				}
-			}
-		}
-		writer.flush();
-		writer.close();
-
-		return "" + stringWriter + "";
-	}
-
-	jRule toRule(String str, jPrologServices engine) {
+	private jRule toRule(String str, jPrologServices engine) {
 		jKnowledgeBase ikb = engine.getKnowledgeBase();
 		pOperatorRegistry ior = engine.getOperatorRegistry();
 		pPredicateRegistry ipr = engine.getPredicateRegistry();
 		String clause = str.charAt(str.length() - 1) == '.' ? str : str + DOT;
 		jTerm term = new pParseStream(clause, ikb, ipr, ior).parseTerm();
-		switch (term.type) {
-
-		// fact
-		case jTerm.TYPE_PREDICATE: {
+		if (term.type == jTerm.TYPE_PREDICATE) { // fact
 			jPredicate predicate = (jPredicate) term;
 			return new jRule(predicate, emptyBody);
-		}
-
-		// rule
-		case jTerm.TYPE_IF: {
+		} else if (term.type == jTerm.TYPE_IF) { // rule
 			jIf rule = (jIf) term;
 			jPredicate h = (jPredicate) rule.getLHS();
 			jTerm ruleBody = rule.getRHS();
 			switch (ruleBody.type) {
 
 			// only and just only predicate
-			case jTerm.TYPE_PREDICATE: {
+			case jTerm.TYPE_PREDICATE:
 				jPredicate predicateBody = (jPredicate) ruleBody;
 				jPredicateTerms b = new jPredicateTerms();
 				b.addTerm(predicateBody);
 				return new jRule(h, b);
-			}
 
 			//
-			case jTerm.TYPE_CONS: {
-				jPredicateTerms b = new jPredicateTerms();
+			case jTerm.TYPE_CONS:
+				b = new jPredicateTerms();
 				while (ruleBody instanceof jCons) {
 					b.addTerm(((jCons) ruleBody).getLHS());
 					ruleBody = ((jCons) ruleBody).getRHS().getTerm();
 				}
 				b.addTerm(ruleBody);
 				return new jRule(h, b);
-			}
 
 			//
 			default:
@@ -195,13 +147,11 @@ public final class JLogEngine extends AbstractEngine implements PrologEngine {
 		}
 
 		// no rule
-		default:
-			throw new StructureExpectedError(term);
-		}
+		throw new StructureExpectedError(term);
 
 	}
 
-	jRule toRule(PrologTerm head, PrologTerm... body) {
+	private jRule toRule(PrologTerm head, PrologTerm... body) {
 		jTerm termHead = fromTerm(head, jTerm.class);
 		if (termHead.type == jTerm.TYPE_PREDICATE) {
 			jPredicate predicateHead = (jPredicate) termHead;
@@ -218,24 +168,6 @@ public final class JLogEngine extends AbstractEngine implements PrologEngine {
 		try {
 			FileReader fileReader = new FileReader(file);
 			new pParseStream(fileReader, kb, pr, or).parseSource();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void consult(String path) {
-		try {
-			kb.clearRules();
-			FileReader fileReader = new FileReader(path);
-			new pParseStream(fileReader, kb, pr, or).parseSource();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void persist(String path) {
-		try {
-			PrintWriter writer = new PrintWriter(new FileWriter(path));
 			Enumeration<?> enumeration = kb.enumDefinitions();
 			while (enumeration.hasMoreElements()) {
 				jRuleDefinitions object = (jRuleDefinitions) enumeration.nextElement();
@@ -247,39 +179,181 @@ public final class JLogEngine extends AbstractEngine implements PrologEngine {
 
 						// rule head
 						jPredicate ruleHead = jRule.getHead();
-						writer.print(ruleHead.toString(true));
+						String functor = ruleHead.getName();
+						if (!functor.matches(SIMPLE_ATOM_REGEX)) {
+							StringBuilder buffer = new StringBuilder();
+							buffer.append('\'');
+							buffer.append(functor);
+							buffer.append('\'');
+							String quoted = "" + buffer + "";
+							FUNCTORS.put(functor, quoted);
+
+						}
 
 						// rule body
 						jPredicateTerms ruleBody = jRule.getBase();
 						Enumeration<?> k = ruleBody.enumTerms();
 						if (k.hasMoreElements()) {
-							writer.print(NECK);
 							while (k.hasMoreElements()) {
 								jTerm term = (jTerm) k.nextElement();
-								writer.print(term.toString(true));
+								if (term.type == TYPE_PREDICATE) {
+									jPredicate bodyPart = (jPredicate) term;
+									functor = bodyPart.getName();
+									if (!functor.matches(SIMPLE_ATOM_REGEX)) {
+										StringBuilder buffer = new StringBuilder();
+										buffer.append('\'');
+										buffer.append(functor);
+										buffer.append('\'');
+										String quoted = "" + buffer + "";
+										FUNCTORS.put(functor, quoted);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void consult(String path) {
+		try {
+			kb.clearRules();
+			FileReader fileReader = new FileReader(path);
+			new pParseStream(fileReader, kb, pr, or).parseSource();
+			Enumeration<?> enumeration = kb.enumDefinitions();
+			while (enumeration.hasMoreElements()) {
+				jRuleDefinitions object = (jRuleDefinitions) enumeration.nextElement();
+				Enumeration<?> r = object.enumRules();
+				while (r.hasMoreElements()) {
+					Object object2 = r.nextElement();
+					if (!(object2 instanceof jBuiltinRule)) {
+						jRule jRule = (jRule) object2;
+
+						// rule head
+						jPredicate ruleHead = jRule.getHead();
+						String functor = ruleHead.getName();
+						if (!functor.matches(SIMPLE_ATOM_REGEX)) {
+							StringBuilder buffer = new StringBuilder();
+							buffer.append('\'');
+							buffer.append(functor);
+							buffer.append('\'');
+							String quoted = "" + buffer + "";
+							FUNCTORS.put(functor, quoted);
+
+						}
+
+						// rule body
+						jPredicateTerms ruleBody = jRule.getBase();
+						Enumeration<?> k = ruleBody.enumTerms();
+						if (k.hasMoreElements()) {
+							while (k.hasMoreElements()) {
+								jTerm term = (jTerm) k.nextElement();
+								if (term.type == TYPE_PREDICATE) {
+									jPredicate bodyPart = (jPredicate) term;
+									functor = bodyPart.getName();
+									if (!functor.matches(SIMPLE_ATOM_REGEX)) {
+										StringBuilder buffer = new StringBuilder();
+										buffer.append('\'');
+										buffer.append(functor);
+										buffer.append('\'');
+										String quoted = "" + buffer + "";
+										FUNCTORS.put(functor, quoted);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void persist(String path) {
+		PrintWriter writer = null;
+		try {
+			StringBuilder buffer = new StringBuilder();
+			writer = new PrintWriter(new FileWriter(path));
+			Enumeration<?> enumeration = kb.enumDefinitions();
+			while (enumeration.hasMoreElements()) {
+				jRuleDefinitions object = (jRuleDefinitions) enumeration.nextElement();
+				Enumeration<?> r = object.enumRules();
+				while (r.hasMoreElements()) {
+					Object object2 = r.nextElement();
+					if (!(object2 instanceof jBuiltinRule)) {
+						jRule jRule = (jRule) object2;
+
+						// rule head
+						jPredicate ruleHead = jRule.getHead();
+						buffer.append(ruleHead.toString(true));
+
+						// rule body
+						jPredicateTerms ruleBody = jRule.getBase();
+						Enumeration<?> k = ruleBody.enumTerms();
+						if (k.hasMoreElements()) {
+							buffer.append(NECK);
+							while (k.hasMoreElements()) {
+								jTerm term = (jTerm) k.nextElement();
+								buffer.append(term.toString(true));
 								if (k.hasMoreElements()) {
-									writer.print(COMMA);
+									buffer.append(COMMA);
 								}
 							}
 						}
 
 						// rule end
-						writer.println(DOT);
+						buffer.append(DOT);
+						String str = "" + buffer + "";
+
+						//
+						for (Entry<String, String> entry : FUNCTORS.entrySet()) {
+
+							// retrieve cached functors
+							String key = entry.getKey();
+							String value = entry.getValue();
+
+							// first and unique term pattern
+							String firstRegex = "(" + key + "";
+							if (str.contains(firstRegex)) {
+								str = str.replaceAll(key, value);
+							}
+
+							// non-first term pattern
+							String nonFirstRegex = "," + key + "";
+							if (str.contains(nonFirstRegex)) {
+								str = str.replaceAll(key, value);
+							}
+
+						}
+
+						writer.println(str);
+						buffer = new StringBuilder();
+
 					}
 				}
 			}
 			writer.flush();
-			writer.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			if (writer != null) {
+				writer.close();
+			}
 		}
 	}
 
 	public void abolish(String functor, int arity) {
 		iNameArityStub na = new iNameArityStub(functor, arity);
-		kb.getRuleDefinitionsMatch(na).clearRules();
+		jRuleDefinitions definitions = kb.getRuleDefinitionsMatch(na);
+		if (definitions != null) {
+			definitions.clearRules();
+		}
 	}
 
 	public void asserta(String stringClause) {
@@ -331,7 +405,6 @@ public final class JLogEngine extends AbstractEngine implements PrologEngine {
 						jRule jRule = (jRule) object2;
 						jPredicate rh = jRule.getHead();
 						jPredicateTerms rb = jRule.getBase();
-
 						jUnifiedVector v = new jUnifiedVector();
 						if (rh.unify(head, v) && rb.unify(body, v)) {
 							return true;
@@ -498,7 +571,7 @@ public final class JLogEngine extends AbstractEngine implements PrologEngine {
 				case XF:
 					specifier = "xf";
 					break;
-				case YF:
+				default:
 					specifier = "yf";
 					break;
 				}
@@ -619,6 +692,7 @@ public final class JLogEngine extends AbstractEngine implements PrologEngine {
 
 	public void dispose() {
 		engine.release();
+		kb.clearRules();
 	}
 
 }

@@ -19,8 +19,10 @@
  */
 package org.logicware.jpi.jlog;
 
-import java.util.Enumeration;
+import static org.logicware.jpi.PrologTermType.LIST_TYPE;
+
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import org.logicware.jpi.PrologList;
 import org.logicware.jpi.PrologProvider;
@@ -31,7 +33,7 @@ import ubc.cs.JLog.Terms.jListPair;
 import ubc.cs.JLog.Terms.jNullList;
 import ubc.cs.JLog.Terms.jTerm;
 
-public class JLogList extends JLogCompound implements PrologList {
+public class JLogList extends JLogTerm implements PrologList {
 
 	protected JLogList(PrologProvider provider) {
 		super(LIST_TYPE, provider, jNullList.NULL_LIST);
@@ -74,9 +76,9 @@ public class JLogList extends JLogCompound implements PrologList {
 	public int size() {
 		int size = 0;
 		jList list = ((jList) value);
-		Enumeration<?> enumeration = new JLogEnumeration(list);
-		while (enumeration.hasMoreElements()) {
-			enumeration.nextElement();
+		Iterator<?> i = new JLogIterator(list);
+		while (i.hasNext()) {
+			i.next();
 			size++;
 		}
 		return size;
@@ -134,18 +136,21 @@ public class JLogList extends JLogCompound implements PrologList {
 
 	private final class JLogListIter implements Iterator<PrologTerm> {
 
-		private Enumeration<? extends jTerm> e;
+		private Iterator<? extends jTerm> e;
 
 		private JLogListIter(jListPair list) {
-			e = new JLogEnumeration(list);
+			e = new JLogIterator(list);
 		}
 
 		public boolean hasNext() {
-			return e.hasMoreElements();
+			return e.hasNext();
 		}
 
 		public PrologTerm next() {
-			return toTerm(e.nextElement(), PrologTerm.class);
+			if (!hasNext()) {
+				throw new NoSuchElementException();
+			}
+			return toTerm(e.next(), PrologTerm.class);
 		}
 
 		public void remove() {
