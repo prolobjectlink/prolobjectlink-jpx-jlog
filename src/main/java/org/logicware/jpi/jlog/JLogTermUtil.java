@@ -19,7 +19,8 @@
  */
 package org.logicware.jpi.jlog;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 import ubc.cs.JLog.Terms.jAtom;
 import ubc.cs.JLog.Terms.jCompoundTerm;
@@ -38,20 +39,14 @@ import ubc.cs.JLog.Terms.jVariable;
  */
 final class JLogTermUtil {
 
-	// static final boolean unify(JLogTerm thisTerm, JLogTerm otherTerm) {
-	// return thisTerm.unify(otherTerm, new Stack<PrologTerm>());
-	// }
-	//
-	// static final boolean unify(JLogTerm thisTerm, JLogTerm otherTerm,
-	// Stack<PrologTerm> stack) {
-	// return thisTerm.unify(otherTerm, stack);
-	// }
-
-	static final boolean unify(jTerm thisTerm, jTerm otherTerm) {
-		return unify(thisTerm, otherTerm, new Stack<jVariable>());
+	private JLogTermUtil() {
 	}
 
-	static final boolean unify(jTerm thisTerm, jTerm otherTerm, Stack<jVariable> stack) {
+	static final boolean unify(jTerm thisTerm, jTerm otherTerm) {
+		return unify(thisTerm, otherTerm, new ArrayDeque<jVariable>());
+	}
+
+	static final boolean unify(jTerm thisTerm, jTerm otherTerm, Deque<jVariable> stack) {
 
 		// if left term is variable
 		if (thisTerm instanceof jVariable) {
@@ -112,11 +107,7 @@ final class JLogTermUtil {
 		}
 
 		else if ((thisTerm instanceof jAtom) && (otherTerm instanceof jAtom)) {
-			// jAtom thisAtom = (jAtom) thisTerm;
-			// jAtom otherAtom = (jAtom) otherTerm;
-			// return thisAtom.equals(otherAtom);
 			return thisTerm.getName().equals(otherTerm.getName());
-			// return thisTerm.equals(otherTerm);
 		}
 
 		// if both terms are predicate

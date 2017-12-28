@@ -123,7 +123,6 @@ public final class JLogProvider extends AbstractProvider implements PrologProvid
 		return new JLogAtom(this, functor);
 	}
 
-	@Deprecated
 	public PrologFloat newFloat(Number value) {
 		return new JLogFloat(this, value);
 	}
@@ -179,13 +178,38 @@ public final class JLogProvider extends AbstractProvider implements PrologProvid
 		return new JLogStructure(this, functor, arguments);
 	}
 
-	public PrologTerm newExpression(PrologTerm left, String operator, PrologTerm right) {
+	public PrologTerm newStructure(PrologTerm left, String operator, PrologTerm right) {
 		return new JLogStructure(this, left, operator, right);
 	}
 
 	@Override
 	public String toString() {
 		return "JLogProvider [converter=" + converter + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((engine != null) ? 0 : engine.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		JLogProvider other = (JLogProvider) obj;
+		if (engine == null) {
+			if (other.engine != null)
+				return false;
+		} else if (!engine.equals(other.engine))
+			return false;
+		return true;
 	}
 
 }

@@ -20,8 +20,9 @@
 package org.logicware.jpi.jlog;
 
 import java.io.IOException;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Enumeration;
-import java.util.Stack;
 
 import org.logicware.jpi.AbstractTerm;
 import org.logicware.jpi.NumberExpectedError;
@@ -178,14 +179,7 @@ public abstract class JLogTerm extends AbstractTerm implements PrologTerm {
 
 	public final boolean unify(PrologTerm term) {
 
-		// jTerm thisTerm = value;
-		// jTerm otherTerm = fromTerm(term, jTerm.class);
-		// jUnifiedVector v = new jUnifiedVector();
-		// boolean match = thisTerm.unify(otherTerm, v);
-		// v.restoreVariables();
-		// return match;
-
-		Stack<PrologTerm> stack = new Stack<PrologTerm>();
+		Deque<PrologTerm> stack = new ArrayDeque<PrologTerm>();
 		boolean match = unify(term, stack);
 		for (PrologTerm prologTerm : stack) {
 			unwrap(prologTerm, JLogTerm.class).unbind();
@@ -195,11 +189,11 @@ public abstract class JLogTerm extends AbstractTerm implements PrologTerm {
 
 	}
 
-	protected final boolean unify(PrologTerm term, Stack<PrologTerm> stack) {
+	protected final boolean unify(PrologTerm term, Deque<PrologTerm> stack) {
 		return unify(unwrap(term, JLogTerm.class), stack);
 	}
 
-	protected final boolean unify(JLogTerm otherTerm, Stack<PrologTerm> stack) {
+	protected final boolean unify(JLogTerm otherTerm, Deque<PrologTerm> stack) {
 
 		JLogTerm thisTerm = this;
 
@@ -213,20 +207,16 @@ public abstract class JLogTerm extends AbstractTerm implements PrologTerm {
 
 		// current term is a free variable
 		else if (thisTerm.isVariableNotBound()) {
-			// if (!thisTerm.occurs(otherTerm)) {
 			thisTerm.bind(otherTerm);
 			stack.push(thisTerm);
 			return true;
-			// }
 		}
 
 		// the other term is a free variable
 		else if (otherTerm.isVariableNotBound()) {
-			// if (!otherTerm.occurs(thisTerm)) {
 			otherTerm.bind(thisTerm);
 			stack.push(otherTerm);
 			return true;
-			// }
 		}
 
 		// if at least term is a number then check equivalence
@@ -319,10 +309,8 @@ public abstract class JLogTerm extends AbstractTerm implements PrologTerm {
 				if (argument != null) {
 					if (argument.isVariable()) {
 						return thisTerm == argument;
-					} else if (argument.isCompound()) {
-						if (thisTerm.occurs(argument)) {
-							return true;
-						}
+					} else if (argument.isCompound() && thisTerm.occurs(argument)) {
+						return true;
 					}
 				}
 			}
@@ -331,10 +319,6 @@ public abstract class JLogTerm extends AbstractTerm implements PrologTerm {
 	}
 
 	public final int compareTo(PrologTerm term) {
-
-		// jTerm thisTerm = value;
-		// jTerm otherTerm = fromTerm(term, jTerm.class);
-		// return thisTerm.compare(otherTerm, true);
 
 		int termType = term.getType();
 
@@ -356,22 +340,21 @@ public abstract class JLogTerm extends AbstractTerm implements PrologTerm {
 			}
 			break;
 
-		case FLOAT_TYPE: {
+		case FLOAT_TYPE:
 
 			checkNumberType(term);
-			float thisValue = ((jReal) value).getRealValue();
-			float otherValue = ((PrologNumber) term).getFloatValue();
+			float thisFloatValue = ((jReal) value).getRealValue();
+			float otherFloatValue = ((PrologNumber) term).getFloatValue();
 
-			if (thisValue < otherValue) {
+			if (thisFloatValue < otherFloatValue) {
 				return -1;
-			} else if (thisValue > otherValue) {
+			} else if (thisFloatValue > otherFloatValue) {
 				return 1;
 			}
 
-		}
 			break;
 
-		case LONG_TYPE: {
+		case LONG_TYPE:
 
 			checkNumberType(term);
 			long thisValue = ((jInteger) value).getIntegerValue();
@@ -383,37 +366,34 @@ public abstract class JLogTerm extends AbstractTerm implements PrologTerm {
 				return 1;
 			}
 
-		}
 			break;
 
-		case DOUBLE_TYPE: {
+		case DOUBLE_TYPE:
 
 			checkNumberType(term);
-			double thisValue = ((jReal) value).getRealValue();
-			double otherValue = ((PrologNumber) term).getDoubleValue();
+			double thisDoubleValue = ((jReal) value).getRealValue();
+			double otherDoubleValue = ((PrologNumber) term).getDoubleValue();
 
-			if (thisValue < otherValue) {
+			if (thisDoubleValue < otherDoubleValue) {
 				return -1;
-			} else if (thisValue > otherValue) {
+			} else if (thisDoubleValue > otherDoubleValue) {
 				return 1;
 			}
 
-		}
 			break;
 
-		case INTEGER_TYPE: {
+		case INTEGER_TYPE:
 
 			checkNumberType(term);
-			int thisValue = ((jInteger) value).getIntegerValue();
-			int otherValue = ((PrologNumber) term).getIntValue();
+			int thisIntergerValue = ((jInteger) value).getIntegerValue();
+			int otherIntegerValue = ((PrologNumber) term).getIntValue();
 
-			if (thisValue < otherValue) {
+			if (thisIntergerValue < otherIntegerValue) {
 				return -1;
-			} else if (thisValue > otherValue) {
+			} else if (thisIntergerValue > otherIntegerValue) {
 				return 1;
 			}
 
-		}
 			break;
 
 		case LIST_TYPE:

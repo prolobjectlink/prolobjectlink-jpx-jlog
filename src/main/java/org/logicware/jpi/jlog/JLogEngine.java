@@ -41,7 +41,7 @@ import java.util.LinkedList;
 import java.util.Set;
 import java.util.StringTokenizer;
 
-import org.logicware.jpi.JavaEngine;
+import org.logicware.jpi.AbstractEngine;
 import org.logicware.jpi.Licenses;
 import org.logicware.jpi.OperatorEntry;
 import org.logicware.jpi.PredicateIndicator;
@@ -75,7 +75,7 @@ import ubc.cs.JLog.Terms.jPredicate;
 import ubc.cs.JLog.Terms.jPredicateTerms;
 import ubc.cs.JLog.Terms.jTerm;
 
-public final class JLogEngine extends JavaEngine implements PrologEngine {
+public final class JLogEngine extends AbstractEngine implements PrologEngine {
 
 	final jPrologServices engine;
 	private final jKnowledgeBase kb;
@@ -509,7 +509,7 @@ public final class JLogEngine extends JavaEngine implements PrologEngine {
 		return operators;
 	}
 
-	public Iterator<PrologClause> getProgramIterator() {
+	public Iterator<PrologClause> iterator() {
 		Collection<PrologClause> cls = new LinkedList<PrologClause>();
 		Enumeration<?> enumeration = kb.enumDefinitions();
 		while (enumeration.hasMoreElements()) {

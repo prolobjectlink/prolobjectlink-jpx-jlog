@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
@@ -53,7 +52,7 @@ import ubc.cs.JLog.Terms.jVariable;
 public final class JLogQuery extends AbstractQuery implements PrologQuery {
 
 	final jPrologAPI jlogApi;
-	private Hashtable<?, ?> solution;
+	private Map<?, ?> solution;
 	private jVariableVector vector = new jVariableVector();
 
 	protected static final String DOT = ".";
@@ -270,7 +269,8 @@ public final class JLogQuery extends AbstractQuery implements PrologQuery {
 
 	public PrologTerm[][] nSolutions(int n) {
 		if (n > 0) {
-			int m = 0, index = 0;
+			int m = 0;
+			int index = 0;
 			List<PrologTerm[]> all = new ArrayList<PrologTerm[]>();
 			while (hasMoreSolutions() && index < n) {
 				PrologTerm[] solutions = oneSolution();
@@ -282,9 +282,9 @@ public final class JLogQuery extends AbstractQuery implements PrologQuery {
 
 			PrologTerm[][] allSolutions = new PrologTerm[n][m];
 			for (int i = 0; i < n; i++) {
-				PrologTerm[] solution = all.get(i);
+				PrologTerm[] solutionArray = all.get(i);
 				for (int j = 0; j < m; j++) {
-					allSolutions[i][j] = solution[j];
+					allSolutions[i][j] = solutionArray[j];
 				}
 			}
 			return allSolutions;
@@ -309,7 +309,8 @@ public final class JLogQuery extends AbstractQuery implements PrologQuery {
 
 	public PrologTerm[][] allSolutions() {
 		// n:solutionCount, m:solutionSize
-		int n = 0, m = 0;
+		int n = 0;
+		int m = 0;
 		List<PrologTerm[]> all = new ArrayList<PrologTerm[]>();
 		while (hasMoreSolutions()) {
 			PrologTerm[] solutions = oneSolution();
@@ -321,9 +322,9 @@ public final class JLogQuery extends AbstractQuery implements PrologQuery {
 
 		PrologTerm[][] allSolutions = new PrologTerm[n][m];
 		for (int i = 0; i < n; i++) {
-			PrologTerm[] solution = all.get(i);
+			PrologTerm[] solutionArray = all.get(i);
 			for (int j = 0; j < m; j++) {
-				allSolutions[i][j] = solution[j];
+				allSolutions[i][j] = solutionArray[j];
 			}
 		}
 		return allSolutions;
