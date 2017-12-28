@@ -36,6 +36,7 @@ import java.io.StringWriter;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
 import java.util.StringTokenizer;
@@ -508,7 +509,7 @@ public final class JLogEngine extends JavaEngine implements PrologEngine {
 		return operators;
 	}
 
-	public Enumeration<PrologClause> getProgramClauses() {
+	public Iterator<PrologClause> getProgramIterator() {
 		Collection<PrologClause> cls = new LinkedList<PrologClause>();
 		Enumeration<?> enumeration = kb.enumDefinitions();
 		while (enumeration.hasMoreElements()) {
@@ -537,7 +538,7 @@ public final class JLogEngine extends JavaEngine implements PrologEngine {
 				}
 			}
 		}
-		return new JLogClauseEnum(cls);
+		return new PrologProgramIterator(cls);
 	}
 
 	public int getProgramSize() {
