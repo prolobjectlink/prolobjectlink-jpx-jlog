@@ -603,9 +603,9 @@ public final class JLogEngine extends AbstractEngine implements PrologEngine {
 
 					// rule end
 					if (!(body instanceof JLogTrue)) {
-						cls.add(new JLogClause(head, body, false, false, false));
+						cls.add(new JLogClause(provider, head, body, false, false, false));
 					} else {
-						cls.add(new JLogClause(head, false, false, false));
+						cls.add(new JLogClause(provider, head, false, false, false));
 					}
 
 				}

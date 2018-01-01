@@ -21,15 +21,18 @@ package org.logicware.jpi.jlog;
 
 import org.logicware.jpi.AbstractClause;
 import org.logicware.jpi.PrologClause;
+import org.logicware.jpi.PrologProvider;
 import org.logicware.jpi.PrologTerm;
 
 public class JLogClause extends AbstractClause implements PrologClause {
 
-	protected JLogClause(PrologTerm head, boolean dynamic, boolean multifile, boolean discontiguous) {
-		super(head, dynamic, multifile, discontiguous);
+	protected JLogClause(PrologProvider provider, PrologTerm head, boolean dynamic, boolean multifile,
+			boolean discontiguous) {
+		super(provider, head, dynamic, multifile, discontiguous);
 	}
 
-	protected JLogClause(PrologTerm head, PrologTerm body, boolean dynamic, boolean multifile, boolean discontiguous) {
-		super(head, body, dynamic, multifile, discontiguous);
+	protected JLogClause(PrologProvider provider, PrologTerm head, PrologTerm body, boolean dynamic, boolean multifile,
+			boolean discontiguous) {
+		super(provider, head, body, dynamic, multifile, discontiguous);
 	}
 }

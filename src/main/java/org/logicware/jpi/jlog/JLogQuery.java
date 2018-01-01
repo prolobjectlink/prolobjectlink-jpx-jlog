@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.logicware.SystemLogger;
 import org.logicware.jpi.AbstractQuery;
 import org.logicware.jpi.PrologEngine;
 import org.logicware.jpi.PrologProvider;
@@ -64,6 +65,7 @@ public final class JLogQuery extends AbstractQuery implements PrologQuery {
 	protected static final String COMMA = ",";
 
 	protected static final PrologProvider provider = new JLogProvider();
+	private static final SystemLogger LOGGER = SystemLogger.getInstance();
 
 	protected JLogQuery(PrologEngine engine, String str) {
 		super(engine);
@@ -139,7 +141,7 @@ public final class JLogQuery extends AbstractQuery implements PrologQuery {
 
 		}
 
-		System.out.println(source);
+		LOGGER.trace(source);
 
 		jlogApi = new jPrologAPI(source);
 		try {
@@ -229,7 +231,7 @@ public final class JLogQuery extends AbstractQuery implements PrologQuery {
 
 		}
 
-		System.out.println(source);
+		LOGGER.trace(source);
 
 		jlogApi = new jPrologAPI(source);
 		try {
