@@ -19,6 +19,9 @@
  */
 package org.logicware.jpi.jlog;
 
+import static org.logicware.LoggerConstants.ERROR_LOADING_BUILT_INS;
+import static org.logicware.LoggerConstants.IO_ERROR;
+import static org.logicware.LoggerConstants.FILE_NOT_FOUND;
 import static org.logicware.jpi.jlog.JLogProvider.FUNCTORS;
 import static ubc.cs.JLog.Foundation.iType.TYPE_PREDICATE;
 import static ubc.cs.JLog.Parser.pOperatorEntry.FX;
@@ -40,9 +43,11 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Set;
 import java.util.StringTokenizer;
 
+import org.logicware.LoggerUtils;
 import org.logicware.jpi.AbstractEngine;
 import org.logicware.jpi.Licenses;
 import org.logicware.jpi.OperatorEntry;
@@ -103,7 +108,7 @@ public final class JLogEngine extends AbstractEngine implements PrologEngine {
 		try {
 			engine.loadLibrary(BUILTINS);
 		} catch (IOException e) {
-			e.printStackTrace();
+			LoggerUtils.error(getClass(), ERROR_LOADING_BUILT_INS, e);
 		}
 	}
 
@@ -164,9 +169,9 @@ public final class JLogEngine extends AbstractEngine implements PrologEngine {
 		throw new StructureExpectedError(head);
 	}
 
-	public void include(String file) {
+	public void include(String path) {
 		try {
-			FileReader fileReader = new FileReader(file);
+			FileReader fileReader = new FileReader(path);
 			new pParseStream(fileReader, kb, pr, or).parseSource();
 			Enumeration<?> enumeration = kb.enumDefinitions();
 			while (enumeration.hasMoreElements()) {
@@ -214,7 +219,7 @@ public final class JLogEngine extends AbstractEngine implements PrologEngine {
 				}
 			}
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			LoggerUtils.error(getClass(), FILE_NOT_FOUND + path, e);
 		}
 	}
 
@@ -269,7 +274,7 @@ public final class JLogEngine extends AbstractEngine implements PrologEngine {
 				}
 			}
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			LoggerUtils.error(getClass(), FILE_NOT_FOUND + path, e);
 		}
 	}
 
@@ -338,9 +343,9 @@ public final class JLogEngine extends AbstractEngine implements PrologEngine {
 			}
 			writer.flush();
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			LoggerUtils.error(getClass(), FILE_NOT_FOUND + path, e);
 		} catch (IOException e) {
-			e.printStackTrace();
+			LoggerUtils.error(getClass(), IO_ERROR + path, e);
 		} finally {
 			if (writer != null) {
 				writer.close();
@@ -651,10 +656,10 @@ public final class JLogEngine extends AbstractEngine implements PrologEngine {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((engine == null) ? 0 : engine.hashCode());
-		result = prime * result + ((kb == null) ? 0 : kb.hashCode());
-		result = prime * result + ((or == null) ? 0 : or.hashCode());
-		result = prime * result + ((pr == null) ? 0 : pr.hashCode());
+		result = prime * result + Objects.hashCode(engine);
+		result = prime * result + Objects.hashCode(kb);
+		result = prime * result + Objects.hashCode(or);
+		result = prime * result + Objects.hashCode(pr);
 		return result;
 	}
 
@@ -667,27 +672,13 @@ public final class JLogEngine extends AbstractEngine implements PrologEngine {
 		if (getClass() != obj.getClass())
 			return false;
 		JLogEngine other = (JLogEngine) obj;
-		if (engine == null) {
-			if (other.engine != null)
-				return false;
-		} else if (!engine.equals(other.engine))
+		if (!Objects.equals(engine, other.engine))
 			return false;
-		if (kb == null) {
-			if (other.kb != null)
-				return false;
-		} else if (!kb.equals(other.kb))
+		if (!Objects.equals(kb, other.kb))
 			return false;
-		if (or == null) {
-			if (other.or != null)
-				return false;
-		} else if (!or.equals(other.or))
+		if (!Objects.equals(or, other.or))
 			return false;
-		if (pr == null) {
-			if (other.pr != null)
-				return false;
-		} else if (!pr.equals(other.pr))
-			return false;
-		return true;
+		return Objects.equals(pr, other.pr);
 	}
 
 	public void dispose() {

@@ -40,6 +40,8 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Enumeration;
 
+import org.logicware.LoggerConstants;
+import org.logicware.LoggerUtils;
 import org.logicware.jpi.AbstractTerm;
 import org.logicware.jpi.NumberExpectedError;
 import org.logicware.jpi.PrologNumber;
@@ -175,7 +177,7 @@ public abstract class JLogTerm extends AbstractTerm implements PrologTerm {
 			try {
 				engine.loadLibrary(builtins);
 			} catch (IOException e) {
-				e.printStackTrace();
+				LoggerUtils.error(getClass(), LoggerConstants.ERROR_LOADING_BUILT_INS, e);
 			}
 			Enumeration<?> e = engine.getOperatorRegistry().enumOperators();
 			while (e.hasMoreElements()) {

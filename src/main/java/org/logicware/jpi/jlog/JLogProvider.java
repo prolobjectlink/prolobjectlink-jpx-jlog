@@ -19,6 +19,7 @@
  */
 package org.logicware.jpi.jlog;
 
+import static org.logicware.LoggerConstants.ERROR_LOADING_BUILT_INS;
 import static org.logicware.jpi.jlog.JLogTerm.SIMPLE_ATOM_REGEX;
 
 import java.io.IOException;
@@ -26,6 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import org.logicware.LoggerUtils;
 import org.logicware.jpi.AbstractProvider;
 import org.logicware.jpi.PrologAtom;
 import org.logicware.jpi.PrologConverter;
@@ -70,7 +72,7 @@ public final class JLogProvider extends AbstractProvider implements PrologProvid
 		try {
 			engine.loadLibrary(BUILTINS);
 		} catch (IOException e) {
-			e.printStackTrace();
+			LoggerUtils.error(getClass(), ERROR_LOADING_BUILT_INS, e);
 		}
 	}
 
