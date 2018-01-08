@@ -19,129 +19,49 @@
  */
 package org.logicware.jpi.jlog;
 
-import static org.logicware.jpi.jlog.JLogProvider.FUNCTORS;
-import static org.logicware.jpi.jlog.JLogTerm.SIMPLE_ATOM_REGEX;
-
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
-import org.logicware.LoggerUtils;
 import org.logicware.jpi.AbstractQuery;
 import org.logicware.jpi.PrologEngine;
-import org.logicware.jpi.PrologProvider;
 import org.logicware.jpi.PrologQuery;
 import org.logicware.jpi.PrologTerm;
 
 import ubc.cs.JLog.Foundation.jKnowledgeBase;
 import ubc.cs.JLog.Foundation.jPrologAPI;
-import ubc.cs.JLog.Foundation.jPrologServices;
-import ubc.cs.JLog.Foundation.jRule;
-import ubc.cs.JLog.Foundation.jRuleDefinitions;
 import ubc.cs.JLog.Foundation.jVariableVector;
 import ubc.cs.JLog.Parser.pOperatorRegistry;
 import ubc.cs.JLog.Parser.pParseStream;
 import ubc.cs.JLog.Parser.pPredicateRegistry;
-import ubc.cs.JLog.Terms.jBuiltinRule;
-import ubc.cs.JLog.Terms.jPredicate;
 import ubc.cs.JLog.Terms.jPredicateTerms;
-import ubc.cs.JLog.Terms.jTerm;
 import ubc.cs.JLog.Terms.jVariable;
 
 public final class JLogQuery extends AbstractQuery implements PrologQuery {
 
-	final jPrologAPI jlogApi;
 	private Map<?, ?> solution;
+	private final jPrologAPI jlogApi;
 	private jVariableVector vector = new jVariableVector();
-
-	protected static final String DOT = ".";
-	protected static final String NECK = ":-";
-	protected static final String COMMA = ",";
-
-	protected static final PrologProvider provider = new JLogProvider();
 
 	protected JLogQuery(PrologEngine engine, String str) {
 		super(engine);
 
-		for (Entry<String, String> entry : FUNCTORS.entrySet()) {
-
-			// retrieve cached functors
-			String key = entry.getKey();
-			String value = entry.getValue();
-
-			// first and unique term pattern
-			String firstRegex = "(" + key + "";
-			if (str.contains(firstRegex)) {
-				str = str.replaceAll(key, value);
-			}
-
-			// non-first term pattern
-			String nonFirstRegex = "," + key + "";
-			if (str.contains(nonFirstRegex)) {
-				str = str.replaceAll(key, value);
-			}
-
-		}
-
 		// saving variable order
+		str = JLogUtil.rectify(str);
 		JLogEngine pe = engine.unwrap(JLogEngine.class);
 		jKnowledgeBase kb = pe.engine.getKnowledgeBase();
 		pOperatorRegistry or = pe.engine.getOperatorRegistry();
 		pPredicateRegistry pr = pe.engine.getPredicateRegistry();
-		String s = str.charAt(str.length() - 1) == '.' ? str : str + DOT;
+		String s = str.charAt(str.length() - 1) == '.' ? str : str + '.';
 		pParseStream parser = new pParseStream(s, kb, pr, or);
 		jPredicateTerms terms = parser.parseQuery();
 		terms.enumerateVariables(vector, true);
 
 		// adapt program to string
-		String source = toString(pe.engine);
-
-		// first functor occurrence
-		int index = source.indexOf('(');
-		if (index > -1) {
-			String functor = source.substring(0, index);
-			String arguments = source.substring(index);
-			if (!functor.startsWith("'") && !functor.endsWith("'") && !functor.matches(SIMPLE_ATOM_REGEX)) {
-				StringBuilder buffer = new StringBuilder();
-				buffer.append('\'');
-				buffer.append(functor);
-				buffer.append('\'');
-				String quoted = "" + buffer + "";
-				buffer.append(arguments);
-				FUNCTORS.put(functor, quoted);
-				source = source.replaceAll(functor, quoted);
-			}
-		}
-
-		// jlog need treatment for complex functors
-		for (Entry<String, String> entry : FUNCTORS.entrySet()) {
-
-			// retrieve cached functors
-			String key = entry.getKey();
-			String value = entry.getValue();
-
-			// first and unique term
-			String firstRegex = "(" + key + "";
-			if (source.contains(firstRegex)) {
-				source = source.replaceAll(key, value);
-			}
-
-			// non-first term
-			String nonFirstRegex = "," + key + "";
-			if (source.contains(nonFirstRegex)) {
-				source = source.replaceAll(key, value);
-			}
-
-		}
-
-		LoggerUtils.trace(getClass(), source);
-
+		String source = JLogUtil.toString(pe.engine);
 		jlogApi = new jPrologAPI(source);
 		try {
 			solution = jlogApi.query(s);
@@ -155,30 +75,10 @@ public final class JLogQuery extends AbstractQuery implements PrologQuery {
 		super(engine);
 
 		String str = Arrays.toString(terms).substring(1);
-		str = str.substring(0, str.length() - 1) + DOT;
-
-		// jlog need treatment for complex functors
-		for (Entry<String, String> entry : FUNCTORS.entrySet()) {
-
-			// retrieve cached functors
-			String key = entry.getKey();
-			String value = entry.getValue();
-
-			// first and unique term
-			String firstRegex = "(" + key + "";
-			if (str.contains(firstRegex)) {
-				str = str.replaceAll(key, value);
-			}
-
-			// non-first term
-			String nonFirstRegex = "," + key + "";
-			if (str.contains(nonFirstRegex)) {
-				str = str.replaceAll(key, value);
-			}
-
-		}
+		str = str.substring(0, str.length() - 1) + '.';
 
 		// saving variable order
+		str = JLogUtil.rectify(str);
 		JLogEngine pe = engine.unwrap(JLogEngine.class);
 		jKnowledgeBase kb = pe.engine.getKnowledgeBase();
 		pOperatorRegistry or = pe.engine.getOperatorRegistry();
@@ -188,50 +88,7 @@ public final class JLogQuery extends AbstractQuery implements PrologQuery {
 		jpts.enumerateVariables(vector, true);
 
 		// adapt program to string
-		String source = toString(pe.engine);
-
-		// first functor occurrence
-		int index = source.indexOf('(');
-		if (index > -1) {
-			String functor = source.substring(0, index);
-			String arguments = source.substring(index);
-			if (!functor.startsWith("'") && !functor.endsWith("'") && !functor.matches(SIMPLE_ATOM_REGEX)) {
-				StringBuilder buffer = new StringBuilder();
-				buffer.append('\'');
-				buffer.append(functor);
-				buffer.append('\'');
-				String quoted = "" + buffer + "";
-				buffer.append(arguments);
-				FUNCTORS.put(functor, quoted);
-				source = source.replaceAll(functor, quoted);
-			}
-		}
-
-		// other functors
-
-		// jlog need treatment for complex functors
-		for (Entry<String, String> entry : FUNCTORS.entrySet()) {
-
-			// retrieve cached functors
-			String key = entry.getKey();
-			String value = entry.getValue();
-
-			// first and unique term
-			String firstRegex = "(" + key + "";
-			if (source.contains(firstRegex)) {
-				source = source.replaceAll(key, value);
-			}
-
-			// non-first term
-			String nonFirstRegex = "," + key + "";
-			if (source.contains(nonFirstRegex)) {
-				source = source.replaceAll(key, value);
-			}
-
-		}
-
-		LoggerUtils.trace(getClass(), source);
-
+		String source = JLogUtil.toString(pe.engine);
 		jlogApi = new jPrologAPI(source);
 		try {
 			solution = jlogApi.query(str);
@@ -239,125 +96,6 @@ public final class JLogQuery extends AbstractQuery implements PrologQuery {
 			solution = null;
 		}
 
-	}
-
-	private PrologTerm toTerm(Object object) {
-
-		// null pointer
-		if (object == null) {
-			return new JLogNil(provider);
-		}
-
-		// string data type
-		else if (object instanceof String) {
-			String string = (String) object;
-			int index = string.indexOf('(');
-			if (index > -1) {
-				String functor = string.substring(0, index);
-				String arguments = string.substring(index);
-				if (!functor.matches(SIMPLE_ATOM_REGEX)) {
-					StringBuilder buffer = new StringBuilder();
-					buffer.append('\'');
-					buffer.append(functor);
-					buffer.append('\'');
-					String quoted = "" + buffer + "";
-					buffer.append(arguments);
-					string = "" + buffer + "";
-					FUNCTORS.put(functor, quoted);
-
-					// jlog need treatment for complex functors
-					for (Entry<String, String> entry : FUNCTORS.entrySet()) {
-
-						// retrieve cached functors
-						String key = entry.getKey();
-						String value = entry.getValue();
-
-						// first and unique term pattern
-						String firstRegex = "(" + key + "";
-						if (string.contains(firstRegex)) {
-							string = string.replaceAll(key, value);
-						}
-
-						// non-first term pattern
-						String nonFirstRegex = "," + key + "";
-						if (string.contains(nonFirstRegex)) {
-							string = string.replaceAll(key, value);
-						}
-
-					}
-				}
-			}
-
-			return provider.parsePrologTerm(string);
-		}
-
-		// primitives and wrappers data types
-		else if (object.getClass() == boolean.class || object instanceof Boolean) {
-			return (Boolean) object ? new JLogTrue(provider) : new JLogFalse(provider);
-		} else if (object.getClass() == int.class || object instanceof Integer) {
-			return new JLogInteger(provider, (Integer) object);
-		} else if (object.getClass() == float.class || object instanceof Float) {
-			return new JLogFloat(provider, (Float) object);
-		} else if (object.getClass() == long.class || object instanceof Long) {
-			return new JLogLong(provider, (Long) object);
-		} else if (object.getClass() == double.class || object instanceof Double) {
-			return new JLogDouble(provider, (Double) object);
-		}
-
-		//
-		else if (object instanceof Object[]) {
-			Object[] objects = (Object[]) object;
-			PrologTerm[] terms = new PrologTerm[objects.length];
-			for (int i = 0; i < objects.length; i++) {
-				terms[i] = toTerm(objects[i]);
-			}
-			return new JLogList(provider, terms);
-		} else if (object instanceof jTerm) {
-			return toTerm((jTerm) object);
-		}
-		return null;
-	}
-
-	private String toString(jPrologServices engine) {
-		jKnowledgeBase kb = engine.getKnowledgeBase();
-		StringWriter stringWriter = new StringWriter();
-		PrintWriter writer = new PrintWriter(stringWriter);
-		Enumeration<?> enumeration = kb.enumDefinitions();
-		while (enumeration.hasMoreElements()) {
-			jRuleDefinitions object = (jRuleDefinitions) enumeration.nextElement();
-			Enumeration<?> r = object.enumRules();
-			while (r.hasMoreElements()) {
-				Object object2 = r.nextElement();
-				if (!(object2 instanceof jBuiltinRule)) {
-					jRule jRule = (jRule) object2;
-
-					// rule head
-					jPredicate ruleHead = jRule.getHead();
-					writer.print(ruleHead);
-
-					// rule body
-					jPredicateTerms ruleBody = jRule.getBase();
-					Enumeration<?> k = ruleBody.enumTerms();
-					if (k.hasMoreElements()) {
-						writer.print(NECK);
-						while (k.hasMoreElements()) {
-							jTerm term = (jTerm) k.nextElement();
-							writer.print(term);
-							if (k.hasMoreElements()) {
-								writer.print(COMMA);
-							}
-						}
-					}
-
-					// rule end
-					writer.println(DOT);
-				}
-			}
-		}
-		writer.flush();
-		writer.close();
-
-		return "" + stringWriter + "";
 	}
 
 	public boolean hasSolution() {
@@ -376,7 +114,7 @@ public final class JLogQuery extends AbstractQuery implements PrologQuery {
 				Object object = e.nextElement();
 				if (object instanceof jVariable) {
 					String key = ((jVariable) object).getName();
-					array[index++] = toTerm(solution.get(key));
+					array[index++] = JLogUtil.toTerm(getProvider(), solution.get(key));
 				}
 			}
 			return array;
@@ -391,7 +129,7 @@ public final class JLogQuery extends AbstractQuery implements PrologQuery {
 				Object object = e.nextElement();
 				if (object instanceof jVariable) {
 					String key = ((jVariable) object).getName();
-					varMap.put(key, toTerm(solution.get(key)));
+					varMap.put(key, JLogUtil.toTerm(getProvider(), solution.get(key)));
 				}
 			}
 			return varMap;
@@ -492,10 +230,11 @@ public final class JLogQuery extends AbstractQuery implements PrologQuery {
 	}
 
 	public void dispose() {
-		jlogApi.stop();
+		vector = new jVariableVector();
 		if (solution != null) {
 			solution.clear();
 		}
+		jlogApi.stop();
 	}
 
 	@Override

@@ -35,10 +35,6 @@ import ubc.cs.JLog.Terms.jInteger;
 
 public class JLogLong extends JLogTerm implements PrologLong {
 
-	public JLogLong(PrologProvider provider) {
-		super(LONG_TYPE, provider, new jInteger(0));
-	}
-
 	public JLogLong(PrologProvider provider, Number value) {
 		super(LONG_TYPE, provider, new jInteger(value.intValue()));
 	}

@@ -35,10 +35,6 @@ import ubc.cs.JLog.Terms.jReal;
 
 public final class JLogFloat extends JLogTerm implements PrologFloat {
 
-	public JLogFloat(PrologProvider provider) {
-		super(FLOAT_TYPE, provider, new jReal(0));
-	}
-
 	public JLogFloat(PrologProvider provider, Number value) {
 		super(FLOAT_TYPE, provider, new jReal(value.floatValue()));
 	}

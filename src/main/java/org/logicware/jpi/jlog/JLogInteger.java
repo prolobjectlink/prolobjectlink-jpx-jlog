@@ -35,10 +35,6 @@ import ubc.cs.JLog.Terms.jInteger;
 
 public class JLogInteger extends JLogTerm implements PrologInteger {
 
-	public JLogInteger(PrologProvider provider) {
-		super(INTEGER_TYPE, provider, new jInteger(0));
-	}
-
 	public JLogInteger(PrologProvider provider, Number value) {
 		super(INTEGER_TYPE, provider, new jInteger(value.intValue()));
 	}

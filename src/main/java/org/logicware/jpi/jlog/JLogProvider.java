@@ -19,15 +19,14 @@
  */
 package org.logicware.jpi.jlog;
 
-import static org.logicware.LoggerConstants.ERROR_LOADING_BUILT_INS;
 import static org.logicware.jpi.jlog.JLogTerm.SIMPLE_ATOM_REGEX;
+import static org.logicware.logging.LoggerConstants.ERROR_LOADING_BUILT_INS;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import org.logicware.LoggerUtils;
 import org.logicware.jpi.AbstractProvider;
 import org.logicware.jpi.PrologAtom;
 import org.logicware.jpi.PrologConverter;
@@ -41,6 +40,7 @@ import org.logicware.jpi.PrologProvider;
 import org.logicware.jpi.PrologStructure;
 import org.logicware.jpi.PrologTerm;
 import org.logicware.jpi.PrologVariable;
+import org.logicware.logging.LoggerUtils;
 
 import ubc.cs.JLog.Foundation.jKnowledgeBase;
 import ubc.cs.JLog.Foundation.jPrologFileServices;

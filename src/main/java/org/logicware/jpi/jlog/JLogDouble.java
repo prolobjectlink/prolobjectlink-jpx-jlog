@@ -35,10 +35,6 @@ import ubc.cs.JLog.Terms.jReal;
 
 public final class JLogDouble extends JLogTerm implements PrologDouble {
 
-	public JLogDouble(PrologProvider provider) {
-		super(DOUBLE_TYPE, provider, new jReal(0));
-	}
-
 	public JLogDouble(PrologProvider provider, Number value) {
 		super(DOUBLE_TYPE, provider, new jReal(value.floatValue()));
 	}

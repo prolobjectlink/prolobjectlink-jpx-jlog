@@ -40,13 +40,13 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Enumeration;
 
-import org.logicware.LoggerConstants;
-import org.logicware.LoggerUtils;
 import org.logicware.jpi.AbstractTerm;
 import org.logicware.jpi.NumberExpectedError;
 import org.logicware.jpi.PrologNumber;
 import org.logicware.jpi.PrologProvider;
 import org.logicware.jpi.PrologTerm;
+import org.logicware.logging.LoggerConstants;
+import org.logicware.logging.LoggerUtils;
 
 import ubc.cs.JLog.Foundation.jEquivalenceMapping;
 import ubc.cs.JLog.Foundation.jKnowledgeBase;
