@@ -1,6 +1,6 @@
 /*
  * #%L
- * prolobjectlink-jlog
+ * prolobjectlink-db-jlog
  * %%
  * Copyright (C) 2012 - 2017 Logicware Project
  * %%
@@ -17,10 +17,10 @@
  * limitations under the License.
  * #L%
  */
-package org.logicware.jpi.jlog;
+package org.logicware.prolog.jlog;
 
-import static org.logicware.jpi.jlog.JLogProvider.FUNCTORS;
-import static org.logicware.jpi.jlog.JLogTerm.SIMPLE_ATOM_REGEX;
+import static org.logicware.prolog.jlog.JLogProvider.FUNCTORS;
+import static org.logicware.prolog.jlog.JLogTerm.SIMPLE_ATOM_REGEX;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -29,9 +29,9 @@ import java.util.Deque;
 import java.util.Enumeration;
 import java.util.Map.Entry;
 
-import org.logicware.jpi.PrologProvider;
-import org.logicware.jpi.PrologTerm;
-import org.logicware.jpi.StructureExpectedError;
+import org.logicware.prolog.PrologProvider;
+import org.logicware.prolog.PrologTerm;
+import org.logicware.prolog.StructureExpectedError;
 
 import ubc.cs.JLog.Foundation.jKnowledgeBase;
 import ubc.cs.JLog.Foundation.jPrologServices;

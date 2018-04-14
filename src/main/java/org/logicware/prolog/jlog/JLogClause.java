@@ -1,6 +1,6 @@
 /*
  * #%L
- * prolobjectlink-jlog
+ * prolobjectlink-db-jlog
  * %%
  * Copyright (C) 2012 - 2017 Logicware Project
  * %%
@@ -17,12 +17,12 @@
  * limitations under the License.
  * #L%
  */
-package org.logicware.jpi.jlog;
+package org.logicware.prolog.jlog;
 
-import org.logicware.jpi.AbstractClause;
-import org.logicware.jpi.PrologClause;
-import org.logicware.jpi.PrologProvider;
-import org.logicware.jpi.PrologTerm;
+import org.logicware.prolog.AbstractClause;
+import org.logicware.prolog.PrologClause;
+import org.logicware.prolog.PrologProvider;
+import org.logicware.prolog.PrologTerm;
 
 public class JLogClause extends AbstractClause implements PrologClause {
 

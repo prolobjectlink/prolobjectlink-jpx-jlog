@@ -1,6 +1,6 @@
 /*
  * #%L
- * prolobjectlink-jlog
+ * prolobjectlink-db-jlog
  * %%
  * Copyright (C) 2012 - 2017 Logicware Project
  * %%
@@ -17,25 +17,32 @@
  * limitations under the License.
  * #L%
  */
-package org.logicware.jpi.jlog;
+package org.logicware.prolog.jlog;
 
-import static org.logicware.jpi.PrologTermType.FALSE_TYPE;
+import static org.logicware.prolog.PrologTermType.ATOM_TYPE;
 
-import org.logicware.jpi.PrologProvider;
-import org.logicware.jpi.PrologTerm;
+import org.logicware.prolog.PrologAtom;
+import org.logicware.prolog.PrologProvider;
+import org.logicware.prolog.PrologTerm;
 
 import ubc.cs.JLog.Terms.jAtom;
 
-public final class JLogFalse extends JLogTerm implements PrologTerm {
+public final class JLogAtom extends JLogTerm implements PrologAtom {
 
-	static final String FALSE_STR = "false";
+	public JLogAtom(PrologProvider provider, String value) {
+		super(ATOM_TYPE, provider, new jAtom(value));
+	}
 
-	protected JLogFalse(PrologProvider provider) {
-		super(FALSE_TYPE, provider, new jAtom(FALSE_STR));
+	public String getStringValue() {
+		return getFunctor();
+	}
+
+	public void setStringValue(String value) {
+		this.value = new jAtom(value);
 	}
 
 	public PrologTerm[] getArguments() {
-		return new PrologTerm[0];
+		return new JLogAtom[0];
 	}
 
 	public int getArity() {

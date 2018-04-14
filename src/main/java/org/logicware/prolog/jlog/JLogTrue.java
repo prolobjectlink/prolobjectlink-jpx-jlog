@@ -1,6 +1,6 @@
 /*
  * #%L
- * prolobjectlink-jlog
+ * prolobjectlink-db-jlog
  * %%
  * Copyright (C) 2012 - 2017 Logicware Project
  * %%
@@ -17,41 +17,37 @@
  * limitations under the License.
  * #L%
  */
-package org.logicware.jpi.jlog;
+package org.logicware.prolog.jlog;
 
-import org.logicware.jpi.PrologList;
-import org.logicware.jpi.PrologProvider;
-import org.logicware.jpi.PrologTerm;
+import static org.logicware.prolog.PrologTermType.TRUE_TYPE;
 
-import ubc.cs.JLog.Terms.jNullList;
+import org.logicware.prolog.PrologProvider;
+import org.logicware.prolog.PrologTerm;
 
-public class JLogEmpty extends JLogList implements PrologList {
+import ubc.cs.JLog.Terms.jTrue;
 
-	protected JLogEmpty(PrologProvider provider) {
-		super(provider);
+public final class JLogTrue extends JLogTerm implements PrologTerm {
+
+	protected JLogTrue(PrologProvider provider) {
+		super(TRUE_TYPE, provider, jTrue.TRUE);
 	}
 
-	@Override
 	public PrologTerm[] getArguments() {
 		return new PrologTerm[0];
 	}
 
-	@Override
 	public int getArity() {
 		return 0;
 	}
 
-	@Override
 	public String getFunctor() {
-		return ((jNullList) value).getName();
+		return "" + value + "";
 	}
 
-	@Override
 	public String getIndicator() {
 		return getFunctor() + "/" + getArity();
 	}
 
-	@Override
 	public boolean hasIndicator(String functor, int arity) {
 		return getFunctor().equals(functor) && getArity() == arity;
 	}

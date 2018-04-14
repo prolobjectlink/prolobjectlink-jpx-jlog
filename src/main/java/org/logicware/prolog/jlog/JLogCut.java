@@ -1,6 +1,6 @@
 /*
  * #%L
- * prolobjectlink-jlog
+ * prolobjectlink-db-jlog
  * %%
  * Copyright (C) 2012 - 2017 Logicware Project
  * %%
@@ -17,21 +17,21 @@
  * limitations under the License.
  * #L%
  */
-package org.logicware.jpi.jlog;
+package org.logicware.prolog.jlog;
 
-import static org.logicware.jpi.PrologTermType.NIL_TYPE;
+import static org.logicware.prolog.PrologTermType.CUT_TYPE;
 
-import org.logicware.jpi.PrologProvider;
-import org.logicware.jpi.PrologTerm;
+import org.logicware.prolog.PrologProvider;
+import org.logicware.prolog.PrologTerm;
 
-import ubc.cs.JLog.Terms.jAtom;
+import ubc.cs.JLog.Builtins.jCut;
 
-public final class JLogNil extends JLogTerm implements PrologTerm {
+public class JLogCut extends JLogTerm implements PrologTerm {
 
-	static final String NIL_STR = "nil";
+	static final jCut JCUT = new jCut();
 
-	protected JLogNil(PrologProvider provider) {
-		super(NIL_TYPE, provider, new jAtom(NIL_STR));
+	protected JLogCut(PrologProvider provider) {
+		super(CUT_TYPE, provider, JCUT);
 	}
 
 	public PrologTerm[] getArguments() {

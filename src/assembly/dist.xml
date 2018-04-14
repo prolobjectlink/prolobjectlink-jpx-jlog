@@ -19,6 +19,12 @@
 			</includes>
 		</fileSet>
 
+		<!-- root data folder -->
+		<fileSet>
+			<directory>${project.basedir}/dat</directory>
+			<outputDirectory>dat</outputDirectory>
+		</fileSet>
+
 		<!-- documentation and api documentation -->
 		<fileSet>
 			<directory>${project.build.directory}/apidocs</directory>

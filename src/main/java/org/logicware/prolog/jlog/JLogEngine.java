@@ -1,6 +1,6 @@
 /*
  * #%L
- * prolobjectlink-jlog
+ * prolobjectlink-db-jlog
  * %%
  * Copyright (C) 2012 - 2017 Logicware Project
  * %%
@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package org.logicware.jpi.jlog;
+package org.logicware.prolog.jlog;
 
 import static org.logicware.logging.LoggerConstants.ERROR_LOADING_BUILT_INS;
 import static org.logicware.logging.LoggerConstants.FILE_NOT_FOUND;
@@ -44,18 +44,18 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.StringTokenizer;
 
-import org.logicware.jpi.AbstractEngine;
-import org.logicware.jpi.Licenses;
-import org.logicware.jpi.OperatorEntry;
-import org.logicware.jpi.PredicateIndicator;
-import org.logicware.jpi.PrologClause;
-import org.logicware.jpi.PrologEngine;
-import org.logicware.jpi.PrologIndicator;
-import org.logicware.jpi.PrologOperator;
-import org.logicware.jpi.PrologProvider;
-import org.logicware.jpi.PrologQuery;
-import org.logicware.jpi.PrologTerm;
 import org.logicware.logging.LoggerUtils;
+import org.logicware.prolog.AbstractEngine;
+import org.logicware.prolog.Licenses;
+import org.logicware.prolog.OperatorEntry;
+import org.logicware.prolog.PredicateIndicator;
+import org.logicware.prolog.PrologClause;
+import org.logicware.prolog.PrologEngine;
+import org.logicware.prolog.PrologIndicator;
+import org.logicware.prolog.PrologOperator;
+import org.logicware.prolog.PrologProvider;
+import org.logicware.prolog.PrologQuery;
+import org.logicware.prolog.PrologTerm;
 
 import ubc.cs.JLog.Foundation.iNameArityStub;
 import ubc.cs.JLog.Foundation.jKnowledgeBase;

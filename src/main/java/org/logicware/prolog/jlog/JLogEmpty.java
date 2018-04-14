@@ -1,6 +1,6 @@
 /*
  * #%L
- * prolobjectlink-jlog
+ * prolobjectlink-db-jlog
  * %%
  * Copyright (C) 2012 - 2017 Logicware Project
  * %%
@@ -17,39 +17,41 @@
  * limitations under the License.
  * #L%
  */
-package org.logicware.jpi.jlog;
+package org.logicware.prolog.jlog;
 
-import static org.logicware.jpi.PrologTermType.CUT_TYPE;
+import org.logicware.prolog.PrologList;
+import org.logicware.prolog.PrologProvider;
+import org.logicware.prolog.PrologTerm;
 
-import org.logicware.jpi.PrologProvider;
-import org.logicware.jpi.PrologTerm;
+import ubc.cs.JLog.Terms.jNullList;
 
-import ubc.cs.JLog.Builtins.jCut;
+public class JLogEmpty extends JLogList implements PrologList {
 
-public class JLogCut extends JLogTerm implements PrologTerm {
-
-	static final jCut JCUT = new jCut();
-
-	protected JLogCut(PrologProvider provider) {
-		super(CUT_TYPE, provider, JCUT);
+	protected JLogEmpty(PrologProvider provider) {
+		super(provider);
 	}
 
+	@Override
 	public PrologTerm[] getArguments() {
 		return new PrologTerm[0];
 	}
 
+	@Override
 	public int getArity() {
 		return 0;
 	}
 
+	@Override
 	public String getFunctor() {
-		return "" + value + "";
+		return ((jNullList) value).getName();
 	}
 
+	@Override
 	public String getIndicator() {
 		return getFunctor() + "/" + getArity();
 	}
 
+	@Override
 	public boolean hasIndicator(String functor, int arity) {
 		return getFunctor().equals(functor) && getArity() == arity;
 	}

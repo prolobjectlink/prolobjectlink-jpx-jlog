@@ -2,9 +2,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.logicware</groupId>
-	<artifactId>prolobjectlink-jlog</artifactId>
+	<artifactId>prolobjectlink-db-jlog</artifactId>
 	<version>1.0.0</version>
-	<name>prolobjectlink-jlog</name>
+	<name>prolobjectlink-db-jlog</name>
 	<description>prolobjectlink-jlog</description>
 
 	<url>http://www.logicware.org</url>
@@ -51,15 +51,12 @@
 		<downloadUrl>http://www.logicware.org/download</downloadUrl>
 	</distributionManagement>
 
-	<properties>
-		<project.version>1.0.0</project.version>
-	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.logicware</groupId>
-			<artifactId>prolobjectlink</artifactId>
-			<version>${project.version}</version>
+			<artifactId>prolobjectlink-db</artifactId>
+			<version>[1.0.0, )</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.jlogic</groupId>

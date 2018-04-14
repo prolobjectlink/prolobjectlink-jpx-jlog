@@ -1,6 +1,6 @@
 /*
  * #%L
- * prolobjectlink-jlog
+ * prolobjectlink-db-jlog
  * %%
  * Copyright (C) 2012 - 2017 Logicware Project
  * %%
@@ -17,29 +17,15 @@
  * limitations under the License.
  * #L%
  */
-package org.logicware.jpi.jlog;
+package org.logicware.prolog.jlog;
 
-import org.logicware.ContainerFactory;
-import org.logicware.Properties;
-import org.logicware.jpi.PrologContainerFactory;
-import org.logicware.jpi.PrologProvider;
+import org.logicware.Settings;
+import org.logicware.prolog.PrologContainerFactory;
 
 public final class JLogContainerFactory extends PrologContainerFactory {
 
-	public JLogContainerFactory() {
-		this(new Properties());
-	}
-
-	public JLogContainerFactory(Properties properties) {
-		super(properties, new JLogProvider());
-	}
-
-	public JLogContainerFactory(Properties properties, PrologProvider provider) {
-		super(properties, provider);
-	}
-
-	public ContainerFactory createContainerFactory() {
-		return this;
+	public JLogContainerFactory(Settings settings) {
+		super(settings, new JLogProvider());
 	}
 
 }

@@ -1,6 +1,6 @@
 /*
  * #%L
- * prolobjectlink-jlog
+ * prolobjectlink-db-jlog
  * %%
  * Copyright (C) 2012 - 2017 Logicware Project
  * %%
@@ -17,19 +17,21 @@
  * limitations under the License.
  * #L%
  */
-package org.logicware.jpi.jlog;
+package org.logicware.prolog.jlog;
 
-import static org.logicware.jpi.PrologTermType.FAIL_TYPE;
+import static org.logicware.prolog.PrologTermType.FALSE_TYPE;
 
-import org.logicware.jpi.PrologProvider;
-import org.logicware.jpi.PrologTerm;
+import org.logicware.prolog.PrologProvider;
+import org.logicware.prolog.PrologTerm;
 
-import ubc.cs.JLog.Terms.jFail;
+import ubc.cs.JLog.Terms.jAtom;
 
-public final class JLogFail extends JLogTerm implements PrologTerm {
+public final class JLogFalse extends JLogTerm implements PrologTerm {
 
-	protected JLogFail(PrologProvider provider) {
-		super(FAIL_TYPE, provider, jFail.FAIL);
+	static final String FALSE_STR = "false";
+
+	protected JLogFalse(PrologProvider provider) {
+		super(FALSE_TYPE, provider, new jAtom(FALSE_STR));
 	}
 
 	public PrologTerm[] getArguments() {

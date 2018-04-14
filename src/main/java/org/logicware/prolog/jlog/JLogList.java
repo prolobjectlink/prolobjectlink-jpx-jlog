@@ -1,6 +1,6 @@
 /*
  * #%L
- * prolobjectlink-jlog
+ * prolobjectlink-db-jlog
  * %%
  * Copyright (C) 2012 - 2017 Logicware Project
  * %%
@@ -17,16 +17,16 @@
  * limitations under the License.
  * #L%
  */
-package org.logicware.jpi.jlog;
+package org.logicware.prolog.jlog;
 
-import static org.logicware.jpi.PrologTermType.LIST_TYPE;
+import static org.logicware.prolog.PrologTermType.LIST_TYPE;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import org.logicware.jpi.PrologList;
-import org.logicware.jpi.PrologProvider;
-import org.logicware.jpi.PrologTerm;
+import org.logicware.prolog.PrologList;
+import org.logicware.prolog.PrologProvider;
+import org.logicware.prolog.PrologTerm;
 
 import ubc.cs.JLog.Terms.jList;
 import ubc.cs.JLog.Terms.jListPair;

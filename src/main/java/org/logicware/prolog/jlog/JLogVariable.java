@@ -1,6 +1,6 @@
 /*
  * #%L
- * prolobjectlink-jlog
+ * prolobjectlink-db-jlog
  * %%
  * Copyright (C) 2012 - 2017 Logicware Project
  * %%
@@ -17,16 +17,16 @@
  * limitations under the License.
  * #L%
  */
-package org.logicware.jpi.jlog;
+package org.logicware.prolog.jlog;
 
-import static org.logicware.jpi.PrologTermType.VARIABLE_TYPE;
+import static org.logicware.prolog.PrologTermType.VARIABLE_TYPE;
 
-import org.logicware.jpi.ArityError;
-import org.logicware.jpi.FunctorError;
-import org.logicware.jpi.IndicatorError;
-import org.logicware.jpi.PrologProvider;
-import org.logicware.jpi.PrologTerm;
-import org.logicware.jpi.PrologVariable;
+import org.logicware.prolog.ArityError;
+import org.logicware.prolog.FunctorError;
+import org.logicware.prolog.IndicatorError;
+import org.logicware.prolog.PrologProvider;
+import org.logicware.prolog.PrologTerm;
+import org.logicware.prolog.PrologVariable;
 
 import ubc.cs.JLog.Terms.jVariable;
 

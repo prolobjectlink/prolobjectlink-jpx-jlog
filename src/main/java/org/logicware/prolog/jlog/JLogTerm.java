@@ -1,6 +1,6 @@
 /*
  * #%L
- * prolobjectlink-jlog
+ * prolobjectlink-db-jlog
  * %%
  * Copyright (C) 2012 - 2017 Logicware Project
  * %%
@@ -17,17 +17,17 @@
  * limitations under the License.
  * #L%
  */
-package org.logicware.jpi.jlog;
+package org.logicware.prolog.jlog;
 
-import static org.logicware.jpi.PrologTermType.ATOM_TYPE;
-import static org.logicware.jpi.PrologTermType.DOUBLE_TYPE;
-import static org.logicware.jpi.PrologTermType.EMPTY_TYPE;
-import static org.logicware.jpi.PrologTermType.FLOAT_TYPE;
-import static org.logicware.jpi.PrologTermType.INTEGER_TYPE;
-import static org.logicware.jpi.PrologTermType.LIST_TYPE;
-import static org.logicware.jpi.PrologTermType.LONG_TYPE;
-import static org.logicware.jpi.PrologTermType.STRUCTURE_TYPE;
-import static org.logicware.jpi.PrologTermType.VARIABLE_TYPE;
+import static org.logicware.prolog.PrologTermType.ATOM_TYPE;
+import static org.logicware.prolog.PrologTermType.DOUBLE_TYPE;
+import static org.logicware.prolog.PrologTermType.EMPTY_TYPE;
+import static org.logicware.prolog.PrologTermType.FLOAT_TYPE;
+import static org.logicware.prolog.PrologTermType.INTEGER_TYPE;
+import static org.logicware.prolog.PrologTermType.LIST_TYPE;
+import static org.logicware.prolog.PrologTermType.LONG_TYPE;
+import static org.logicware.prolog.PrologTermType.STRUCTURE_TYPE;
+import static org.logicware.prolog.PrologTermType.VARIABLE_TYPE;
 import static ubc.cs.JLog.Foundation.iType.TYPE_ATOM;
 import static ubc.cs.JLog.Foundation.iType.TYPE_INTEGER;
 import static ubc.cs.JLog.Foundation.iType.TYPE_LIST;
@@ -40,13 +40,13 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Enumeration;
 
-import org.logicware.jpi.AbstractTerm;
-import org.logicware.jpi.NumberExpectedError;
-import org.logicware.jpi.PrologNumber;
-import org.logicware.jpi.PrologProvider;
-import org.logicware.jpi.PrologTerm;
 import org.logicware.logging.LoggerConstants;
 import org.logicware.logging.LoggerUtils;
+import org.logicware.prolog.AbstractTerm;
+import org.logicware.prolog.NumberExpectedError;
+import org.logicware.prolog.PrologNumber;
+import org.logicware.prolog.PrologProvider;
+import org.logicware.prolog.PrologTerm;
 
 import ubc.cs.JLog.Foundation.jEquivalenceMapping;
 import ubc.cs.JLog.Foundation.jKnowledgeBase;
@@ -207,8 +207,11 @@ public abstract class JLogTerm extends AbstractTerm implements PrologTerm {
 		return value.type == TYPE_PREDICATE || value.type == TYPE_LIST;
 	}
 
-	public final boolean unify(PrologTerm term) {
+	public final PrologTerm getTerm() {
+		return toTerm(value.getTerm(), PrologTerm.class);
+	}
 
+	public final boolean unify(PrologTerm term) {
 		Deque<PrologTerm> stack = new ArrayDeque<PrologTerm>();
 		boolean match = unify(term, stack);
 		for (PrologTerm prologTerm : stack) {
@@ -216,7 +219,6 @@ public abstract class JLogTerm extends AbstractTerm implements PrologTerm {
 		}
 		stack.clear();
 		return match;
-
 	}
 
 	protected final boolean unify(PrologTerm term, Deque<PrologTerm> stack) {

@@ -1,6 +1,6 @@
 /*
  * #%L
- * prolobjectlink-jlog
+ * prolobjectlink-db-jlog
  * %%
  * Copyright (C) 2012 - 2017 Logicware Project
  * %%
@@ -17,13 +17,13 @@
  * limitations under the License.
  * #L%
  */
-package org.logicware.jpi.jlog;
+package org.logicware.prolog.jlog;
 
-import static org.logicware.jpi.PrologTermType.STRUCTURE_TYPE;
+import static org.logicware.prolog.PrologTermType.STRUCTURE_TYPE;
 
-import org.logicware.jpi.PrologProvider;
-import org.logicware.jpi.PrologStructure;
-import org.logicware.jpi.PrologTerm;
+import org.logicware.prolog.PrologProvider;
+import org.logicware.prolog.PrologStructure;
+import org.logicware.prolog.PrologTerm;
 
 import ubc.cs.JLog.Terms.jCompoundTerm;
 import ubc.cs.JLog.Terms.jPredicate;
@@ -64,16 +64,10 @@ public class JLogStructure extends JLogTerm implements PrologStructure {
 		value = new jPredicate(functor, compound);
 	}
 
-	private void checkIndexOutOfBound(int index, int lenght) {
-		if (index < 0 || index > lenght) {
-			throw new ArrayIndexOutOfBoundsException(index);
-		}
-	}
-
 	public PrologTerm getArgument(int index) {
+		checkIndex(index, getArity());
 		jPredicate structure = (jPredicate) value;
 		jCompoundTerm compound = structure.getArguments();
-		checkIndexOutOfBound(index, compound.size());
 		return toTerm(compound.elementAt(index), PrologTerm.class);
 	}
 

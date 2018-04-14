@@ -1,6 +1,6 @@
 /*
  * #%L
- * prolobjectlink-jlog
+ * prolobjectlink-db-jlog
  * %%
  * Copyright (C) 2012 - 2017 Logicware Project
  * %%
@@ -17,41 +17,41 @@
  * limitations under the License.
  * #L%
  */
-package org.logicware.jpi.jlog;
+package org.logicware.prolog.jlog;
 
-import static org.logicware.jpi.PrologTermType.ATOM_TYPE;
-import static org.logicware.jpi.PrologTermType.CUT_TYPE;
-import static org.logicware.jpi.PrologTermType.DOUBLE_TYPE;
-import static org.logicware.jpi.PrologTermType.EMPTY_TYPE;
-import static org.logicware.jpi.PrologTermType.FAIL_TYPE;
-import static org.logicware.jpi.PrologTermType.FALSE_TYPE;
-import static org.logicware.jpi.PrologTermType.FLOAT_TYPE;
-import static org.logicware.jpi.PrologTermType.INTEGER_TYPE;
-import static org.logicware.jpi.PrologTermType.LIST_TYPE;
-import static org.logicware.jpi.PrologTermType.LONG_TYPE;
-import static org.logicware.jpi.PrologTermType.NIL_TYPE;
-import static org.logicware.jpi.PrologTermType.STRUCTURE_TYPE;
-import static org.logicware.jpi.PrologTermType.TRUE_TYPE;
-import static org.logicware.jpi.PrologTermType.VARIABLE_TYPE;
+import static org.logicware.prolog.PrologTermType.ATOM_TYPE;
+import static org.logicware.prolog.PrologTermType.CUT_TYPE;
+import static org.logicware.prolog.PrologTermType.DOUBLE_TYPE;
+import static org.logicware.prolog.PrologTermType.EMPTY_TYPE;
+import static org.logicware.prolog.PrologTermType.FAIL_TYPE;
+import static org.logicware.prolog.PrologTermType.FALSE_TYPE;
+import static org.logicware.prolog.PrologTermType.FLOAT_TYPE;
+import static org.logicware.prolog.PrologTermType.INTEGER_TYPE;
+import static org.logicware.prolog.PrologTermType.LIST_TYPE;
+import static org.logicware.prolog.PrologTermType.LONG_TYPE;
+import static org.logicware.prolog.PrologTermType.NIL_TYPE;
+import static org.logicware.prolog.PrologTermType.STRUCTURE_TYPE;
+import static org.logicware.prolog.PrologTermType.TRUE_TYPE;
+import static org.logicware.prolog.PrologTermType.VARIABLE_TYPE;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Objects;
 
-import org.logicware.jpi.AbstractConverter;
-import org.logicware.jpi.PrologAtom;
-import org.logicware.jpi.PrologConverter;
-import org.logicware.jpi.PrologDouble;
-import org.logicware.jpi.PrologFloat;
-import org.logicware.jpi.PrologInteger;
-import org.logicware.jpi.PrologList;
-import org.logicware.jpi.PrologLong;
-import org.logicware.jpi.PrologProvider;
-import org.logicware.jpi.PrologStructure;
-import org.logicware.jpi.PrologTerm;
-import org.logicware.jpi.PrologVariable;
-import org.logicware.jpi.UnknownTermError;
+import org.logicware.prolog.AbstractConverter;
+import org.logicware.prolog.PrologAtom;
+import org.logicware.prolog.PrologConverter;
+import org.logicware.prolog.PrologDouble;
+import org.logicware.prolog.PrologFloat;
+import org.logicware.prolog.PrologInteger;
+import org.logicware.prolog.PrologList;
+import org.logicware.prolog.PrologLong;
+import org.logicware.prolog.PrologProvider;
+import org.logicware.prolog.PrologStructure;
+import org.logicware.prolog.PrologTerm;
+import org.logicware.prolog.PrologVariable;
+import org.logicware.prolog.UnknownTermError;
 
 import ubc.cs.JLog.Foundation.jEquivalenceMapping;
 import ubc.cs.JLog.Terms.jAtom;

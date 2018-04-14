@@ -1,6 +1,6 @@
 /*
  * #%L
- * prolobjectlink-jlog
+ * prolobjectlink-db-jlog
  * %%
  * Copyright (C) 2012 - 2017 Logicware Project
  * %%
@@ -17,30 +17,30 @@
  * limitations under the License.
  * #L%
  */
-package org.logicware.jpi.jlog;
+package org.logicware.prolog.jlog;
 
-import static org.logicware.jpi.jlog.JLogTerm.SIMPLE_ATOM_REGEX;
 import static org.logicware.logging.LoggerConstants.ERROR_LOADING_BUILT_INS;
+import static org.logicware.prolog.jlog.JLogTerm.SIMPLE_ATOM_REGEX;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import org.logicware.jpi.AbstractProvider;
-import org.logicware.jpi.PrologAtom;
-import org.logicware.jpi.PrologConverter;
-import org.logicware.jpi.PrologDouble;
-import org.logicware.jpi.PrologEngine;
-import org.logicware.jpi.PrologFloat;
-import org.logicware.jpi.PrologInteger;
-import org.logicware.jpi.PrologList;
-import org.logicware.jpi.PrologLong;
-import org.logicware.jpi.PrologProvider;
-import org.logicware.jpi.PrologStructure;
-import org.logicware.jpi.PrologTerm;
-import org.logicware.jpi.PrologVariable;
 import org.logicware.logging.LoggerUtils;
+import org.logicware.prolog.AbstractProvider;
+import org.logicware.prolog.PrologAtom;
+import org.logicware.prolog.PrologConverter;
+import org.logicware.prolog.PrologDouble;
+import org.logicware.prolog.PrologEngine;
+import org.logicware.prolog.PrologFloat;
+import org.logicware.prolog.PrologInteger;
+import org.logicware.prolog.PrologList;
+import org.logicware.prolog.PrologLong;
+import org.logicware.prolog.PrologProvider;
+import org.logicware.prolog.PrologStructure;
+import org.logicware.prolog.PrologTerm;
+import org.logicware.prolog.PrologVariable;
 
 import ubc.cs.JLog.Foundation.jKnowledgeBase;
 import ubc.cs.JLog.Foundation.jPrologFileServices;
