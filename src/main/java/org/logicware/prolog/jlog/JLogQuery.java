@@ -229,21 +229,14 @@ public final class JLogQuery extends AbstractQuery implements PrologQuery {
 		return allVariablesSolution;
 	}
 
-	public void dispose() {
-		vector = new jVariableVector();
-		if (solution != null) {
-			solution.clear();
+	public List<Map<String, PrologTerm>> all() {
+		List<Map<String, PrologTerm>> allVariables = new ArrayList<Map<String, PrologTerm>>();
+		while (hasMoreSolutions()) {
+			Map<String, PrologTerm> variables = oneVariablesSolution();
+			allVariables.add(variables);
+			solution = jlogApi.retry();
 		}
-		jlogApi.stop();
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((solution == null) ? 0 : solution.hashCode());
-		result = prime * result + ((vector == null) ? 0 : vector.hashCode());
-		return result;
+		return allVariables;
 	}
 
 	@Override
@@ -266,6 +259,23 @@ public final class JLogQuery extends AbstractQuery implements PrologQuery {
 		} else if (!vector.equals(other.vector))
 			return false;
 		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((solution == null) ? 0 : solution.hashCode());
+		result = prime * result + ((vector == null) ? 0 : vector.hashCode());
+		return result;
+	}
+
+	public void dispose() {
+		vector = new jVariableVector();
+		if (solution != null) {
+			solution.clear();
+		}
+		jlogApi.stop();
 	}
 
 }
