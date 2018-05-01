@@ -19,13 +19,18 @@
  */
 package org.logicware.prolog.jlog;
 
-import org.logicware.Settings;
-import org.logicware.prolog.PrologContainerFactory;
+import org.logicware.pdb.HierarchicalCache;
+import org.logicware.pdb.Settings;
+import org.logicware.pdb.prolog.PrologContainerFactory;
 
 public final class JLogContainerFactory extends PrologContainerFactory {
 
 	public JLogContainerFactory(Settings settings) {
 		super(settings, new JLogProvider());
+	}
+
+	public HierarchicalCache createHierarchicalCache() {
+		return new JLogHierarchicalCache(getProvider(), getSettings(), this);
 	}
 
 }

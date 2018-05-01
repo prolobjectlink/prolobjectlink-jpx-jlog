@@ -1,0 +1,3 @@
+'org.logicware.domain.geometry.Segment'(ab, 'org.logicware.domain.geometry.Point'(a, 3.5, 10.14), 'org.logicware.domain.geometry.Point'(b, 3.5, 10.14)).
+'org.logicware.domain.geometry.Segment'(bc, 'org.logicware.domain.geometry.Point'(b, 3.5, 10.14), 'org.logicware.domain.geometry.Point'(c, 3.5, 10.14)).
+'org.logicware.domain.geometry.Segment'(ca, 'org.logicware.domain.geometry.Point'(c, 3.5, 10.14), 'org.logicware.domain.geometry.Point'(a, 3.5, 10.14)).

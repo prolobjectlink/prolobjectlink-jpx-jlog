@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<entry key="org.logicware.pdb.prologProvider">org.logicware.pdb.prolog.tuprolog.TuPrologProvider</entry>
+<entry key="org.logicware.pdb.containerFactory">org.logicware.pdb.prolog.tuprolog.TuPrologContainerFactory</entry>
+</properties>

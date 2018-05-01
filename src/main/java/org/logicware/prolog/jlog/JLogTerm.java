@@ -19,15 +19,20 @@
  */
 package org.logicware.prolog.jlog;
 
-import static org.logicware.prolog.PrologTermType.ATOM_TYPE;
-import static org.logicware.prolog.PrologTermType.DOUBLE_TYPE;
-import static org.logicware.prolog.PrologTermType.EMPTY_TYPE;
-import static org.logicware.prolog.PrologTermType.FLOAT_TYPE;
-import static org.logicware.prolog.PrologTermType.INTEGER_TYPE;
-import static org.logicware.prolog.PrologTermType.LIST_TYPE;
-import static org.logicware.prolog.PrologTermType.LONG_TYPE;
-import static org.logicware.prolog.PrologTermType.STRUCTURE_TYPE;
-import static org.logicware.prolog.PrologTermType.VARIABLE_TYPE;
+import static org.logicware.pdb.prolog.PrologTermType.ATOM_TYPE;
+import static org.logicware.pdb.prolog.PrologTermType.CUT_TYPE;
+import static org.logicware.pdb.prolog.PrologTermType.DOUBLE_TYPE;
+import static org.logicware.pdb.prolog.PrologTermType.EMPTY_TYPE;
+import static org.logicware.pdb.prolog.PrologTermType.FAIL_TYPE;
+import static org.logicware.pdb.prolog.PrologTermType.FALSE_TYPE;
+import static org.logicware.pdb.prolog.PrologTermType.FLOAT_TYPE;
+import static org.logicware.pdb.prolog.PrologTermType.INTEGER_TYPE;
+import static org.logicware.pdb.prolog.PrologTermType.LIST_TYPE;
+import static org.logicware.pdb.prolog.PrologTermType.LONG_TYPE;
+import static org.logicware.pdb.prolog.PrologTermType.NIL_TYPE;
+import static org.logicware.pdb.prolog.PrologTermType.STRUCTURE_TYPE;
+import static org.logicware.pdb.prolog.PrologTermType.TRUE_TYPE;
+import static org.logicware.pdb.prolog.PrologTermType.VARIABLE_TYPE;
 import static ubc.cs.JLog.Foundation.iType.TYPE_ATOM;
 import static ubc.cs.JLog.Foundation.iType.TYPE_INTEGER;
 import static ubc.cs.JLog.Foundation.iType.TYPE_LIST;
@@ -40,13 +45,13 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Enumeration;
 
-import org.logicware.logging.LoggerConstants;
-import org.logicware.logging.LoggerUtils;
-import org.logicware.prolog.AbstractTerm;
-import org.logicware.prolog.NumberExpectedError;
-import org.logicware.prolog.PrologNumber;
-import org.logicware.prolog.PrologProvider;
-import org.logicware.prolog.PrologTerm;
+import org.logicware.pdb.logging.LoggerConstants;
+import org.logicware.pdb.logging.LoggerUtils;
+import org.logicware.pdb.prolog.AbstractTerm;
+import org.logicware.pdb.prolog.NumberExpectedError;
+import org.logicware.pdb.prolog.PrologNumber;
+import org.logicware.pdb.prolog.PrologProvider;
+import org.logicware.pdb.prolog.PrologTerm;
 
 import ubc.cs.JLog.Foundation.jEquivalenceMapping;
 import ubc.cs.JLog.Foundation.jKnowledgeBase;
@@ -119,7 +124,8 @@ public abstract class JLogTerm extends AbstractTerm implements PrologTerm {
 	}
 
 	public final boolean isAtom() {
-		return this instanceof JLogAtom || isEmptyList();
+		return type == ATOM_TYPE || type == FAIL_TYPE || type == FALSE_TYPE || type == TRUE_TYPE || type == EMPTY_TYPE
+				|| type == CUT_TYPE || type == NIL_TYPE;
 	}
 
 	public final boolean isNumber() {
@@ -198,12 +204,13 @@ public abstract class JLogTerm extends AbstractTerm implements PrologTerm {
 		return false;
 	}
 
-	public boolean isAtomic() {
+	public final boolean isAtomic() {
 		return value.type == TYPE_ATOM || value.type == TYPE_INTEGER || value.type == TYPE_REAL
-				|| value.type == TYPE_VARIABLE;
+				|| value.type == TYPE_VARIABLE || type == FAIL_TYPE || type == FALSE_TYPE || type == TRUE_TYPE
+				|| type == EMPTY_TYPE || type == CUT_TYPE || type == NIL_TYPE;
 	}
 
-	public boolean isCompound() {
+	public final boolean isCompound() {
 		return value.type == TYPE_PREDICATE || value.type == TYPE_LIST;
 	}
 
@@ -287,8 +294,8 @@ public abstract class JLogTerm extends AbstractTerm implements PrologTerm {
 	}
 
 	/**
-	 * Check if Variable and bound. A variable bound is synonym of not free
-	 * variable because this variable have instance value.
+	 * Check if Variable and bound. A variable bound is synonym of not free variable
+	 * because this variable have instance value.
 	 * 
 	 * @return true if Variable and bound.
 	 */
@@ -297,8 +304,8 @@ public abstract class JLogTerm extends AbstractTerm implements PrologTerm {
 	}
 
 	/**
-	 * Check if current variable is not bound. A variable not bound is synonym
-	 * of free variable because this variable don't have instance value.
+	 * Check if current variable is not bound. A variable not bound is synonym of
+	 * free variable because this variable don't have instance value.
 	 * 
 	 * @return true if Variable and not bound.
 	 */
@@ -320,17 +327,15 @@ public abstract class JLogTerm extends AbstractTerm implements PrologTerm {
 
 	/**
 	 * If the current term is variable check that your occurrence in other term
-	 * passed as parameter. If the other term is compound and at less one
-	 * argument match with the current variable term then return true indicating
-	 * that the current variable term occurs in compound term. If the other term
-	 * is compound and at less one argument is another compound term, then the
-	 * current term check your occurrence in this compound term in recursive
-	 * way.
+	 * passed as parameter. If the other term is compound and at less one argument
+	 * match with the current variable term then return true indicating that the
+	 * current variable term occurs in compound term. If the other term is compound
+	 * and at less one argument is another compound term, then the current term
+	 * check your occurrence in this compound term in recursive way.
 	 * 
-	 * @param otherTerm
-	 *            term to check if current term occurs inside him
-	 * @return true if current term occurs in other compound term, false in
-	 *         another case
+	 * @param otherTerm term to check if current term occurs inside him
+	 * @return true if current term occurs in other compound term, false in another
+	 *         case
 	 */
 	protected final boolean occurs(PrologTerm otherTerm) {
 		JLogTerm thisTerm = this;
@@ -490,7 +495,7 @@ public abstract class JLogTerm extends AbstractTerm implements PrologTerm {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + type;
-		result = prime * result + ((value == null) ? 0 : value.hashCode());
+		result = prime * result + ((value == null) ? 0 : value.toString().hashCode());
 		return result;
 	}
 

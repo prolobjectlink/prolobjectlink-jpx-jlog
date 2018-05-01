@@ -29,9 +29,9 @@ import java.util.Deque;
 import java.util.Enumeration;
 import java.util.Map.Entry;
 
-import org.logicware.prolog.PrologProvider;
-import org.logicware.prolog.PrologTerm;
-import org.logicware.prolog.StructureExpectedError;
+import org.logicware.pdb.prolog.PrologProvider;
+import org.logicware.pdb.prolog.PrologTerm;
+import org.logicware.pdb.prolog.StructureExpectedError;
 
 import ubc.cs.JLog.Foundation.jKnowledgeBase;
 import ubc.cs.JLog.Foundation.jPrologServices;

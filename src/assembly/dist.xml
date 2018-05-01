@@ -15,10 +15,17 @@
 			<outputDirectory>/</outputDirectory>
 			<includes>
 				<include>LICENSE*</include>
+				<include>NOTICE*</include>
 				<include>README*</include>
 			</includes>
 		</fileSet>
 
+		<!-- binary script folder -->
+		<fileSet>
+			<directory>${project.basedir}/bin</directory>
+			<outputDirectory>bin</outputDirectory>
+		</fileSet>
+		
 		<!-- root data folder -->
 		<fileSet>
 			<directory>${project.basedir}/dat</directory>
@@ -37,32 +44,20 @@
 			<outputDirectory>etc</outputDirectory>
 		</fileSet>
 
-		<!-- source code folder -->
+		<!-- logs folder -->
 		<fileSet>
-			<directory>${project.basedir}/src</directory>
-			<outputDirectory>src/src</outputDirectory>
+			<directory>${project.basedir}/log</directory>
+			<outputDirectory>log</outputDirectory>
 		</fileSet>
+
+		<!-- web folder -->
 		<fileSet>
-			<directory>${project.basedir}</directory>
-			<outputDirectory>/src</outputDirectory>
-			<includes>
-				<include>pom.xml</include>
-			</includes>
+			<directory>${project.basedir}/web</directory>
+			<outputDirectory>web</outputDirectory>
 		</fileSet>
 
 	</fileSets>
 	<dependencySets>
-		<dependencySet>
-			<outputDirectory>bin</outputDirectory>
-			<scope>runtime</scope>
-		</dependencySet>
-		<dependencySet>
-			<outputDirectory>bin</outputDirectory>
-			<scope>system</scope>
-			<excludes>
-				<exclude>${project.groupId}:${project.artifactId}</exclude>
-			</excludes>
-		</dependencySet>
 		<dependencySet>
 			<outputDirectory>lib</outputDirectory>
 			<scope>runtime</scope>

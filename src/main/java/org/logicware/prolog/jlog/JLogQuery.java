@@ -26,10 +26,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.logicware.prolog.AbstractQuery;
-import org.logicware.prolog.PrologEngine;
-import org.logicware.prolog.PrologQuery;
-import org.logicware.prolog.PrologTerm;
+import org.logicware.pdb.prolog.AbstractEngine;
+import org.logicware.pdb.prolog.AbstractQuery;
+import org.logicware.pdb.prolog.PrologQuery;
+import org.logicware.pdb.prolog.PrologTerm;
 
 import ubc.cs.JLog.Foundation.jKnowledgeBase;
 import ubc.cs.JLog.Foundation.jPrologAPI;
@@ -46,7 +46,7 @@ public final class JLogQuery extends AbstractQuery implements PrologQuery {
 	private final jPrologAPI jlogApi;
 	private jVariableVector vector = new jVariableVector();
 
-	protected JLogQuery(PrologEngine engine, String str) {
+	protected JLogQuery(AbstractEngine engine, String str) {
 		super(engine);
 
 		// saving variable order
@@ -71,7 +71,7 @@ public final class JLogQuery extends AbstractQuery implements PrologQuery {
 
 	}
 
-	protected JLogQuery(PrologEngine engine, PrologTerm[] terms) {
+	protected JLogQuery(AbstractEngine engine, PrologTerm[] terms) {
 		super(engine);
 
 		String str = Arrays.toString(terms).substring(1);
