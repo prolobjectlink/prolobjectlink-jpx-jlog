@@ -24,11 +24,11 @@ import static org.logicware.prolog.jlog.JLogTerm.SIMPLE_ATOM_REGEX;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayDeque;
-import java.util.Deque;
 import java.util.Enumeration;
 import java.util.Map.Entry;
 
+import org.logicware.pdb.Stack;
+import org.logicware.pdb.TypedArrayStack;
 import org.logicware.pdb.prolog.PrologProvider;
 import org.logicware.pdb.prolog.PrologTerm;
 import org.logicware.pdb.prolog.StructureExpectedError;
@@ -73,10 +73,10 @@ final class JLogUtil {
 	}
 
 	static final boolean unify(jTerm thisTerm, jTerm otherTerm) {
-		return unify(thisTerm, otherTerm, new ArrayDeque<jVariable>());
+		return unify(thisTerm, otherTerm, new TypedArrayStack<jVariable>());
 	}
 
-	static final boolean unify(jTerm thisTerm, jTerm otherTerm, Deque<jVariable> stack) {
+	static final boolean unify(jTerm thisTerm, jTerm otherTerm, Stack<jVariable> stack) {
 
 		thisTerm = dereference(thisTerm);
 		otherTerm = dereference(otherTerm);

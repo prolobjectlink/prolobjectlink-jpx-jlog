@@ -41,10 +41,10 @@ import static ubc.cs.JLog.Foundation.iType.TYPE_REAL;
 import static ubc.cs.JLog.Foundation.iType.TYPE_VARIABLE;
 
 import java.io.IOException;
-import java.util.ArrayDeque;
-import java.util.Deque;
 import java.util.Enumeration;
 
+import org.logicware.pdb.Stack;
+import org.logicware.pdb.TypedArrayStack;
 import org.logicware.pdb.logging.LoggerConstants;
 import org.logicware.pdb.logging.LoggerUtils;
 import org.logicware.pdb.prolog.AbstractTerm;
@@ -219,7 +219,7 @@ public abstract class JLogTerm extends AbstractTerm implements PrologTerm {
 	}
 
 	public final boolean unify(PrologTerm term) {
-		Deque<PrologTerm> stack = new ArrayDeque<PrologTerm>();
+		Stack<PrologTerm> stack = new TypedArrayStack<PrologTerm>();
 		boolean match = unify(term, stack);
 		for (PrologTerm prologTerm : stack) {
 			unwrap(prologTerm, JLogTerm.class).unbind();
@@ -228,11 +228,11 @@ public abstract class JLogTerm extends AbstractTerm implements PrologTerm {
 		return match;
 	}
 
-	protected final boolean unify(PrologTerm term, Deque<PrologTerm> stack) {
+	protected final boolean unify(PrologTerm term, Stack<PrologTerm> stack) {
 		return unify(unwrap(term, JLogTerm.class), stack);
 	}
 
-	protected final boolean unify(JLogTerm otherTerm, Deque<PrologTerm> stack) {
+	protected final boolean unify(JLogTerm otherTerm, Stack<PrologTerm> stack) {
 
 		JLogTerm thisTerm = this;
 
