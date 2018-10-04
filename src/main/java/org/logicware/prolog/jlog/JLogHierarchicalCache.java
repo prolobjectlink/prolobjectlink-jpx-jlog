@@ -24,8 +24,8 @@ import org.logicware.pdb.HierarchicalCache;
 import org.logicware.pdb.ObjectConverter;
 import org.logicware.pdb.Settings;
 import org.logicware.pdb.prolog.PrologHierarchicalCache;
-import org.logicware.pdb.prolog.PrologProvider;
-import org.logicware.pdb.prolog.PrologTerm;
+import org.logicware.prolog.PrologProvider;
+import org.logicware.prolog.PrologTerm;
 
 public class JLogHierarchicalCache extends PrologHierarchicalCache implements HierarchicalCache {
 

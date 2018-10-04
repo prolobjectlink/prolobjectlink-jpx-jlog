@@ -24,8 +24,8 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 import org.logicware.pdb.jdbc.AbstractDriver;
-import org.logicware.pdb.prolog.PrologConverter;
 import org.logicware.pdb.prolog.PrologDriver;
+import org.logicware.prolog.PrologConverter;
 
 public class JLogDriver extends AbstractDriver implements PrologDriver {
 
