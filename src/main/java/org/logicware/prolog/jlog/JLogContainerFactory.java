@@ -30,7 +30,7 @@ public final class JLogContainerFactory extends PrologContainerFactory {
 	}
 
 	public HierarchicalCache createHierarchicalCache() {
-		return new JLogHierarchicalCache(getProvider(), getSettings(), this);
+		return new JLogHierarchicalCache(getProvider(), getSettings());
 	}
 
 }

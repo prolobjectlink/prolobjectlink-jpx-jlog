@@ -29,12 +29,11 @@ import org.logicware.prolog.PrologTerm;
 
 public class JLogHierarchicalCache extends PrologHierarchicalCache implements HierarchicalCache {
 
-	public JLogHierarchicalCache(PrologProvider provider, Settings settings, ContainerFactory containerFactory) {
+	public JLogHierarchicalCache(PrologProvider provider, Settings settings) {
 		super(provider, settings, new JLogContainerFactory(settings));
 	}
 
-	public JLogHierarchicalCache(PrologProvider provider, Settings settings, ObjectConverter<PrologTerm> converter,
-			ContainerFactory containerFactory) {
+	public JLogHierarchicalCache(PrologProvider provider, Settings settings, ObjectConverter<PrologTerm> converter) {
 		super(provider, settings, converter, new JLogContainerFactory(settings));
 	}
 
