@@ -20,6 +20,7 @@
 		<license>
 			<name>Apache 2</name>
 			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
 		</license>
 	</licenses>
 
@@ -28,7 +29,7 @@
 			<id>jzalacain</id>
 			<name>Jose Zalacain</name>
 			<email>jzalacain@nauta.cu</email>
-			<organization>Logicware Developments</organization>
+			<organization>Logicware Project</organization>
 			<organizationUrl>http://www.logicware.org</organizationUrl>
 			<roles>
 				<role>architect</role>
@@ -40,16 +41,37 @@
 	</developers>
 
 	<scm>
-		<url>D:\Desarrollo\EclipseWorkspace\eclipse-java-neon-workspace\prolobjectlink-jlog\.git</url>
+		<developerConnection>scm:git:git@gitlab.delnet.cu:logicware/${project.name}.git</developerConnection>
+		<connection>scm:git:git@gitlab.delnet.cu:logicware/${project.name}.git</connection>
+		<url>http://gitlab.delnet.cu/logicware/${project.name}</url>
+		<tag>${project.name}-${project.version}</tag>
 	</scm>
 
 	<ciManagement>
-		<system>jenkins</system>
-		<url>http://opteron:8080/jenkins/</url>
+		<system>Jenkins</system>
+		<url>http://jenkins.delnet.cu:8080/jenkins/</url>
 	</ciManagement>
 
+	<issueManagement>
+		<system>Bugzilla</system>
+		<url>http://bugzilla.delnet.cu/</url>
+	</issueManagement>
+
 	<distributionManagement>
-		<downloadUrl>http://www.logicware.org/download</downloadUrl>
+		<repository>
+			<id>internal</id>
+			<name>Internal Release Repository</name>
+			<url>http://maven.delnet.cu/repository/internal/</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>Internal Snapshot Repository</name>
+			<url>http://maven.delnet.cu/repository/snapshots/</url>
+		</snapshotRepository>
+		<site>
+			<id>website</id>
+			<url>dav:http://deploy.delnet.cu/webdav/sites/${project.name}</url>
+		</site>
 	</distributionManagement>
 
 	<properties>
