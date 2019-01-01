@@ -19,9 +19,9 @@
  */
 package org.logicware.prolog.jlog;
 
-import org.logicware.database.HierarchicalCache;
-import org.logicware.database.etc.Settings;
-import org.logicware.database.prolog.PrologContainerFactory;
+import org.logicware.db.HierarchicalCache;
+import org.logicware.db.etc.Settings;
+import org.logicware.db.prolog.PrologContainerFactory;
 
 public final class JLogContainerFactory extends PrologContainerFactory {
 

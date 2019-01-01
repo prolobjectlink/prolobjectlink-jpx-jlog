@@ -19,11 +19,11 @@
  */
 package org.logicware.prolog.jlog;
 
-import org.logicware.database.ContainerFactory;
-import org.logicware.database.HierarchicalCache;
-import org.logicware.database.ObjectConverter;
-import org.logicware.database.etc.Settings;
-import org.logicware.database.prolog.PrologHierarchicalCache;
+import org.logicware.db.ContainerFactory;
+import org.logicware.db.HierarchicalCache;
+import org.logicware.db.ObjectConverter;
+import org.logicware.db.etc.Settings;
+import org.logicware.db.prolog.PrologHierarchicalCache;
 import org.logicware.prolog.PrologProvider;
 import org.logicware.prolog.PrologTerm;
 

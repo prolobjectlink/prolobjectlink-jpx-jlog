@@ -21,7 +21,7 @@ package org.logicware.prolog.jlog;
 
 import javax.persistence.spi.PersistenceProvider;
 
-import org.logicware.database.jpa.JpaAbstractProvider;
+import org.logicware.db.jpa.JpaAbstractProvider;
 
 public class JLogPersistenceProvider extends JpaAbstractProvider implements PersistenceProvider {
 
