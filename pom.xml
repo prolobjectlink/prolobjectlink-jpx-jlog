@@ -85,13 +85,8 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.worklogic</groupId>
-			<artifactId>prolobjectlink-jpi</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.worklogic</groupId>
 			<artifactId>prolobjectlink-jpi-jlog</artifactId>
-			<version>1.0.0</version>
+			<version>[1.0.0, )</version>
 		</dependency>
 		<dependency>
 			<groupId>org.worklogic</groupId>
