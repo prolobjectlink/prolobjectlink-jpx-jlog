@@ -1,6 +1,4 @@
 'org.prolobjectlink.domain.geometry.Point'(a,3,14).
 'org.prolobjectlink.domain.geometry.Point'(b,3,14).
 'org.prolobjectlink.domain.geometry.Point'(c,3,14).
-'org.prolobjectlink.domain.geometry.Point'(a,6,28).
-'org.prolobjectlink.domain.geometry.Point'(b,6,28).
-'org.prolobjectlink.domain.geometry.Point'(c,6,28).
+'org.prolobjectlink.domain.geometry.Point'(d,3,14).
