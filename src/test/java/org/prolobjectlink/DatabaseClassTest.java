@@ -227,7 +227,7 @@ public class DatabaseClassTest extends BaseTest {
 	@Test
 	public void testGetName() {
 		DatabaseClass p = rdb.getSchema().addClass(Person.class, "");
-		assertEquals("org.logicware.domain.model.Person", p.getName());
+		assertEquals(Person.class.getName(), p.getName());
 	}
 
 	@Test

@@ -87,7 +87,7 @@ public abstract class BaseTest {
 	protected static final String POOL_NAME = "pool-name";
 	protected static final String ROOT = "data" + SEPARATOR + "test";
 	protected static final String BASE_LOCATION = "data" + SEPARATOR + "test" + SEPARATOR + "org" + SEPARATOR
-			+ "logicware" + SEPARATOR + "domain" + SEPARATOR + "geometry";
+			+ "prolobjectlink" + SEPARATOR + "domain" + SEPARATOR + "geometry";
 
 	// File Backup Names Constants
 	protected static final String BACKUP_ZIP_FILE_NAME_1 = "data.zip";
