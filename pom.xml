@@ -104,6 +104,11 @@
 			<version>[4.10, )</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.prolobjectlink</groupId>
+			<artifactId>prolobjectlink-jps-glassfish</artifactId>
+			<version>[1.0.0, )</version>
+		</dependency>
 	</dependencies>
 
 
