@@ -95,6 +95,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.prolobjectlink</groupId>
+			<artifactId>prolobjectlink-jpp-javax</artifactId>
+			<version>[1.0.0, )</version>
+		</dependency>
+		<dependency>
+			<groupId>org.prolobjectlink</groupId>
 			<artifactId>prolobjectlink-jps-jetty</artifactId>
 			<version>[1.0.0, )</version>
 		</dependency>
