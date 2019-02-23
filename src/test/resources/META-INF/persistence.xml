@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- #%L
+  prolobjectlink-jpx-tuprolog
+  %%
+  Copyright (C) 2019 Prolobjectlink Project
+  %%
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU Lesser General Public License as
+  published by the Free Software Foundation, either version 2.1 of the
+  License, or (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Lesser Public License for more details.
+  
+  You should have received a copy of the GNU General Lesser Public
+  License along with this program.  If not, see
+  <http://www.gnu.org/licenses/lgpl-2.1.html>.
+  #L% -->
+
+<persistence version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+
+
+	<persistence-unit name="test"
+		transaction-type="RESOURCE_LOCAL">
+
+		<description>This is an implementation of JPA</description>
+		<provider>org.prolobjectlink.provider.TuPrologPersistenceProvider
+		</provider>
+
+		<jta-data-source>jdbc/sample</jta-data-source>
+
+		<class>org.prolobjectlink.domain.geometry.Point</class>
+		<class>org.prolobjectlink.domain.geometry.Segment</class>
+		<class>org.prolobjectlink.domain.geometry.Polygon</class>
+		<class>org.prolobjectlink.domain.geometry.Tetragon</class>
+		<class>org.prolobjectlink.domain.model.Person</class>
+		<class>org.prolobjectlink.domain.model.Employee</class>
+		<class>org.prolobjectlink.domain.model.Department</class>
+		<class>org.prolobjectlink.domain.model.Node</class>
+
+		<properties>
+
+			<property name="javax.persistence.jdbc.driver"
+				value="org.prolobjectlink.pdb.prolog.tuprolog.TuPrologContainerFactory" />
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:prolobjectlink:mempdb:~/test" />
+			<property name="javax.persistence.jdbc.user" value="sa" />
+			<property name="javax.persistence.jdbc.password" value="" />
+
+		</properties>
+
+	</persistence-unit>
+</persistence>
