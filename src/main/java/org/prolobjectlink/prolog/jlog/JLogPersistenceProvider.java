@@ -30,21 +30,21 @@ import java.util.Map.Entry;
 import java.util.Properties;
 
 import javax.persistence.spi.PersistenceProvider;
-import javax.persistence.spi.PersistenceUnitInfo;
 
 import org.prolobjectlink.db.DatabaseEngine;
 import org.prolobjectlink.db.DatabaseSchema;
 import org.prolobjectlink.db.DatabaseUser;
+import org.prolobjectlink.db.DatabaseUnitInfo;
 import org.prolobjectlink.db.Protocol;
 import org.prolobjectlink.db.Schema;
 import org.prolobjectlink.db.etc.Settings;
 import org.prolobjectlink.db.jpa.JpaAbstractProvider;
 import org.prolobjectlink.db.jpa.JpaEntityManagerFactory;
 import org.prolobjectlink.db.jpa.JpaProperties;
-import org.prolobjectlink.db.jpa.spi.JPAPersistenceXmlParser;
 import org.prolobjectlink.db.memory.MemoryHierarchical;
 import org.prolobjectlink.db.persistent.EmbeddedHierarchical;
 import org.prolobjectlink.db.persistent.RemoteHierarchical;
+import org.prolobjectlink.db.spi.PersistenceXmlParser;
 import org.prolobjectlink.db.util.JavaReflect;
 import org.prolobjectlink.logging.LoggerConstants;
 import org.prolobjectlink.logging.LoggerUtils;
@@ -52,11 +52,11 @@ import org.prolobjectlink.logging.LoggerUtils;
 public class JLogPersistenceProvider extends JpaAbstractProvider implements PersistenceProvider {
 
 	public JLogPersistenceProvider() {
-		JPAPersistenceXmlParser p = new JPAPersistenceXmlParser();
+		PersistenceXmlParser p = new PersistenceXmlParser();
 		URL persistenceXml = Thread.currentThread().getContextClassLoader().getResource(XML);
-		Map<String, PersistenceUnitInfo> m = p.parsePersistenceXml(persistenceXml);
-		for (Entry<String, PersistenceUnitInfo> info : m.entrySet()) {
-			PersistenceUnitInfo unit = info.getValue();
+		Map<String, DatabaseUnitInfo> m = p.parsePersistenceXml(persistenceXml);
+		for (Entry<String, DatabaseUnitInfo> info : m.entrySet()) {
+			DatabaseUnitInfo unit = info.getValue();
 			String name = unit.getPersistenceUnitName();
 			Properties properties = unit.getProperties();
 			Settings settings = new Settings(properties.getProperty(JpaProperties.DRIVER));
