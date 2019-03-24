@@ -14,8 +14,8 @@
 			<directory>${project.basedir}</directory>
 			<outputDirectory>/</outputDirectory>
 			<includes>
-				
-				<include>CHANGELOG*</include>
+
+				<include>CONTRIBUTING*</include>
 				<include>LICENSE*</include>
 				<include>NOTICE*</include>
 				<include>README*</include>
@@ -65,6 +65,15 @@
 		<fileSet>
 			<directory>${project.basedir}/web</directory>
 			<outputDirectory>web</outputDirectory>
+		</fileSet>
+
+		<!-- install scripts -->
+		<fileSet>
+			<directory>${project.basedir}</directory>
+			<outputDirectory>/</outputDirectory>
+			<includes>
+				<include>install.*</include>
+			</includes>
 		</fileSet>
 
 	</fileSets>

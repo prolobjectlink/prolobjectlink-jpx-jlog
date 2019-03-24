@@ -19,7 +19,7 @@
  * <http://www.gnu.org/licenses/gpl-2.0.html>.
  * #L%
  */
-package org.prolobjectlink.prolog.jlog;
+package org.prolobjectlink.db.prolog.jlog;
 
 import static org.prolobjectlink.db.XmlParser.XML;
 

@@ -44,6 +44,7 @@ import org.prolobjectlink.db.StorageManager;
 import org.prolobjectlink.db.StorageMode;
 import org.prolobjectlink.db.StoragePool;
 import org.prolobjectlink.db.etc.Settings;
+import org.prolobjectlink.db.prolog.jlog.JLogContainerFactory;
 import org.prolobjectlink.domain.geometry.Point;
 import org.prolobjectlink.domain.geometry.Polygon;
 import org.prolobjectlink.domain.geometry.Segment;
@@ -59,7 +60,6 @@ import org.prolobjectlink.prolog.Prolog;
 import org.prolobjectlink.prolog.PrologInteger;
 import org.prolobjectlink.prolog.PrologProvider;
 import org.prolobjectlink.prolog.jlog.JLog;
-import org.prolobjectlink.prolog.jlog.JLogContainerFactory;
 
 /** @author Jose Zalacain @since 1.0 */
 public abstract class BaseTest {

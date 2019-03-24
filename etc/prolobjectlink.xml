@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-<entry key="org.prolobjectlink.db.etc.containerFactory">org.prolobjectlink.prolog.jlog.JLogContainerFactory</entry>
+<entry key="org.prolobjectlink.db.etc.containerFactory">org.prolobjectlink.db.prolog.jlog.JLogContainerFactory</entry>
 <entry key="org.prolobjectlink.db.etc.password"/>
 <entry key="org.prolobjectlink.db.etc.lock.granularity">80</entry>
 <entry key="org.prolobjectlink.db.etc.lock.timegap">1</entry>
