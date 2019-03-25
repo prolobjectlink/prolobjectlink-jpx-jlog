@@ -76,6 +76,12 @@
 			</includes>
 		</fileSet>
 
+		<!-- persistence xml -->
+		<fileSet>
+			<directory>${project.basedir}/src/test/resources/META-INF</directory>
+			<outputDirectory>/src/META-INF</outputDirectory>
+		</fileSet>
+
 	</fileSets>
 	<dependencySets>
 		<dependencySet>
