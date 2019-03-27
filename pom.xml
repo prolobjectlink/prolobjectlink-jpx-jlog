@@ -100,7 +100,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.prolobjectlink</groupId>
-			<artifactId>prolobjectlink-jps-glassfish</artifactId>
+			<artifactId>prolobjectlink-jps-grizzly</artifactId>
 			<version>[1.0.0, )</version>
 		</dependency>
 		<dependency>
