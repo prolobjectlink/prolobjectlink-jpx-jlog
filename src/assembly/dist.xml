@@ -34,6 +34,12 @@
 			<outputDirectory>dat</outputDirectory>
 		</fileSet>
 
+		<!-- demostration folder -->
+		<fileSet>
+			<directory>${project.basedir}/demo</directory>
+			<outputDirectory>demo</outputDirectory>
+		</fileSet>
+
 		<!-- api documentation -->
 		<fileSet>
 			<directory>${project.build.directory}/apidocs</directory>
@@ -42,7 +48,7 @@
 
 		<!-- documentation pdf -->
 		<fileSet>
-			<directory>${project.build.directory}/site</directory>
+			<directory>${project.basedir}/doc</directory>
 			<outputDirectory>doc</outputDirectory>
 			<includes>
 				<include>${project.name}.pdf</include>
@@ -53,6 +59,18 @@
 		<fileSet>
 			<directory>${project.basedir}/etc</directory>
 			<outputDirectory>etc</outputDirectory>
+		</fileSet>
+
+		<!-- prolog folder -->
+		<fileSet>
+			<directory>${project.basedir}/prt</directory>
+			<outputDirectory>prt</outputDirectory>
+		</fileSet>
+
+		<!-- harness prolog to java folder -->
+		<fileSet>
+			<directory>${project.basedir}/obj</directory>
+			<outputDirectory>obj</outputDirectory>
 		</fileSet>
 
 		<!-- logs folder -->
