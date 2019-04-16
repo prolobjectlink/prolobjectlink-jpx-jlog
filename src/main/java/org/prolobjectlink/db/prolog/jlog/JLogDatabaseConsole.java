@@ -30,7 +30,6 @@ import org.prolobjectlink.db.platform.linux.LinuxDatabaseServer;
 import org.prolobjectlink.db.platform.macosx.MacosxDatabaseServer;
 import org.prolobjectlink.db.platform.win32.Win32DatabaseServer;
 import org.prolobjectlink.db.prolog.AbstractDatabaseConsole;
-import org.prolobjectlink.prolog.jlog.JLog;
 import org.prolobjectlink.web.platform.GrizzlyServerControl;
 import org.prolobjectlink.web.platform.GrizzlyWebServer;
 import org.prolobjectlink.web.platform.WebPlatformUtil;
@@ -47,7 +46,7 @@ import org.prolobjectlink.web.platform.win32.grizzly.Win32GrizzlyWebServer;
 public class JLogDatabaseConsole extends AbstractDatabaseConsole implements DatabaseConsole {
 
 	public JLogDatabaseConsole() {
-		super(new JLog());
+		super(new JLogDatabaseProvider());
 	}
 
 	public static void main(String[] args) {
