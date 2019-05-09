@@ -1,0 +1,2 @@
+class('org.prolobjectlink.domain.model.Person', compound, [field(addresses, list),field(names, list)]).
+class('org.prolobjectlink.domain.model.Address', compound, [field(street, atom), field(postalCode, integer)]).
