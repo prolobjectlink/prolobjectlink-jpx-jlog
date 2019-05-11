@@ -1,6 +1,6 @@
 /*-
  * #%L
- * prolobjectlink-jpi-jlog
+ * >prolobjectlink-jpx-jlog
  * %%
  * Copyright (C) 2012 - 2019 Prolobjectlink Project
  * %%
