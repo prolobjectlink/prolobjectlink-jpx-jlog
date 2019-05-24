@@ -51,7 +51,7 @@ public class DatabaseClassTest extends BaseTest {
 	}
 
 	@Test
-	public void testCompile() {
+	public void testCompile() throws InstantiationException, IllegalAccessException {
 
 		assertNotNull(hschema.getClass(Point.class.getSimpleName()).compile());
 		assertNotNull(rschema.getClass(Address.class.getSimpleName()).compile());
@@ -62,6 +62,16 @@ public class DatabaseClassTest extends BaseTest {
 		assertTrue(rschema.getClass(Address.class.getSimpleName()).compile().length > 0);
 		assertTrue(rschema.getClass(Person.class.getSimpleName()).compile().length > 0);
 		assertTrue(rschema.getClass(Employee.class.getSimpleName()).compile().length > 0);
+
+		assertNotNull(hschema.compile().get(0).newInstance());
+		assertNotNull(hschema.compile().get(1).newInstance());
+		assertNotNull(hschema.compile().get(2).newInstance());
+		assertNotNull(hschema.compile().get(3).newInstance());
+
+		assertNotNull(rschema.compile().get(0).newInstance());
+		assertNotNull(rschema.compile().get(1).newInstance());
+		assertNotNull(rschema.compile().get(2).newInstance());
+		assertNotNull(rschema.compile().get(3).newInstance());
 
 	}
 
