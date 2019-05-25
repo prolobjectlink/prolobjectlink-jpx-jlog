@@ -27,7 +27,6 @@ import java.util.Currency;
 import java.util.Locale;
 
 import org.junit.Test;
-import org.prolobjectlink.db.prolog.PrologCurrency;
 
 public class CurrencyTest {
 

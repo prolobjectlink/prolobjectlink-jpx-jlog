@@ -31,7 +31,6 @@ import java.util.Collection;
 import java.util.Set;
 
 import org.junit.Test;
-import org.prolobjectlink.db.prolog.PrologHashMap;
 
 public class HashMapTest extends CollectionTest {
 

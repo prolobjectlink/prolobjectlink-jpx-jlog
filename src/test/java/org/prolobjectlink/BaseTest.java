@@ -30,8 +30,6 @@ import java.util.Set;
 
 import org.junit.After;
 import org.junit.Before;
-import org.prolobjectlink.GraphEdge;
-import org.prolobjectlink.GraphVertex;
 import org.prolobjectlink.db.ContainerFactory;
 import org.prolobjectlink.db.DatabaseClass;
 import org.prolobjectlink.db.DatabaseUser;

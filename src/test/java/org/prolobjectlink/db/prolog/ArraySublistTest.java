@@ -32,7 +32,6 @@ import java.util.List;
 import java.util.ListIterator;
 
 import org.junit.Test;
-import org.prolobjectlink.db.prolog.PrologArrayList;
 
 public class ArraySublistTest extends CollectionTest {
 

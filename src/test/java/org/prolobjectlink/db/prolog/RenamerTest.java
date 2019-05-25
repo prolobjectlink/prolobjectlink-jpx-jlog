@@ -28,7 +28,6 @@ import java.lang.reflect.Field;
 
 import org.junit.Test;
 import org.prolobjectlink.BaseTest;
-import org.prolobjectlink.db.prolog.PrologRenamer;
 import org.prolobjectlink.domain.geometry.Point;
 import org.prolobjectlink.prolog.PrologVariable;
 

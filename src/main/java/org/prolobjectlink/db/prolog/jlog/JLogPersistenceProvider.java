@@ -33,8 +33,8 @@ import javax.persistence.spi.PersistenceProvider;
 
 import org.prolobjectlink.db.DatabaseEngine;
 import org.prolobjectlink.db.DatabaseSchema;
-import org.prolobjectlink.db.DatabaseUser;
 import org.prolobjectlink.db.DatabaseUnitInfo;
+import org.prolobjectlink.db.DatabaseUser;
 import org.prolobjectlink.db.Protocol;
 import org.prolobjectlink.db.Schema;
 import org.prolobjectlink.db.etc.Settings;

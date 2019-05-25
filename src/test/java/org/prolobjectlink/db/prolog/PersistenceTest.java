@@ -30,12 +30,6 @@ import java.util.UUID;
 
 import org.junit.Test;
 import org.prolobjectlink.BaseTest;
-import org.prolobjectlink.db.prolog.PrologArrayList;
-import org.prolobjectlink.db.prolog.PrologDate;
-import org.prolobjectlink.db.prolog.PrologHashMap;
-import org.prolobjectlink.db.prolog.PrologHashSet;
-import org.prolobjectlink.db.prolog.PrologTreeMap;
-import org.prolobjectlink.db.prolog.PrologTreeSet;
 import org.prolobjectlink.domain.classes.MonsEnum;
 
 public class PersistenceTest extends BaseTest {

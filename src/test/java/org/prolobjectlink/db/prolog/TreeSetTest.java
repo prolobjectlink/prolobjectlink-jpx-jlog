@@ -33,7 +33,6 @@ import java.util.Iterator;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.prolobjectlink.db.prolog.PrologTreeSet;
 
 public class TreeSetTest extends CollectionTest {
 
