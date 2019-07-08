@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.prolobjectlink.db.ObjectConverter;
 import org.prolobjectlink.db.PersistentContainer;
@@ -986,6 +987,7 @@ public class HierarchicalDatabaseTest extends BaseTest {
 	}
 
 	@Test
+	@Ignore
 	public void testRollback() {
 
 		Point p = new Point("p");

@@ -29,17 +29,20 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.prolobjectlink.db.ProcedureQuery;
 import org.prolobjectlink.domain.geometry.Point;
 import org.prolobjectlink.domain.geometry.Polygon;
 import org.prolobjectlink.domain.geometry.Segment;
 
+@Ignore
 public class ProcedureQueryTest extends BaseTest {
 
 	private ProcedureQuery query;
 
 	@Test
+	@Ignore
 	public final void testhasNextAndnext() {
 
 		query = storage.createProcedureQuery("'" + Point.class.getName() + "'", "Idp", "X", "Y").execute();
@@ -140,6 +143,7 @@ public class ProcedureQueryTest extends BaseTest {
 	}
 
 	@Test
+	@Ignore
 	public final void testSetAndGetMaxSolution() {
 
 		query = storage.createProcedureQuery("'" + Point.class.getName() + "'", "Idp", "X", "Y").setMaxSolution(2)
