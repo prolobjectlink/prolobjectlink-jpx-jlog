@@ -5,7 +5,7 @@
 <entry key="org.prolobjectlink.db.etc.password"/>
 <entry key="org.prolobjectlink.db.etc.lock.granularity">80</entry>
 <entry key="org.prolobjectlink.db.etc.lock.timegap">1</entry>
-<entry key="org.prolobjectlink.db.etc.prologProvider">org.prolobjectlink.prolog.jlog.JLog</entry>
+<entry key="org.prolobjectlink.db.etc.prologProvider">org.prolobjectlink.db.prolog.jlog.JLogDatabaseProvider</entry>
 <entry key="org.prolobjectlink.db.etc.storage.mode">STORAGE_POOL</entry>
 <entry key="org.prolobjectlink.db.etc.server.port">5370</entry>
 <entry key="org.prolobjectlink.db.etc.lock.sleep">40</entry>

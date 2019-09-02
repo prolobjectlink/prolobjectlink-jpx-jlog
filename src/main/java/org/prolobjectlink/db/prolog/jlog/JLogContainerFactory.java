@@ -24,12 +24,11 @@ package org.prolobjectlink.db.prolog.jlog;
 import org.prolobjectlink.db.HierarchicalCache;
 import org.prolobjectlink.db.etc.Settings;
 import org.prolobjectlink.db.prolog.PrologContainerFactory;
-import org.prolobjectlink.prolog.jlog.JLog;
 
 public final class JLogContainerFactory extends PrologContainerFactory {
 
 	public JLogContainerFactory(Settings settings) {
-		super(settings, new JLog());
+		super(settings, new JLogDatabaseProvider());
 	}
 
 	public HierarchicalCache createHierarchicalCache() {

@@ -18,6 +18,7 @@ import org.prolobjectlink.db.StorageMode;
 import org.prolobjectlink.domain.model.Address;
 import org.prolobjectlink.domain.model.Department;
 import org.prolobjectlink.domain.model.Employee;
+import org.prolobjectlink.web.application.WebApplication;
 
 public class ModelGeneratorTest extends BaseTest {
 
@@ -60,7 +61,7 @@ public class ModelGeneratorTest extends BaseTest {
 		department.addField("employeesByCubicle", "", 2, Map.class, Employee.class);
 //		rschema.addSequence("department_sequence", "", Department.class, 1);
 
-		ModelGenerator rg = new ModelGenerator(rdb);
+		ModelGenerator rg = new ModelGenerator(rdb, WebApplication.ROOT + "/webpro/model.pl");
 		assertEquals(4, rg.createSchema().countClasses());
 		assertEquals(rschema, rg.createSchema());
 	}
@@ -68,7 +69,7 @@ public class ModelGeneratorTest extends BaseTest {
 	@Test
 	public void testGenerateSchema() {
 
-		ModelGenerator rg = new ModelGenerator(rdb);
+		ModelGenerator rg = new ModelGenerator(rdb, WebApplication.ROOT + "/webpro/model.pl");
 		assertEquals(4, rg.createSchema().countClasses());
 		assertFalse(rg.generateSchema().isEmpty());
 
@@ -78,7 +79,7 @@ public class ModelGeneratorTest extends BaseTest {
 //	@Ignore
 	public void testCompileSchema() {
 
-		ModelGenerator rg = new ModelGenerator(rdb);
+		ModelGenerator rg = new ModelGenerator(rdb, WebApplication.ROOT + "/webpro/model.pl");
 		assertEquals(4, rg.createSchema().countClasses());
 		System.out.println(rg.compileSchema());
 

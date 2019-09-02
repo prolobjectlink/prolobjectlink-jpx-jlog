@@ -43,6 +43,7 @@ import org.prolobjectlink.db.StorageMode;
 import org.prolobjectlink.db.StoragePool;
 import org.prolobjectlink.db.etc.Settings;
 import org.prolobjectlink.db.prolog.jlog.JLogContainerFactory;
+import org.prolobjectlink.db.prolog.jlog.JLogDatabaseProvider;
 import org.prolobjectlink.domain.geometry.Point;
 import org.prolobjectlink.domain.geometry.Polygon;
 import org.prolobjectlink.domain.geometry.Segment;
@@ -57,7 +58,6 @@ import org.prolobjectlink.graph.DirectedGraph;
 import org.prolobjectlink.prolog.Prolog;
 import org.prolobjectlink.prolog.PrologInteger;
 import org.prolobjectlink.prolog.PrologProvider;
-import org.prolobjectlink.prolog.jlog.JLog;
 
 /** @author Jose Zalacain @since 1.0 */
 public abstract class BaseTest {
@@ -99,7 +99,7 @@ public abstract class BaseTest {
 	protected static final String BACKUP_ZIP_FILE_PATH_4 = BACKUP_DIRECTORY + BACKUP_ZIP_FILE_NAME_4;
 
 	protected static final Class<? extends ContainerFactory> driver = JLogContainerFactory.class;
-	protected static final PrologProvider provider = Prolog.getProvider(JLog.class);
+	protected static final PrologProvider provider = Prolog.getProvider(JLogDatabaseProvider.class);
 
 	protected static final PrologInteger zero = provider.newInteger(0);
 	protected static final PrologInteger one = provider.newInteger(1);
