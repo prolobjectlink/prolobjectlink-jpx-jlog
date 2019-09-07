@@ -1,2 +1,2 @@
 #!/usr/bin/bash
-java -classpath "$(dirname "$(pwd)")/lib/*" org.prolobjectlink.db.prolog.jpl.swi.SwiPrologDatabaseConsole -z 9110
+java -classpath "$(dirname "$(pwd)")/lib/*" org.prolobjectlink.db.prolog.jlog.JLogDatabaseConsole -z 9110

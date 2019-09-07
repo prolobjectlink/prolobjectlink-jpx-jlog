@@ -1,4 +1,4 @@
-class('org.prolobjectlink.domain.model.Person', compound, [field(id, integer),field(firstName, atom), field(middleName, atom), field(lastName, atom),field(address, 'org.prolobjectlink.domain.model.Address'),field(phones, list),field(emails, list),field(nickNames, list),field(birthDate, date),field(joinDate, date),field(lastLoginDate, date),field(loginCount, integer)]).
-class('org.prolobjectlink.domain.model.Address', compound, [field(street, atom), field(city, atom), field(state, atom), field(zip, atom), field(country, atom)]).
-class('org.prolobjectlink.domain.model.Department', compound, [field(id, integer), field(name, atom), field(employeesByCubicle, map)]).
-class('org.prolobjectlink.domain.model.Employee', compound, [field(salary, long), field(department, 'org.prolobjectlink.domain.model.Department')]).
+entity('webpro.model.Person', compound, [key(id, integer),field(firstName, atom), field(middleName, atom), field(lastName, atom),field(address, 'webpro.model.Address'),field(phones, list),field(emails, list),field(nickNames, list),field(birthDate, date),field(joinDate, date),field(lastLoginDate, date),field(loginCount, integer)]).
+entity('webpro.model.Address', compound, [key(id, integer),field(street, atom), field(city, atom), field(state, atom), field(zip, atom), field(country, atom)]).
+entity('webpro.model.Department', compound, [key(id, integer), field(name, atom), field(employeesByCubicle, map)]).
+entity('webpro.model.Employee', compound, [key(id, integer),field(salary, long), field(department, 'webpro.model.Department')]).

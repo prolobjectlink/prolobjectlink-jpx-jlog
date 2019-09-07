@@ -30,6 +30,8 @@ import org.prolobjectlink.db.platform.linux.LinuxDatabaseServer;
 import org.prolobjectlink.db.platform.macosx.MacosxDatabaseServer;
 import org.prolobjectlink.db.platform.win32.Win32DatabaseServer;
 import org.prolobjectlink.db.prolog.AbstractDatabaseConsole;
+import org.prolobjectlink.web.application.GrizzlyModelGenerator;
+import org.prolobjectlink.web.application.ModelGenerator;
 import org.prolobjectlink.web.platform.GrizzlyServerControl;
 import org.prolobjectlink.web.platform.GrizzlyWebServer;
 import org.prolobjectlink.web.platform.WebPlatformUtil;
@@ -70,6 +72,10 @@ public class JLogDatabaseConsole extends AbstractDatabaseConsole implements Data
 			System.exit(1);
 		}
 		return new GrizzlyServerControl(server, database);
+	}
+
+	public ModelGenerator getModelGeneratorInstance() {
+		return new GrizzlyModelGenerator();
 	}
 
 }

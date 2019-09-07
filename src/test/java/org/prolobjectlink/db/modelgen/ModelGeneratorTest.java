@@ -2,7 +2,6 @@ package org.prolobjectlink.db.modelgen;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.fail;
 
 import java.util.Collection;
 import java.util.Date;
@@ -10,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.prolobjectlink.BaseTest;
 import org.prolobjectlink.db.DatabaseClass;
@@ -83,12 +81,6 @@ public class ModelGeneratorTest extends BaseTest {
 		assertEquals(4, rg.createSchema().countClasses());
 		System.out.println(rg.compileSchema());
 
-	}
-
-	@Test
-	@Ignore
-	public void testWritePersistence() {
-		fail("Not Implemented yet"); // TODO
 	}
 
 }
