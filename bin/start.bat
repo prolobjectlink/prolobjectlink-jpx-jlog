@@ -5,4 +5,5 @@ for %%B in (%CURRENT_DIRECTORY%.) do set PROLOBJECTLINK_HOME=%%~dpB
 SET CLASSPATH=%PROLOBJECTLINK_HOME%lib\*
 
 : default jdk
+java -classpath %CLASSPATH% org.prolobjectlink.db.prolog.jlog.JLogDatabaseConsole -m
 java -classpath %CLASSPATH% org.prolobjectlink.db.prolog.jlog.JLogDatabaseConsole -z 9110
