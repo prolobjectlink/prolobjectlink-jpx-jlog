@@ -40,19 +40,10 @@
 			<outputDirectory>demo</outputDirectory>
 		</fileSet>
 
-		<!-- api documentation -->
-		<fileSet>
-			<directory>${project.build.directory}/apidocs</directory>
-			<outputDirectory>doc/apidocs</outputDirectory>
-		</fileSet>
-
-		<!-- documentation pdf -->
+		<!-- doc folder -->
 		<fileSet>
 			<directory>${project.basedir}/doc</directory>
 			<outputDirectory>doc</outputDirectory>
-			<includes>
-				<include>${project.name}.pdf</include>
-			</includes>
 		</fileSet>
 
 		<!-- configuration properties folder -->
