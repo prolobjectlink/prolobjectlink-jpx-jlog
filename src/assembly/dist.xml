@@ -30,8 +30,8 @@
 
 		<!-- root data folder -->
 		<fileSet>
-			<directory>${project.basedir}/dat</directory>
-			<outputDirectory>dat</outputDirectory>
+			<directory>${project.basedir}/db</directory>
+			<outputDirectory>db</outputDirectory>
 		</fileSet>
 
 		<!-- demostration folder -->
