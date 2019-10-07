@@ -59,13 +59,13 @@ public class JLogDatabaseConsole extends AbstractDatabaseConsole implements Data
 		DatabaseServer database = null;
 		GrizzlyWebServer server = null;
 		if (WebPlatformUtil.runOnWindows()) {
-			database = new Win32DatabaseServer();
+//			database = new Win32DatabaseServer();
 			server = new Win32GrizzlyWebServer(port);
 		} else if (WebPlatformUtil.runOnOsX()) {
-			database = new MacosxDatabaseServer();
+//			database = new MacosxDatabaseServer();
 			server = new MacosxGrizzlyWebServer(port);
 		} else if (WebPlatformUtil.runOnLinux()) {
-			database = new LinuxDatabaseServer();
+//			database = new LinuxDatabaseServer();
 			server = new LinuxGrizzlyWebServer(port);
 		} else {
 			Logger.getLogger(GrizzlyServerControl.class.getName()).log(Level.SEVERE, null, "Not supported platfor");
