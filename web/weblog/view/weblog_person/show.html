@@ -1,0 +1,25 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Details</title>
+	</head>
+	<body>
+		<h1>Details</h1>
+		<a href="{{ path("weblog_person_new") }}">New</a>
+		<a href="{{ path("weblog_person_edit/"+ENTITY.getId()) }}">Editar</a>
+		<table>
+			<tr><th>LastName</th><td>{{ENTITY.getLastName()}}</td></tr>
+			<tr><th>Address</th><td>{{ENTITY.getAddress()}}</td></tr>
+			<tr><th>Salt</th><td>{{ENTITY.getSalt()}}</td></tr>
+			<tr><th>Idnumber</th><td>{{ENTITY.getIdnumber()}}</td></tr>
+			<tr><th>Photo</th><td>{{ENTITY.getPhoto()}}</td></tr>
+			<tr><th>FirstName</th><td>{{ENTITY.getFirstName()}}</td></tr>
+			<tr><th>Phone</th><td>{{ENTITY.getPhone()}}</td></tr>
+			<tr><th>MiddleName</th><td>{{ENTITY.getMiddleName()}}</td></tr>
+			<tr><th>Company</th><td>{{ENTITY.getCompany()}}</td></tr>
+			<tr><th>Pwd</th><td>{{ENTITY.getPwd()}}</td></tr>
+			<tr><th>User</th><td>{{ENTITY.getUser()}}</td></tr>
+			<tr><th>Email</th><td>{{ENTITY.getEmail()}}</td></tr>
+		</table>
+		<a href="{{ path("weblog_person_find_all") }}">List</a>	</body>
+</html>

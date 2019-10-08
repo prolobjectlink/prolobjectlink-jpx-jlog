@@ -1,0 +1,20 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Create</title>
+	</head>
+	<body>
+		<h1>Create</h1>
+		<form id="edit" action="{{ path("webpro_address_create") }}" method="post">
+		<table>
+			<tr><td>Zip:</td><td><input type="text" id = "Zip" name="Zip" /></td></tr>
+			<tr><td>Country:</td><td><input type="text" id = "Country" name="Country" /></td></tr>
+			<tr><td>City:</td><td><input type="text" id = "City" name="City" /></td></tr>
+			<tr><td>Street:</td><td><input type="text" id = "Street" name="Street" /></td></tr>
+			<tr><td>State:</td><td><input type="text" id = "State" name="State" /></td></tr>
+		</table>
+		<input type="submit" id="Create" value="Create" />
+		</form>
+		<a href="{{ path("webpro_address_find_all") }}">List</a>
+	</body>
+</html>

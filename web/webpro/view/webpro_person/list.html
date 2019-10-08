@@ -1,0 +1,55 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>List</title>
+	</head>
+	<body>
+		<h1>List</h1>
+		<a href="{{ path("webpro_person_new") }}">New</a>
+		<table>
+		<tr>
+			<th>LastName</th>
+			<th>Address</th>
+			<th>Salt</th>
+			<th>Idnumber</th>
+			<th>Photo</th>
+			<th>FirstName</th>
+			<th>Phone</th>
+			<th>MiddleName</th>
+			<th>Company</th>
+			<th>Pwd</th>
+			<th>User</th>
+			<th>Email</th>
+		</tr>
+		{{for value in LIST}}
+		<tr>
+			<td>{{value.getLastName()}}</td>
+			<td>{{value.getAddress()}}</td>
+			<td>{{value.getSalt()}}</td>
+			<td>{{value.getIdnumber()}}</td>
+			<td>{{value.getPhoto()}}</td>
+			<td>{{value.getFirstName()}}</td>
+			<td>{{value.getPhone()}}</td>
+			<td>{{value.getMiddleName()}}</td>
+			<td>{{value.getCompany()}}</td>
+			<td>{{value.getPwd()}}</td>
+			<td>{{value.getUser()}}</td>
+			<td>{{value.getEmail()}}</td>
+			<td>
+				<ul>
+					<li>
+						<a href="{{ path("webpro_person_find/"+value.getId()) }}">Details</a>
+					</li>
+					<li>
+						<a href="{{ path("webpro_person_edit/"+value.getId()) }}">Edit</a>
+					</li>
+					<li>
+						<a href="{{ path("webpro_person_delete/"+value.getId()) }}">Delete</a>
+					</li>
+				</ul>
+			</td>
+		</tr>
+		{{end}}
+		</table>
+	</body>
+</html>

@@ -55,6 +55,9 @@ webpro_address_dao_retrieve_one(REF, ARG0, OUT) :-
 webpro_address_dao_query_one(REF, ARG0, OUT) :- 
 	object_call(REF, queryOne, '.'(ARG0, []), OUT).
 
+webpro_address_dao_close(REF) :- 
+	object_call(REF, close, [], _).
+
 webpro_address_dao_retrieve_all(REF, OUT) :- 
 	object_call(REF, retrieveAll, [], OUT).
 

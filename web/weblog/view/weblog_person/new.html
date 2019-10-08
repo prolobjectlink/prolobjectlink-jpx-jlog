@@ -1,0 +1,27 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Create</title>
+	</head>
+	<body>
+		<h1>Create</h1>
+		<form id="edit" action="{{ path("weblog_person_create") }}" method="post">
+		<table>
+			<tr><td>LastName:</td><td><input type="text" id = "LastName" name="LastName" /></td></tr>
+			<tr><td>Address:</td><td><input type="text" id = "Address" name="Address" /></td></tr>
+			<tr><td>Salt:</td><td><input type="text" id = "Salt" name="Salt" /></td></tr>
+			<tr><td>Idnumber:</td><td><input type="text" id = "Idnumber" name="Idnumber" /></td></tr>
+			<tr><td>Photo:</td><td><input type="text" id = "Photo" name="Photo" /></td></tr>
+			<tr><td>FirstName:</td><td><input type="text" id = "FirstName" name="FirstName" /></td></tr>
+			<tr><td>Phone:</td><td><input type="text" id = "Phone" name="Phone" /></td></tr>
+			<tr><td>MiddleName:</td><td><input type="text" id = "MiddleName" name="MiddleName" /></td></tr>
+			<tr><td>Company:</td><td><input type="text" id = "Company" name="Company" /></td></tr>
+			<tr><td>Pwd:</td><td><input type="text" id = "Pwd" name="Pwd" /></td></tr>
+			<tr><td>User:</td><td><input type="text" id = "User" name="User" /></td></tr>
+			<tr><td>Email:</td><td><input type="text" id = "Email" name="Email" /></td></tr>
+		</table>
+		<input type="submit" id="Create" value="Create" />
+		</form>
+		<a href="{{ path("weblog_person_find_all") }}">List</a>
+	</body>
+</html>

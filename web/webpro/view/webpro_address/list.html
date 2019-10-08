@@ -1,0 +1,41 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>List</title>
+	</head>
+	<body>
+		<h1>List</h1>
+		<a href="{{ path("webpro_address_new") }}">New</a>
+		<table>
+		<tr>
+			<th>Zip</th>
+			<th>Country</th>
+			<th>City</th>
+			<th>Street</th>
+			<th>State</th>
+		</tr>
+		{{for value in LIST}}
+		<tr>
+			<td>{{value.getZip()}}</td>
+			<td>{{value.getCountry()}}</td>
+			<td>{{value.getCity()}}</td>
+			<td>{{value.getStreet()}}</td>
+			<td>{{value.getState()}}</td>
+			<td>
+				<ul>
+					<li>
+						<a href="{{ path("webpro_address_find/"+value.getId()) }}">Details</a>
+					</li>
+					<li>
+						<a href="{{ path("webpro_address_edit/"+value.getId()) }}">Edit</a>
+					</li>
+					<li>
+						<a href="{{ path("webpro_address_delete/"+value.getId()) }}">Delete</a>
+					</li>
+				</ul>
+			</td>
+		</tr>
+		{{end}}
+		</table>
+	</body>
+</html>

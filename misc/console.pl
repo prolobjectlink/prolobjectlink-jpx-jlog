@@ -22,6 +22,39 @@
 
 :-consult('../prt/prolog/lang/integer.pl').
 
-integer_parse_int(STRING,INT):-
-	integer(0, INTEGER),
-	integer_parse_int(INTEGER, STRING, INT).
+:-consult('../prt/prolog/lang/system.pl').
+
+:-consult('../prt/prolog/io/print_stream.pl').
+
+console_print(STRING):- 
+	system_out_print(STRING).
+	
+console_println:- 
+	system_out_println.
+	
+console_println(STRING):- 
+	system_out_println(STRING).
+
+system_out_print(STRING):- 
+	system_OUT(OUT),
+	print_stream_print(OUT, STRING).
+	
+system_out_println:- 
+	system_OUT(OUT),
+	print_stream_println(OUT).
+	
+system_out_println(STRING):- 
+	system_OUT(OUT),
+	print_stream_println(OUT, STRING).
+
+system_err_print(STRING):- 
+	system_ERR(OUT),
+	print_stream_print(OUT, STRING).
+
+system_err_println:- 
+	system_ERR(OUT),
+	print_stream_println(OUT).
+	
+system_err_println(STRING):- 
+	system_ERR(OUT),
+	print_stream_println(OUT, STRING).

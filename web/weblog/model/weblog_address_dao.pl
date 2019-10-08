@@ -34,6 +34,9 @@ weblog_address_dao_query_one(REF, ARG0, OUT) :-
 weblog_address_dao_notify_all(REF) :- 
 	object_call(REF, notifyAll, [], _).
 
+weblog_address_dao_close(REF) :- 
+	object_call(REF, close, [], _).
+
 weblog_address_dao_query_all(REF, ARG0, ARG1, ARG2, OUT) :- 
 	object_call(REF, queryAll, '.'(ARG0, '.'(ARG1, '.'(ARG2, []))), OUT).
 

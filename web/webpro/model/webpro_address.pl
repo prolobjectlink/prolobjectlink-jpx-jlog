@@ -22,6 +22,8 @@
 
 :-consult('../../../obj/prolobject.pl').
 
+:-consult('../../../web/webpro/model/webpro_address_dao.pl').
+
 webpro_address(OUT) :- 
 	object_new('webpro.model.WebproAddress', [], OUT).
 
@@ -76,11 +78,11 @@ webpro_address_get_street(REF, OUT) :-
 webpro_address_set_state(REF, ARG0) :- 
 	object_call(REF, setState, '.'(ARG0, []), _).
 
-webpro_address_set_id(REF, ARG0) :- 
-	object_call(REF, setId, '.'(ARG0, []), _).
-
 webpro_address_set_country(REF, ARG0) :- 
 	object_call(REF, setCountry, '.'(ARG0, []), _).
+
+webpro_address_set_id(REF, ARG0) :- 
+	object_call(REF, setId, '.'(ARG0, []), _).
 
 webpro_address_get_id(REF, OUT) :- 
 	object_call(REF, getId, [], OUT).
@@ -96,4 +98,34 @@ webpro_address_notify(REF) :-
 
 webpro_address_equals(REF, ARG0, OUT) :- 
 	object_call(REF, equals, '.'(ARG0, []), OUT).
+
+webpro_address_query_one(ARG0, OUT) :- 
+	webpro_address_dao(DAO),
+	webpro_address_dao_query_one(DAO, ARG0, OUT),
+	webpro_address_dao_close(DAO).
+
+webpro_address_query_all(ARG0, OUT) :- 
+	webpro_address_dao(DAO),
+	webpro_address_dao_query_all(DAO, ARG0, OUT),
+	webpro_address_dao_close(DAO).
+
+webpro_address_query_all(ARG0, ARG1, ARG2, OUT) :- 
+	webpro_address_dao(DAO),
+	webpro_address_dao_query_all(DAO, ARG0, ARG1, ARG2, OUT),
+	webpro_address_dao_close(DAO).
+
+webpro_address_retrieve_one(ARG0, OUT) :- 
+	webpro_address_dao(DAO),
+	webpro_address_dao_retrieve_one(DAO, ARG0, OUT),
+	webpro_address_dao_close(DAO).
+
+webpro_address_retrieve_all(OUT) :- 
+	webpro_address_dao(DAO),
+	webpro_address_dao_retrieve_all(DAO, OUT),
+	webpro_address_dao_close(DAO).
+
+webpro_address_retrieve_all(ARG0, ARG1, OUT) :- 
+	webpro_address_dao(DAO),
+	webpro_address_dao_retrieve_all(DAO, ARG0, ARG1, OUT),
+	webpro_address_dao_close(DAO).
 

@@ -20,7 +20,7 @@
 
 % Author: Jose Zalacain
 
-:-consult('d:/pas-win32-x64-1.0.0/prt/prolog/lang/float.pl').
+:-consult('../prt/prolog/lang/float.pl').
 
 float_parse_int(STRING,FLOAT):-
 	float(0, float),

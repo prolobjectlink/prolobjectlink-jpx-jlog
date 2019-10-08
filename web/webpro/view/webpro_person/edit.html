@@ -1,0 +1,28 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Edit</title>
+	</head>
+	<body>
+		<h1>Edit</h1>
+		<form id="edit" action="{{ path("webpro_person_update") }}" method="post">
+		<table>
+			<tr><td>LastName:</td><td><input type="text" id = "LastName" name="LastName" value="{{ENTITY.getLastName()}}" /></td></tr>
+			<tr><td>Address:</td><td><input type="text" id = "Address" name="Address" value="{{ENTITY.getAddress()}}" /></td></tr>
+			<tr><td>Salt:</td><td><input type="text" id = "Salt" name="Salt" value="{{ENTITY.getSalt()}}" /></td></tr>
+			<tr><td>Idnumber:</td><td><input type="text" id = "Idnumber" name="Idnumber" value="{{ENTITY.getIdnumber()}}" /></td></tr>
+			<tr><td>Photo:</td><td><input type="text" id = "Photo" name="Photo" value="{{ENTITY.getPhoto()}}" /></td></tr>
+			<tr><td>FirstName:</td><td><input type="text" id = "FirstName" name="FirstName" value="{{ENTITY.getFirstName()}}" /></td></tr>
+			<tr><td>Phone:</td><td><input type="text" id = "Phone" name="Phone" value="{{ENTITY.getPhone()}}" /></td></tr>
+			<tr><td>MiddleName:</td><td><input type="text" id = "MiddleName" name="MiddleName" value="{{ENTITY.getMiddleName()}}" /></td></tr>
+			<tr><td>Company:</td><td><input type="text" id = "Company" name="Company" value="{{ENTITY.getCompany()}}" /></td></tr>
+			<tr><td>Id:</td><td><input type="text" id = "Id" name="Id" value="{{ENTITY.getId()}}" /></td></tr>
+			<tr><td>Pwd:</td><td><input type="text" id = "Pwd" name="Pwd" value="{{ENTITY.getPwd()}}" /></td></tr>
+			<tr><td>User:</td><td><input type="text" id = "User" name="User" value="{{ENTITY.getUser()}}" /></td></tr>
+			<tr><td>Email:</td><td><input type="text" id = "Email" name="Email" value="{{ENTITY.getEmail()}}" /></td></tr>
+		</table>
+		<input type="submit" id="Update" value="Update" />
+		</form>
+		<a href="{{ path("webpro_person_find_all") }}">List</a>
+	</body>
+</html>

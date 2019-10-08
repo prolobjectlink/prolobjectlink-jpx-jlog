@@ -1,0 +1,18 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Details</title>
+	</head>
+	<body>
+		<h1>Details</h1>
+		<a href="{{ path("webpro_address_new") }}">New</a>
+		<a href="{{ path("webpro_address_edit/"+ENTITY.getId()) }}">Editar</a>
+		<table>
+			<tr><th>Zip</th><td>{{ENTITY.getZip()}}</td></tr>
+			<tr><th>Country</th><td>{{ENTITY.getCountry()}}</td></tr>
+			<tr><th>City</th><td>{{ENTITY.getCity()}}</td></tr>
+			<tr><th>Street</th><td>{{ENTITY.getStreet()}}</td></tr>
+			<tr><th>State</th><td>{{ENTITY.getState()}}</td></tr>
+		</table>
+		<a href="{{ path("webpro_address_find_all") }}">List</a>	</body>
+</html>

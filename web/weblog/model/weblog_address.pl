@@ -22,6 +22,8 @@
 
 :-consult('../../../obj/prolobject.pl').
 
+:-consult('../../../web/weblog/model/weblog_address_dao.pl').
+
 weblog_address(OUT) :- 
 	object_new('weblog.model.WeblogAddress', [], OUT).
 
@@ -96,4 +98,34 @@ weblog_address_set_city(REF, ARG0) :-
 
 weblog_address_to_string(REF, OUT) :- 
 	object_call(REF, toString, [], OUT).
+
+weblog_address_query_one(ARG0, OUT) :- 
+	weblog_address_dao(DAO),
+	weblog_address_dao_query_one(DAO, ARG0, OUT),
+	weblog_address_dao_close(DAO).
+
+weblog_address_query_all(ARG0, OUT) :- 
+	weblog_address_dao(DAO),
+	weblog_address_dao_query_all(DAO, ARG0, OUT),
+	weblog_address_dao_close(DAO).
+
+weblog_address_query_all(ARG0, ARG1, ARG2, OUT) :- 
+	weblog_address_dao(DAO),
+	weblog_address_dao_query_all(DAO, ARG0, ARG1, ARG2, OUT),
+	weblog_address_dao_close(DAO).
+
+weblog_address_retrieve_one(ARG0, OUT) :- 
+	weblog_address_dao(DAO),
+	weblog_address_dao_retrieve_one(DAO, ARG0, OUT),
+	weblog_address_dao_close(DAO).
+
+weblog_address_retrieve_all(OUT) :- 
+	weblog_address_dao(DAO),
+	weblog_address_dao_retrieve_all(DAO, OUT),
+	weblog_address_dao_close(DAO).
+
+weblog_address_retrieve_all(ARG0, ARG1, OUT) :- 
+	weblog_address_dao(DAO),
+	weblog_address_dao_retrieve_all(DAO, ARG0, ARG1, OUT),
+	weblog_address_dao_close(DAO).
 

@@ -1,0 +1,21 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Edit</title>
+	</head>
+	<body>
+		<h1>Edit</h1>
+		<form id="edit" action="{{ path("webpro_address_update") }}" method="post">
+		<table>
+			<tr><td>Zip:</td><td><input type="text" id = "Zip" name="Zip" value="{{ENTITY.getZip()}}" /></td></tr>
+			<tr><td>Country:</td><td><input type="text" id = "Country" name="Country" value="{{ENTITY.getCountry()}}" /></td></tr>
+			<tr><td>City:</td><td><input type="text" id = "City" name="City" value="{{ENTITY.getCity()}}" /></td></tr>
+			<tr><td>Street:</td><td><input type="text" id = "Street" name="Street" value="{{ENTITY.getStreet()}}" /></td></tr>
+			<tr><td>Id:</td><td><input type="text" id = "Id" name="Id" value="{{ENTITY.getId()}}" /></td></tr>
+			<tr><td>State:</td><td><input type="text" id = "State" name="State" value="{{ENTITY.getState()}}" /></td></tr>
+		</table>
+		<input type="submit" id="Update" value="Update" />
+		</form>
+		<a href="{{ path("webpro_address_find_all") }}">List</a>
+	</body>
+</html>
