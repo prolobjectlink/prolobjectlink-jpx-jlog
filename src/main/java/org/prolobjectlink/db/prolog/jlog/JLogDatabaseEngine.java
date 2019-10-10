@@ -21,23 +21,61 @@
  */
 package org.prolobjectlink.db.prolog.jlog;
 
+import org.prolobjectlink.db.ObjectConverter;
 import org.prolobjectlink.db.prolog.PrologDatabaseEngine;
+import org.prolobjectlink.db.prolog.PrologObjectConverter;
 import org.prolobjectlink.db.prolog.PrologProgrammer;
 import org.prolobjectlink.prolog.PrologProvider;
+import org.prolobjectlink.prolog.PrologTerm;
 import org.prolobjectlink.prolog.jlog.JLogEngine;
 
 public class JLogDatabaseEngine extends JLogEngine implements PrologDatabaseEngine {
 
+	private final ObjectConverter<PrologTerm> converter;
+
 	JLogDatabaseEngine() {
 		super(new JLogDatabaseProvider());
+		converter = new PrologObjectConverter(provider);
 	}
 
 	JLogDatabaseEngine(PrologProvider provider) {
 		super(provider);
+		converter = new PrologObjectConverter(provider);
+	}
+
+	public boolean unify(Object x, Object y) {
+		PrologTerm xt = converter.toTerm(x);
+		PrologTerm yt = converter.toTerm(y);
+		return unify(xt, yt);
 	}
 
 	public PrologProgrammer getProgrammer() {
 		return new JLogProgrammer(getProvider());
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((converter == null) ? 0 : converter.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		JLogDatabaseEngine other = (JLogDatabaseEngine) obj;
+		if (converter == null) {
+			if (other.converter != null)
+				return false;
+		} else if (!converter.equals(other.converter))
+			return false;
+		return true;
 	}
 
 }
