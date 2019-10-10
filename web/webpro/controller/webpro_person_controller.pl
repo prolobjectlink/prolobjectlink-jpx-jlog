@@ -1,8 +1,10 @@
 :-consult('../../../obj/prolobject.pl').
 
-:-consult('../../../misc/http.pl').
+:-consult('../../../misc/pl/http.pl').
 
-:-consult('../../../misc/integer.pl').
+:-consult('../../../misc/pl/float.pl').
+
+:-consult('../../../misc/pl/integer.pl').
 
 :-consult('../../../web/webpro/model/webpro_person.pl').
 
@@ -44,7 +46,7 @@ webpro_person_query(ID, ENTITY) :-
 	webpro_person_query_one(QUERY, ENTITY),
 	render('view/webpro_person/show.html').
 
-webpro_person_update(LASTNAME, ADDRESS, SALT, IDNUMBER, PHOTO, FIRSTNAME, PHONE, MIDDLENAME, COMPANY, ID, PWD, USER, EMAIL, ENTITY) :- 
+webpro_person_update(LASTNAME, ADDRESS, SALT, IDNUMBER, PHOTO, WEIGHT, LOGINCOUNT, FIRSTNAME, PHONE, HEIGTH, MIDDLENAME, COMPANY, ID, PWD, USER, EMAIL, ENTITY) :- 
 	integer_parse_int(ID, A),
 	webpro_person_retrieve_one(A, ENTITY),
 	webpro_person_set_last_name(ENTITY, LASTNAME),
@@ -52,8 +54,14 @@ webpro_person_update(LASTNAME, ADDRESS, SALT, IDNUMBER, PHOTO, FIRSTNAME, PHONE,
 	webpro_person_set_salt(ENTITY, SALT),
 	webpro_person_set_idnumber(ENTITY, IDNUMBER),
 	webpro_person_set_photo(ENTITY, PHOTO),
+	float_parse_float(WEIGHT, WEIGHT_FLOAT_VALUE),
+	webpro_person_set_weight(ENTITY, WEIGHT_FLOAT_VALUE),
+	integer_parse_int(LOGINCOUNT, LOGINCOUNT_INT_VALUE),
+	webpro_person_set_login_count(ENTITY, LOGINCOUNT_INT_VALUE),
 	webpro_person_set_first_name(ENTITY, FIRSTNAME),
 	webpro_person_set_phone(ENTITY, PHONE),
+	float_parse_float(HEIGTH, HEIGTH_FLOAT_VALUE),
+	webpro_person_set_heigth(ENTITY, HEIGTH_FLOAT_VALUE),
 	webpro_person_set_middle_name(ENTITY, MIDDLENAME),
 	webpro_person_set_company(ENTITY, COMPANY),
 	webpro_person_set_pwd(ENTITY, PWD),
@@ -62,15 +70,21 @@ webpro_person_update(LASTNAME, ADDRESS, SALT, IDNUMBER, PHOTO, FIRSTNAME, PHONE,
 	webpro_person_update(ENTITY),
 	render('view/webpro_person/show.html').
 
-webpro_person_create(LASTNAME, ADDRESS, SALT, IDNUMBER, PHOTO, FIRSTNAME, PHONE, MIDDLENAME, COMPANY, PWD, USER, EMAIL, ENTITY) :- 
+webpro_person_create(LASTNAME, ADDRESS, SALT, IDNUMBER, PHOTO, WEIGHT, LOGINCOUNT, FIRSTNAME, PHONE, HEIGTH, MIDDLENAME, COMPANY, PWD, USER, EMAIL, ENTITY) :- 
 	webpro_person(ENTITY),
 	webpro_person_set_last_name(ENTITY, LASTNAME),
 	webpro_person_set_address(ENTITY, ADDRESS),
 	webpro_person_set_salt(ENTITY, SALT),
 	webpro_person_set_idnumber(ENTITY, IDNUMBER),
 	webpro_person_set_photo(ENTITY, PHOTO),
+	float_parse_float(WEIGHT, WEIGHT_FLOAT_VALUE),
+	webpro_person_set_weight(ENTITY, WEIGHT_FLOAT_VALUE),
+	integer_parse_int(LOGINCOUNT, LOGINCOUNT_INT_VALUE),
+	webpro_person_set_login_count(ENTITY, LOGINCOUNT_INT_VALUE),
 	webpro_person_set_first_name(ENTITY, FIRSTNAME),
 	webpro_person_set_phone(ENTITY, PHONE),
+	float_parse_float(HEIGTH, HEIGTH_FLOAT_VALUE),
+	webpro_person_set_heigth(ENTITY, HEIGTH_FLOAT_VALUE),
 	webpro_person_set_middle_name(ENTITY, MIDDLENAME),
 	webpro_person_set_company(ENTITY, COMPANY),
 	webpro_person_set_pwd(ENTITY, PWD),

@@ -20,8 +20,8 @@
 
 % Author: Jose Zalacain
 
-:-consult('../prt/prolog/lang/float.pl').
+:-consult('../../prt/prolog/lang/integer.pl').
 
-float_parse_int(STRING,FLOAT):-
-	float(0, float),
-	float_parse_int(float, STRING, FLOAT).
+integer_parse_int(STRING,INT):-
+	integer(0, INTEGER),
+	integer_parse_int(INTEGER, STRING, INT).

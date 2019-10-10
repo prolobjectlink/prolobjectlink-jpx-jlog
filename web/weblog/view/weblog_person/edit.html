@@ -2,7 +2,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Edit</title>
-	</head>
+		<script src="{{ asset("js/bootstrap.js") }}"></script>	</head>
 	<body>
 		<h1>Edit</h1>
 		<form id="edit" action="{{ path("weblog_person_update") }}" method="post">
@@ -12,8 +12,11 @@
 			<tr><td>Salt:</td><td><input type="text" id = "Salt" name="Salt" value="{{ENTITY.getSalt()}}" /></td></tr>
 			<tr><td>Idnumber:</td><td><input type="text" id = "Idnumber" name="Idnumber" value="{{ENTITY.getIdnumber()}}" /></td></tr>
 			<tr><td>Photo:</td><td><input type="text" id = "Photo" name="Photo" value="{{ENTITY.getPhoto()}}" /></td></tr>
+			<tr><td>Weight:</td><td><input type="text" id = "Weight" name="Weight" value="{{ENTITY.getWeight()}}" /></td></tr>
+			<tr><td>LoginCount:</td><td><input type="text" id = "LoginCount" name="LoginCount" value="{{ENTITY.getLoginCount()}}" /></td></tr>
 			<tr><td>FirstName:</td><td><input type="text" id = "FirstName" name="FirstName" value="{{ENTITY.getFirstName()}}" /></td></tr>
 			<tr><td>Phone:</td><td><input type="text" id = "Phone" name="Phone" value="{{ENTITY.getPhone()}}" /></td></tr>
+			<tr><td>Heigth:</td><td><input type="text" id = "Heigth" name="Heigth" value="{{ENTITY.getHeigth()}}" /></td></tr>
 			<tr><td>MiddleName:</td><td><input type="text" id = "MiddleName" name="MiddleName" value="{{ENTITY.getMiddleName()}}" /></td></tr>
 			<tr><td>Company:</td><td><input type="text" id = "Company" name="Company" value="{{ENTITY.getCompany()}}" /></td></tr>
 			<tr><td>Id:</td><td><input type="text" id = "Id" name="Id" value="{{ENTITY.getId()}}" /></td></tr>

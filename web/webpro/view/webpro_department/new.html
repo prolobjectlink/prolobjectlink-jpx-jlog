@@ -1,0 +1,16 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Create</title>
+		<script src="{{ asset("js/bootstrap.js") }}"></script>	</head>
+	<body>
+		<h1>Create</h1>
+		<form id="edit" action="{{ path("webpro_department_create") }}" method="post">
+		<table>
+			<tr><td>Name:</td><td><input type="text" id = "Name" name="Name" /></td></tr>
+		</table>
+		<input type="submit" id="Create" value="Create" />
+		</form>
+		<a href="{{ path("webpro_department_find_all") }}">List</a>
+	</body>
+</html>

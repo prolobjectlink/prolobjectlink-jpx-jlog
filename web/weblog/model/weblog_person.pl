@@ -45,11 +45,11 @@ weblog_person_set_salt(REF, ARG0) :-
 weblog_person_set_address(REF, ARG0) :- 
 	object_call(REF, setAddress, '.'(ARG0, []), _).
 
-weblog_person_get_company(REF, OUT) :- 
-	object_call(REF, getCompany, [], OUT).
-
 weblog_person_get_pwd(REF, OUT) :- 
 	object_call(REF, getPwd, [], OUT).
+
+weblog_person_get_company(REF, OUT) :- 
+	object_call(REF, getCompany, [], OUT).
 
 weblog_person_get_email(REF, OUT) :- 
 	object_call(REF, getEmail, [], OUT).
@@ -63,11 +63,17 @@ weblog_person_wait(REF, ARG0) :-
 weblog_person_wait(REF) :- 
 	object_call(REF, wait, [], _).
 
+weblog_person_get_weight(REF, OUT) :- 
+	object_call(REF, getWeight, [], OUT).
+
 weblog_person_notify(REF) :- 
 	object_call(REF, notify, [], _).
 
 weblog_person_set_photo(REF, ARG0) :- 
 	object_call(REF, setPhoto, '.'(ARG0, []), _).
+
+weblog_person_get_heigth(REF, OUT) :- 
+	object_call(REF, getHeigth, [], OUT).
 
 weblog_person_set_phone(REF, ARG0) :- 
 	object_call(REF, setPhone, '.'(ARG0, []), _).
@@ -86,6 +92,9 @@ weblog_person_set_idnumber(REF, ARG0) :-
 
 weblog_person_set_last_name(REF, ARG0) :- 
 	object_call(REF, setLastName, '.'(ARG0, []), _).
+
+weblog_person_set_heigth(REF, ARG0) :- 
+	object_call(REF, setHeigth, '.'(ARG0, []), _).
 
 weblog_person_get_phone(REF, OUT) :- 
 	object_call(REF, getPhone, [], OUT).
@@ -123,6 +132,9 @@ weblog_person_notify_all(REF) :-
 weblog_person_update(REF) :- 
 	object_call(REF, update, [], _).
 
+weblog_person_set_weight(REF, ARG0) :- 
+	object_call(REF, setWeight, '.'(ARG0, []), _).
+
 weblog_person_set_pwd(REF, ARG0) :- 
 	object_call(REF, setPwd, '.'(ARG0, []), _).
 
@@ -132,8 +144,14 @@ weblog_person_get_idnumber(REF, OUT) :-
 weblog_person_set_middle_name(REF, ARG0) :- 
 	object_call(REF, setMiddleName, '.'(ARG0, []), _).
 
+weblog_person_get_login_count(REF, OUT) :- 
+	object_call(REF, getLoginCount, [], OUT).
+
 weblog_person_get_salt(REF, OUT) :- 
 	object_call(REF, getSalt, [], OUT).
+
+weblog_person_set_login_count(REF, ARG0) :- 
+	object_call(REF, setLoginCount, '.'(ARG0, []), _).
 
 weblog_person_set_id(REF, ARG0) :- 
 	object_call(REF, setId, '.'(ARG0, []), _).

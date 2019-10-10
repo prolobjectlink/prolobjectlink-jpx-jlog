@@ -27,11 +27,11 @@
 weblog_address(OUT) :- 
 	object_new('weblog.model.WeblogAddress', [], OUT).
 
-weblog_address_get_city(REF, OUT) :- 
-	object_call(REF, getCity, [], OUT).
-
 weblog_address_get_street(REF, OUT) :- 
 	object_call(REF, getStreet, [], OUT).
+
+weblog_address_get_city(REF, OUT) :- 
+	object_call(REF, getCity, [], OUT).
 
 weblog_address_get_class(REF, OUT) :- 
 	object_call(REF, getClass, [], OUT).
@@ -90,11 +90,11 @@ weblog_address_set_zip(REF, ARG0) :-
 weblog_address_create(REF) :- 
 	object_call(REF, create, [], _).
 
-weblog_address_get_zip(REF, OUT) :- 
-	object_call(REF, getZip, [], OUT).
-
 weblog_address_set_city(REF, ARG0) :- 
 	object_call(REF, setCity, '.'(ARG0, []), _).
+
+weblog_address_get_zip(REF, OUT) :- 
+	object_call(REF, getZip, [], OUT).
 
 weblog_address_to_string(REF, OUT) :- 
 	object_call(REF, toString, [], OUT).

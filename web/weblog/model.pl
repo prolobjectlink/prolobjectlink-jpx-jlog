@@ -1,3 +1,5 @@
+:-multifile(entity/3).
+
 entity('weblog.model.WeblogAddress', compound,
 	[
 		key(id, integer),
@@ -23,6 +25,16 @@ entity('weblog.model.WeblogPerson', compound,
 		field(company, atom),
 		field(salt, atom),
 		field(user, atom),
-		field(pwd, atom)
+		field(pwd, atom),
+		field(loginCount, integer),
+		field(weight, float),
+		field(heigth, float)
+	]
+).
+
+entity('weblog.model.WeblogDepartment', compound,
+	[
+		key(id, integer),
+		field(name, atom)
 	]
 ).

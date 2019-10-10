@@ -1,8 +1,10 @@
 :-consult('../../../obj/prolobject.pl').
 
-:-consult('../../../misc/http.pl').
+:-consult('../../../misc/pl/http.pl').
 
-:-consult('../../../misc/integer.pl').
+:-consult('../../../misc/pl/float.pl').
+
+:-consult('../../../misc/pl/integer.pl').
 
 :-consult('../../../web/weblog/model/weblog_address.pl').
 
