@@ -38,10 +38,11 @@ import org.prolobjectlink.domain.geometry.Point;
 import org.prolobjectlink.domain.geometry.Polygon;
 import org.prolobjectlink.domain.geometry.Segment;
 import org.prolobjectlink.domain.geometry.Tetragon;
-import org.prolobjectlink.prolog.Prolog;
-import org.prolobjectlink.prolog.PrologProvider;
-import org.prolobjectlink.prolog.PrologTerm;
-import org.prolobjectlink.prolog.jlog.JLog;
+
+import io.github.prolobjectlink.prolog.Prolog;
+import io.github.prolobjectlink.prolog.PrologProvider;
+import io.github.prolobjectlink.prolog.PrologTerm;
+import io.github.prolobjectlink.prolog.jlog.JLog;
 
 public class ObjectConverterTest extends BaseTest {
 

@@ -29,7 +29,8 @@ import java.lang.reflect.Field;
 import org.junit.Test;
 import org.prolobjectlink.BaseTest;
 import org.prolobjectlink.domain.geometry.Point;
-import org.prolobjectlink.prolog.PrologVariable;
+
+import io.github.prolobjectlink.prolog.PrologVariable;
 
 public class RenamerTest extends BaseTest {
 

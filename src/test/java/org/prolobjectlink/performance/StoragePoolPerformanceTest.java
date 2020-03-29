@@ -26,9 +26,10 @@ import org.prolobjectlink.db.StoragePool;
 import org.prolobjectlink.db.etc.Settings;
 import org.prolobjectlink.db.prolog.jlog.JLogContainerFactory;
 import org.prolobjectlink.domain.geometry.Point;
-import org.prolobjectlink.prolog.Prolog;
-import org.prolobjectlink.prolog.PrologProvider;
-import org.prolobjectlink.prolog.jlog.JLog;
+
+import io.github.prolobjectlink.prolog.Prolog;
+import io.github.prolobjectlink.prolog.PrologProvider;
+import io.github.prolobjectlink.prolog.jlog.JLog;
 
 public class StoragePoolPerformanceTest {
 

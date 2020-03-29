@@ -25,9 +25,10 @@ import org.prolobjectlink.db.ObjectConverter;
 import org.prolobjectlink.db.prolog.PrologDatabaseEngine;
 import org.prolobjectlink.db.prolog.PrologObjectConverter;
 import org.prolobjectlink.db.prolog.PrologProgrammer;
-import org.prolobjectlink.prolog.PrologProvider;
-import org.prolobjectlink.prolog.PrologTerm;
-import org.prolobjectlink.prolog.jlog.JLogEngine;
+
+import io.github.prolobjectlink.prolog.PrologProvider;
+import io.github.prolobjectlink.prolog.PrologTerm;
+import io.github.prolobjectlink.prolog.jlog.JLogEngine;
 
 public class JLogDatabaseEngine extends JLogEngine implements PrologDatabaseEngine {
 

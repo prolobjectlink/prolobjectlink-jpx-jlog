@@ -42,8 +42,9 @@ import org.prolobjectlink.domain.geometry.Point;
 import org.prolobjectlink.domain.geometry.Polygon;
 import org.prolobjectlink.domain.geometry.Segment;
 import org.prolobjectlink.domain.geometry.Tetragon;
-import org.prolobjectlink.prolog.PrologClause;
-import org.prolobjectlink.prolog.PrologEngine;
+
+import io.github.prolobjectlink.prolog.PrologClause;
+import io.github.prolobjectlink.prolog.PrologEngine;
 
 public class StoragePoolTest extends BaseTest {
 

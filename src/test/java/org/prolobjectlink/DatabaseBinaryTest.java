@@ -21,10 +21,10 @@
  */
 package org.prolobjectlink;
 
+import static io.github.prolobjectlink.prolog.PrologLogger.FILE_NOT_FOUND;
+import static io.github.prolobjectlink.prolog.PrologLogger.IO;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.prolobjectlink.prolog.PrologLogger.FILE_NOT_FOUND;
-import static org.prolobjectlink.prolog.PrologLogger.IO;
 
 import java.io.BufferedReader;
 import java.io.File;

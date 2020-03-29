@@ -25,8 +25,9 @@ import org.prolobjectlink.db.HierarchicalCache;
 import org.prolobjectlink.db.ObjectConverter;
 import org.prolobjectlink.db.etc.Settings;
 import org.prolobjectlink.db.prolog.PrologHierarchicalCache;
-import org.prolobjectlink.prolog.PrologProvider;
-import org.prolobjectlink.prolog.PrologTerm;
+
+import io.github.prolobjectlink.prolog.PrologProvider;
+import io.github.prolobjectlink.prolog.PrologTerm;
 
 public class JLogHierarchicalCache extends PrologHierarchicalCache implements HierarchicalCache {
 
