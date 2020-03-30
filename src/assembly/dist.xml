@@ -43,7 +43,7 @@
 		<!-- doc folder -->
 		<fileSet>
 			<directory>${project.basedir}/doc</directory>
-			<outputDirectory>doc</outputDirectory>
+			<outputDirectory>docs</outputDirectory>
 		</fileSet>
 
 		<!-- configuration properties folder -->
