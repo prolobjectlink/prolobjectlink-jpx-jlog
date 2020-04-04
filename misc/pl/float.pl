@@ -22,6 +22,6 @@
 
 :-consult('../../prt/prolog/lang/float.pl').
 
-float_parse_float(STRING,FLOAT):-
-	float(0, float),
-	float_parse_float(float, STRING, FLOAT).
+float_parse_float(STRING,FL):-
+	float(0, FLOAT),
+	float_parse_float(FLOAT, STRING, FL).
