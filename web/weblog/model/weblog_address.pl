@@ -1,4 +1,4 @@
-% Copyright (c) 2019 Prolobjectlink Project
+% Copyright (c) 2020 Prolobjectlink Project
 
 % Permission is hereby granted, free of charge, to any person obtaining a copy
 % of this software and associated documentation files (the "Software"), to deal
@@ -24,6 +24,9 @@
 
 :-consult('../../../web/weblog/model/weblog_address_dao.pl').
 
+weblog_address(ARG0, ARG1, ARG2, ARG3, ARG4, ARG5, OUT) :- 
+	object_new('weblog.model.WeblogAddress', '.'(ARG0, '.'(ARG1, '.'(ARG2, '.'(ARG3, '.'(ARG4, '.'(ARG5, [])))))), OUT).
+
 weblog_address(OUT) :- 
 	object_new('weblog.model.WeblogAddress', [], OUT).
 
@@ -39,14 +42,14 @@ weblog_address_get_class(REF, OUT) :-
 weblog_address_set_state(REF, ARG0) :- 
 	object_call(REF, setState, '.'(ARG0, []), _).
 
+weblog_address_set_street(REF, ARG0) :- 
+	object_call(REF, setStreet, '.'(ARG0, []), _).
+
 weblog_address_update(REF) :- 
 	object_call(REF, update, [], _).
 
 weblog_address_get_id(REF, OUT) :- 
 	object_call(REF, getId, [], OUT).
-
-weblog_address_set_street(REF, ARG0) :- 
-	object_call(REF, setStreet, '.'(ARG0, []), _).
 
 weblog_address_hash_code(REF, OUT) :- 
 	object_call(REF, hashCode, [], OUT).
@@ -69,11 +72,11 @@ weblog_address_notify_all(REF) :-
 weblog_address_delete(REF) :- 
 	object_call(REF, delete, [], _).
 
-weblog_address_equals(REF, ARG0, OUT) :- 
-	object_call(REF, equals, '.'(ARG0, []), OUT).
-
 weblog_address_notify(REF) :- 
 	object_call(REF, notify, [], _).
+
+weblog_address_equals(REF, ARG0, OUT) :- 
+	object_call(REF, equals, '.'(ARG0, []), OUT).
 
 weblog_address_get_state(REF, OUT) :- 
 	object_call(REF, getState, [], OUT).
@@ -90,11 +93,11 @@ weblog_address_set_zip(REF, ARG0) :-
 weblog_address_create(REF) :- 
 	object_call(REF, create, [], _).
 
-weblog_address_set_city(REF, ARG0) :- 
-	object_call(REF, setCity, '.'(ARG0, []), _).
-
 weblog_address_get_zip(REF, OUT) :- 
 	object_call(REF, getZip, [], OUT).
+
+weblog_address_set_city(REF, ARG0) :- 
+	object_call(REF, setCity, '.'(ARG0, []), _).
 
 weblog_address_to_string(REF, OUT) :- 
 	object_call(REF, toString, [], OUT).

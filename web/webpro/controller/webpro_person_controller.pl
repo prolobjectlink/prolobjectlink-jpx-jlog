@@ -93,10 +93,10 @@ webpro_person_create(LASTNAME, ADDRESS, SALT, IDNUMBER, PHOTO, WEIGHT, LOGINCOUN
 	webpro_person_create(ENTITY),
 	render('view/webpro_person/show.html').
 
-webpro_person_delete(ID, ENTITY) :- 
+webpro_person_delete(ID, LIST) :- 
 	integer_parse_int(ID, A),
 	webpro_person_retrieve_one(A, ENTITY),
 	webpro_person_delete(ENTITY),
-	webpro_person_retrieve_all(ENTITY),
+	webpro_person_retrieve_all(LIST),
 	render('view/webpro_person/list.html').
 

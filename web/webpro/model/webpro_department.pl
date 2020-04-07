@@ -1,4 +1,4 @@
-% Copyright (c) 2019 Prolobjectlink Project
+% Copyright (c) 2020 Prolobjectlink Project
 
 % Permission is hereby granted, free of charge, to any person obtaining a copy
 % of this software and associated documentation files (the "Software"), to deal
@@ -24,6 +24,9 @@
 
 :-consult('../../../web/webpro/model/webpro_department_dao.pl').
 
+webpro_department(ARG0, ARG1, OUT) :- 
+	object_new('webpro.model.WebproDepartment', '.'(ARG0, '.'(ARG1, [])), OUT).
+
 webpro_department(OUT) :- 
 	object_new('webpro.model.WebproDepartment', [], OUT).
 
@@ -42,20 +45,20 @@ webpro_department_wait(REF, ARG0) :-
 webpro_department_wait(REF, ARG0, ARG1) :- 
 	object_call(REF, wait, '.'(ARG0, '.'(ARG1, [])), _).
 
-webpro_department_update(REF) :- 
-	object_call(REF, update, [], _).
-
 webpro_department_notify_all(REF) :- 
 	object_call(REF, notifyAll, [], _).
+
+webpro_department_update(REF) :- 
+	object_call(REF, update, [], _).
 
 webpro_department_wait(REF) :- 
 	object_call(REF, wait, [], _).
 
-webpro_department_hash_code(REF, OUT) :- 
-	object_call(REF, hashCode, [], OUT).
-
 webpro_department_get_class(REF, OUT) :- 
 	object_call(REF, getClass, [], OUT).
+
+webpro_department_hash_code(REF, OUT) :- 
+	object_call(REF, hashCode, [], OUT).
 
 webpro_department_set_name(REF, ARG0) :- 
 	object_call(REF, setName, '.'(ARG0, []), _).
@@ -69,11 +72,11 @@ webpro_department_get_name(REF, OUT) :-
 webpro_department_notify(REF) :- 
 	object_call(REF, notify, [], _).
 
-webpro_department_to_string(REF, OUT) :- 
-	object_call(REF, toString, [], OUT).
-
 webpro_department_get_id(REF, OUT) :- 
 	object_call(REF, getId, [], OUT).
+
+webpro_department_to_string(REF, OUT) :- 
+	object_call(REF, toString, [], OUT).
 
 webpro_department_query_one(ARG0, OUT) :- 
 	webpro_department_dao(DAO),

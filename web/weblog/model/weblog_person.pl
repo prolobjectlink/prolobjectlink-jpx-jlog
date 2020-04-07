@@ -1,4 +1,4 @@
-% Copyright (c) 2019 Prolobjectlink Project
+% Copyright (c) 2020 Prolobjectlink Project
 
 % Permission is hereby granted, free of charge, to any person obtaining a copy
 % of this software and associated documentation files (the "Software"), to deal
@@ -24,6 +24,9 @@
 
 :-consult('../../../web/weblog/model/weblog_person_dao.pl').
 
+weblog_person(ARG0, ARG1, ARG2, ARG3, ARG4, ARG5, ARG6, ARG7, ARG8, ARG9, ARG10, ARG11, ARG12, ARG13, ARG14, ARG15, OUT) :- 
+	object_new('weblog.model.WeblogPerson', '.'(ARG0, '.'(ARG1, '.'(ARG2, '.'(ARG3, '.'(ARG4, '.'(ARG5, '.'(ARG6, '.'(ARG7, '.'(ARG8, '.'(ARG9, '.'(ARG10, '.'(ARG11, '.'(ARG12, '.'(ARG13, '.'(ARG14, '.'(ARG15, [])))))))))))))))), OUT).
+
 weblog_person(OUT) :- 
 	object_new('weblog.model.WeblogPerson', [], OUT).
 
@@ -36,14 +39,14 @@ weblog_person_get_id(REF, OUT) :-
 weblog_person_get_first_name(REF, OUT) :- 
 	object_call(REF, getFirstName, [], OUT).
 
-weblog_person_to_string(REF, OUT) :- 
-	object_call(REF, toString, [], OUT).
-
 weblog_person_set_salt(REF, ARG0) :- 
 	object_call(REF, setSalt, '.'(ARG0, []), _).
 
 weblog_person_set_address(REF, ARG0) :- 
 	object_call(REF, setAddress, '.'(ARG0, []), _).
+
+weblog_person_to_string(REF, OUT) :- 
+	object_call(REF, toString, [], OUT).
 
 weblog_person_get_pwd(REF, OUT) :- 
 	object_call(REF, getPwd, [], OUT).
@@ -78,11 +81,11 @@ weblog_person_get_heigth(REF, OUT) :-
 weblog_person_set_phone(REF, ARG0) :- 
 	object_call(REF, setPhone, '.'(ARG0, []), _).
 
-weblog_person_delete(REF) :- 
-	object_call(REF, delete, [], _).
-
 weblog_person_get_user(REF, OUT) :- 
 	object_call(REF, getUser, [], OUT).
+
+weblog_person_delete(REF) :- 
+	object_call(REF, delete, [], _).
 
 weblog_person_get_photo(REF, OUT) :- 
 	object_call(REF, getPhoto, [], OUT).
@@ -105,14 +108,14 @@ weblog_person_get_address(REF, OUT) :-
 weblog_person_set_company(REF, ARG0) :- 
 	object_call(REF, setCompany, '.'(ARG0, []), _).
 
+weblog_person_get_class(REF, OUT) :- 
+	object_call(REF, getClass, [], OUT).
+
 weblog_person_get_middle_name(REF, OUT) :- 
 	object_call(REF, getMiddleName, [], OUT).
 
 weblog_person_hash_code(REF, OUT) :- 
 	object_call(REF, hashCode, [], OUT).
-
-weblog_person_get_class(REF, OUT) :- 
-	object_call(REF, getClass, [], OUT).
 
 weblog_person_set_first_name(REF, ARG0) :- 
 	object_call(REF, setFirstName, '.'(ARG0, []), _).
@@ -120,14 +123,14 @@ weblog_person_set_first_name(REF, ARG0) :-
 weblog_person_get_last_name(REF, OUT) :- 
 	object_call(REF, getLastName, [], OUT).
 
+weblog_person_notify_all(REF) :- 
+	object_call(REF, notifyAll, [], _).
+
 weblog_person_create(REF) :- 
 	object_call(REF, create, [], _).
 
 weblog_person_set_email(REF, ARG0) :- 
 	object_call(REF, setEmail, '.'(ARG0, []), _).
-
-weblog_person_notify_all(REF) :- 
-	object_call(REF, notifyAll, [], _).
 
 weblog_person_update(REF) :- 
 	object_call(REF, update, [], _).
@@ -138,11 +141,11 @@ weblog_person_set_weight(REF, ARG0) :-
 weblog_person_set_pwd(REF, ARG0) :- 
 	object_call(REF, setPwd, '.'(ARG0, []), _).
 
-weblog_person_get_idnumber(REF, OUT) :- 
-	object_call(REF, getIdnumber, [], OUT).
-
 weblog_person_set_middle_name(REF, ARG0) :- 
 	object_call(REF, setMiddleName, '.'(ARG0, []), _).
+
+weblog_person_get_idnumber(REF, OUT) :- 
+	object_call(REF, getIdnumber, [], OUT).
 
 weblog_person_get_login_count(REF, OUT) :- 
 	object_call(REF, getLoginCount, [], OUT).

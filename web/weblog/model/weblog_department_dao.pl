@@ -1,4 +1,4 @@
-% Copyright (c) 2019 Prolobjectlink Project
+% Copyright (c) 2020 Prolobjectlink Project
 
 % Permission is hereby granted, free of charge, to any person obtaining a copy
 % of this software and associated documentation files (the "Software"), to deal
@@ -37,11 +37,11 @@ weblog_department_dao_notify_all(REF) :-
 weblog_department_dao_wait(REF) :- 
 	object_call(REF, wait, [], _).
 
-weblog_department_dao_create(REF, ARG0) :- 
-	object_call(REF, create, '.'(ARG0, []), _).
-
 weblog_department_dao_retrieve_all(REF, ARG0, ARG1, OUT) :- 
 	object_call(REF, retrieveAll, '.'(ARG0, '.'(ARG1, [])), OUT).
+
+weblog_department_dao_create(REF, ARG0) :- 
+	object_call(REF, create, '.'(ARG0, []), _).
 
 weblog_department_dao_retrieve_one(REF, ARG0, OUT) :- 
 	object_call(REF, retrieveOne, '.'(ARG0, []), OUT).

@@ -67,10 +67,10 @@ webpro_address_create(ZIP, COUNTRY, CITY, STREET, STATE, ENTITY) :-
 	webpro_address_create(ENTITY),
 	render('view/webpro_address/show.html').
 
-webpro_address_delete(ID, ENTITY) :- 
+webpro_address_delete(ID, LIST) :- 
 	integer_parse_int(ID, A),
 	webpro_address_retrieve_one(A, ENTITY),
 	webpro_address_delete(ENTITY),
-	webpro_address_retrieve_all(ENTITY),
+	webpro_address_retrieve_all(LIST),
 	render('view/webpro_address/list.html').
 

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd version="4.2.5" timestamp="2020-04-26T10:31:25.667">
+<file name="C:\Users\Jose Zalacain\Documents\eclipse-java-photon-workspace\prolobjectlink-jpx-jlog\src\main\java\io\github\prolobjectlink\db\prolog\jlog\JLogDatabaseConsole.java">
+<violation beginline="29" endline="29" begincolumn="1" endcolumn="70" rule="UnusedImports" ruleset="Import Statement Rules" package="io.github.prolobjectlink.db.prolog.jlog" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
+Avoid unused imports such as 'io.github.prolobjectlink.db.platform.linux.LinuxDatabaseServer'
+</violation>
+<violation beginline="30" endline="30" begincolumn="1" endcolumn="72" rule="UnusedImports" ruleset="Import Statement Rules" package="io.github.prolobjectlink.db.prolog.jlog" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
+Avoid unused imports such as 'io.github.prolobjectlink.db.platform.macosx.MacosxDatabaseServer'
+</violation>
+<violation beginline="31" endline="31" begincolumn="1" endcolumn="70" rule="UnusedImports" ruleset="Import Statement Rules" package="io.github.prolobjectlink.db.prolog.jlog" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#UnusedImports" priority="4">
+Avoid unused imports such as 'io.github.prolobjectlink.db.platform.win32.Win32DatabaseServer'
+</violation>
+</file>
+</pmd>

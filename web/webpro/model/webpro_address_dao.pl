@@ -1,4 +1,4 @@
-% Copyright (c) 2019 Prolobjectlink Project
+% Copyright (c) 2020 Prolobjectlink Project
 
 % Permission is hereby granted, free of charge, to any person obtaining a copy
 % of this software and associated documentation files (the "Software"), to deal
@@ -55,20 +55,20 @@ webpro_address_dao_retrieve_one(REF, ARG0, OUT) :-
 webpro_address_dao_query_one(REF, ARG0, OUT) :- 
 	object_call(REF, queryOne, '.'(ARG0, []), OUT).
 
-webpro_address_dao_close(REF) :- 
-	object_call(REF, close, [], _).
-
 webpro_address_dao_retrieve_all(REF, OUT) :- 
 	object_call(REF, retrieveAll, [], OUT).
+
+webpro_address_dao_close(REF) :- 
+	object_call(REF, close, [], _).
 
 webpro_address_dao_get_class(REF, OUT) :- 
 	object_call(REF, getClass, [], OUT).
 
-webpro_address_dao_query_all(REF, ARG0, OUT) :- 
-	object_call(REF, queryAll, '.'(ARG0, []), OUT).
-
 webpro_address_dao_retrieve_all(REF, ARG0, ARG1, OUT) :- 
 	object_call(REF, retrieveAll, '.'(ARG0, '.'(ARG1, [])), OUT).
+
+webpro_address_dao_query_all(REF, ARG0, OUT) :- 
+	object_call(REF, queryAll, '.'(ARG0, []), OUT).
 
 webpro_address_dao_hash_code(REF, OUT) :- 
 	object_call(REF, hashCode, [], OUT).
@@ -76,9 +76,9 @@ webpro_address_dao_hash_code(REF, OUT) :-
 webpro_address_dao_delete(REF, ARG0) :- 
 	object_call(REF, delete, '.'(ARG0, []), _).
 
-webpro_address_dao_notify(REF) :- 
-	object_call(REF, notify, [], _).
-
 webpro_address_dao_notify_all(REF) :- 
 	object_call(REF, notifyAll, [], _).
+
+webpro_address_dao_notify(REF) :- 
+	object_call(REF, notify, [], _).
 

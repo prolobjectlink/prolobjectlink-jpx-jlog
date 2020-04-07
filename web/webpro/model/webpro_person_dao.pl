@@ -1,4 +1,4 @@
-% Copyright (c) 2019 Prolobjectlink Project
+% Copyright (c) 2020 Prolobjectlink Project
 
 % Permission is hereby granted, free of charge, to any person obtaining a copy
 % of this software and associated documentation files (the "Software"), to deal
@@ -55,23 +55,23 @@ webpro_person_dao_wait(REF, ARG0) :-
 webpro_person_dao_close(REF) :- 
 	object_call(REF, close, [], _).
 
-webpro_person_dao_delete(REF, ARG0) :- 
-	object_call(REF, delete, '.'(ARG0, []), _).
-
 webpro_person_dao_retrieve_all(REF, OUT) :- 
 	object_call(REF, retrieveAll, [], OUT).
+
+webpro_person_dao_delete(REF, ARG0) :- 
+	object_call(REF, delete, '.'(ARG0, []), _).
 
 webpro_person_dao_retrieve_one(REF, ARG0, OUT) :- 
 	object_call(REF, retrieveOne, '.'(ARG0, []), OUT).
 
-webpro_person_dao_query_all(REF, ARG0, OUT) :- 
-	object_call(REF, queryAll, '.'(ARG0, []), OUT).
+webpro_person_dao_wait(REF) :- 
+	object_call(REF, wait, [], _).
 
 webpro_person_dao_retrieve_all(REF, ARG0, ARG1, OUT) :- 
 	object_call(REF, retrieveAll, '.'(ARG0, '.'(ARG1, [])), OUT).
 
-webpro_person_dao_wait(REF) :- 
-	object_call(REF, wait, [], _).
+webpro_person_dao_query_all(REF, ARG0, OUT) :- 
+	object_call(REF, queryAll, '.'(ARG0, []), OUT).
 
 webpro_person_dao_update(REF, ARG0) :- 
 	object_call(REF, update, '.'(ARG0, []), _).

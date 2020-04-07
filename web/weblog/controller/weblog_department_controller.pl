@@ -59,10 +59,10 @@ weblog_department_create(NAME, ENTITY) :-
 	weblog_department_create(ENTITY),
 	render('view/weblog_department/show.html').
 
-weblog_department_delete(ID, ENTITY) :- 
+weblog_department_delete(ID, LIST) :- 
 	integer_parse_int(ID, A),
 	weblog_department_retrieve_one(A, ENTITY),
 	weblog_department_delete(ENTITY),
-	weblog_department_retrieve_all(ENTITY),
+	weblog_department_retrieve_all(LIST),
 	render('view/weblog_department/list.html').
 

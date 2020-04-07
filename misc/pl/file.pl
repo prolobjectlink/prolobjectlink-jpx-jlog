@@ -23,7 +23,7 @@
 :-consult('../../obj/prolobject.pl').
 
 file(ARG0, OUT) :- 
-	object_new('org.prolobjectlink.web.io.ServerFile', '.'(ARG0, []), OUT).
+	object_new('io.github.prolobjectlink.web.io.ServerFile', '.'(ARG0, []), OUT).
 
 file_exists(REF, OUT) :- 
 	object_call(REF, exists, [], OUT).

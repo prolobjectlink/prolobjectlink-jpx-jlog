@@ -1,4 +1,4 @@
-% Copyright (c) 2019 Prolobjectlink Project
+% Copyright (c) 2020 Prolobjectlink Project
 
 % Permission is hereby granted, free of charge, to any person obtaining a copy
 % of this software and associated documentation files (the "Software"), to deal
@@ -24,23 +24,26 @@
 
 :-consult('../../../web/webpro/model/webpro_person_dao.pl').
 
+webpro_person(ARG0, ARG1, ARG2, ARG3, ARG4, ARG5, ARG6, ARG7, ARG8, ARG9, ARG10, ARG11, ARG12, ARG13, ARG14, ARG15, OUT) :- 
+	object_new('webpro.model.WebproPerson', '.'(ARG0, '.'(ARG1, '.'(ARG2, '.'(ARG3, '.'(ARG4, '.'(ARG5, '.'(ARG6, '.'(ARG7, '.'(ARG8, '.'(ARG9, '.'(ARG10, '.'(ARG11, '.'(ARG12, '.'(ARG13, '.'(ARG14, '.'(ARG15, [])))))))))))))))), OUT).
+
 webpro_person(OUT) :- 
 	object_new('webpro.model.WebproPerson', [], OUT).
-
-webpro_person_set_login_count(REF, ARG0) :- 
-	object_call(REF, setLoginCount, '.'(ARG0, []), _).
 
 webpro_person_get_photo(REF, OUT) :- 
 	object_call(REF, getPhoto, [], OUT).
 
+webpro_person_set_login_count(REF, ARG0) :- 
+	object_call(REF, setLoginCount, '.'(ARG0, []), _).
+
 webpro_person_set_heigth(REF, ARG0) :- 
 	object_call(REF, setHeigth, '.'(ARG0, []), _).
 
-webpro_person_get_id(REF, OUT) :- 
-	object_call(REF, getId, [], OUT).
-
 webpro_person_get_phone(REF, OUT) :- 
 	object_call(REF, getPhone, [], OUT).
+
+webpro_person_get_id(REF, OUT) :- 
+	object_call(REF, getId, [], OUT).
 
 webpro_person_set_salt(REF, ARG0) :- 
 	object_call(REF, setSalt, '.'(ARG0, []), _).
@@ -66,23 +69,23 @@ webpro_person_set_company(REF, ARG0) :-
 webpro_person_set_photo(REF, ARG0) :- 
 	object_call(REF, setPhoto, '.'(ARG0, []), _).
 
-webpro_person_to_string(REF, OUT) :- 
-	object_call(REF, toString, [], OUT).
+webpro_person_get_user(REF, OUT) :- 
+	object_call(REF, getUser, [], OUT).
 
 webpro_person_get_heigth(REF, OUT) :- 
 	object_call(REF, getHeigth, [], OUT).
 
-webpro_person_get_user(REF, OUT) :- 
-	object_call(REF, getUser, [], OUT).
+webpro_person_to_string(REF, OUT) :- 
+	object_call(REF, toString, [], OUT).
 
 webpro_person_set_id(REF, ARG0) :- 
 	object_call(REF, setId, '.'(ARG0, []), _).
 
-webpro_person_set_email(REF, ARG0) :- 
-	object_call(REF, setEmail, '.'(ARG0, []), _).
-
 webpro_person_get_pwd(REF, OUT) :- 
 	object_call(REF, getPwd, [], OUT).
+
+webpro_person_set_email(REF, ARG0) :- 
+	object_call(REF, setEmail, '.'(ARG0, []), _).
 
 webpro_person_create(REF) :- 
 	object_call(REF, create, [], _).
@@ -90,14 +93,14 @@ webpro_person_create(REF) :-
 webpro_person_get_first_name(REF, OUT) :- 
 	object_call(REF, getFirstName, [], OUT).
 
+webpro_person_get_class(REF, OUT) :- 
+	object_call(REF, getClass, [], OUT).
+
 webpro_person_get_login_count(REF, OUT) :- 
 	object_call(REF, getLoginCount, [], OUT).
 
 webpro_person_hash_code(REF, OUT) :- 
 	object_call(REF, hashCode, [], OUT).
-
-webpro_person_get_class(REF, OUT) :- 
-	object_call(REF, getClass, [], OUT).
 
 webpro_person_get_weight(REF, OUT) :- 
 	object_call(REF, getWeight, [], OUT).
@@ -132,26 +135,26 @@ webpro_person_get_address(REF, OUT) :-
 webpro_person_set_address(REF, ARG0) :- 
 	object_call(REF, setAddress, '.'(ARG0, []), _).
 
-webpro_person_set_first_name(REF, ARG0) :- 
-	object_call(REF, setFirstName, '.'(ARG0, []), _).
-
 webpro_person_notify_all(REF) :- 
 	object_call(REF, notifyAll, [], _).
+
+webpro_person_set_first_name(REF, ARG0) :- 
+	object_call(REF, setFirstName, '.'(ARG0, []), _).
 
 webpro_person_get_company(REF, OUT) :- 
 	object_call(REF, getCompany, [], OUT).
 
+webpro_person_get_salt(REF, OUT) :- 
+	object_call(REF, getSalt, [], OUT).
+
 webpro_person_set_user(REF, ARG0) :- 
 	object_call(REF, setUser, '.'(ARG0, []), _).
-
-webpro_person_set_weight(REF, ARG0) :- 
-	object_call(REF, setWeight, '.'(ARG0, []), _).
 
 webpro_person_set_middle_name(REF, ARG0) :- 
 	object_call(REF, setMiddleName, '.'(ARG0, []), _).
 
-webpro_person_get_salt(REF, OUT) :- 
-	object_call(REF, getSalt, [], OUT).
+webpro_person_set_weight(REF, ARG0) :- 
+	object_call(REF, setWeight, '.'(ARG0, []), _).
 
 webpro_person_get_idnumber(REF, OUT) :- 
 	object_call(REF, getIdnumber, [], OUT).

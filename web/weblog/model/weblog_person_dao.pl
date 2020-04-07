@@ -1,4 +1,4 @@
-% Copyright (c) 2019 Prolobjectlink Project
+% Copyright (c) 2020 Prolobjectlink Project
 
 % Permission is hereby granted, free of charge, to any person obtaining a copy
 % of this software and associated documentation files (the "Software"), to deal
@@ -37,11 +37,11 @@ weblog_person_dao_get_class(REF, OUT) :-
 weblog_person_dao_retrieve_all(REF, OUT) :- 
 	object_call(REF, retrieveAll, [], OUT).
 
-weblog_person_dao_create(REF, ARG0) :- 
-	object_call(REF, create, '.'(ARG0, []), _).
-
 weblog_person_dao_hash_code(REF, OUT) :- 
 	object_call(REF, hashCode, [], OUT).
+
+weblog_person_dao_create(REF, ARG0) :- 
+	object_call(REF, create, '.'(ARG0, []), _).
 
 weblog_person_dao_query_one(REF, ARG0, OUT) :- 
 	object_call(REF, queryOne, '.'(ARG0, []), OUT).
@@ -70,15 +70,15 @@ weblog_person_dao_query_all(REF, ARG0, OUT) :-
 weblog_person_dao_equals(REF, ARG0, OUT) :- 
 	object_call(REF, equals, '.'(ARG0, []), OUT).
 
-weblog_person_dao_retrieve_one(REF, ARG0, OUT) :- 
-	object_call(REF, retrieveOne, '.'(ARG0, []), OUT).
-
 weblog_person_dao_wait(REF, ARG0) :- 
 	object_call(REF, wait, '.'(ARG0, []), _).
 
-weblog_person_dao_close(REF) :- 
-	object_call(REF, close, [], _).
+weblog_person_dao_retrieve_one(REF, ARG0, OUT) :- 
+	object_call(REF, retrieveOne, '.'(ARG0, []), OUT).
 
 weblog_person_dao_wait(REF) :- 
 	object_call(REF, wait, [], _).
+
+weblog_person_dao_close(REF) :- 
+	object_call(REF, close, [], _).
 

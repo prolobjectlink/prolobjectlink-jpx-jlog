@@ -93,10 +93,10 @@ weblog_person_create(LASTNAME, ADDRESS, SALT, IDNUMBER, PHOTO, WEIGHT, LOGINCOUN
 	weblog_person_create(ENTITY),
 	render('view/weblog_person/show.html').
 
-weblog_person_delete(ID, ENTITY) :- 
+weblog_person_delete(ID, LIST) :- 
 	integer_parse_int(ID, A),
 	weblog_person_retrieve_one(A, ENTITY),
 	weblog_person_delete(ENTITY),
-	weblog_person_retrieve_all(ENTITY),
+	weblog_person_retrieve_all(LIST),
 	render('view/weblog_person/list.html').
 

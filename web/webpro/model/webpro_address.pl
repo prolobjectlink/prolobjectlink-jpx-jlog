@@ -1,4 +1,4 @@
-% Copyright (c) 2019 Prolobjectlink Project
+% Copyright (c) 2020 Prolobjectlink Project
 
 % Permission is hereby granted, free of charge, to any person obtaining a copy
 % of this software and associated documentation files (the "Software"), to deal
@@ -27,6 +27,9 @@
 webpro_address(OUT) :- 
 	object_new('webpro.model.WebproAddress', [], OUT).
 
+webpro_address(ARG0, ARG1, ARG2, ARG3, ARG4, ARG5, OUT) :- 
+	object_new('webpro.model.WebproAddress', '.'(ARG0, '.'(ARG1, '.'(ARG2, '.'(ARG3, '.'(ARG4, '.'(ARG5, [])))))), OUT).
+
 webpro_address_delete(REF) :- 
 	object_call(REF, delete, [], _).
 
@@ -51,23 +54,23 @@ webpro_address_notify_all(REF) :-
 webpro_address_get_country(REF, OUT) :- 
 	object_call(REF, getCountry, [], OUT).
 
-webpro_address_set_city(REF, ARG0) :- 
-	object_call(REF, setCity, '.'(ARG0, []), _).
+webpro_address_get_class(REF, OUT) :- 
+	object_call(REF, getClass, [], OUT).
 
 webpro_address_wait(REF) :- 
 	object_call(REF, wait, [], _).
 
-webpro_address_get_class(REF, OUT) :- 
-	object_call(REF, getClass, [], OUT).
+webpro_address_set_city(REF, ARG0) :- 
+	object_call(REF, setCity, '.'(ARG0, []), _).
 
 webpro_address_update(REF) :- 
 	object_call(REF, update, [], _).
 
-webpro_address_create(REF) :- 
-	object_call(REF, create, [], _).
-
 webpro_address_hash_code(REF, OUT) :- 
 	object_call(REF, hashCode, [], OUT).
+
+webpro_address_create(REF) :- 
+	object_call(REF, create, [], _).
 
 webpro_address_set_street(REF, ARG0) :- 
 	object_call(REF, setStreet, '.'(ARG0, []), _).
@@ -90,11 +93,11 @@ webpro_address_get_id(REF, OUT) :-
 webpro_address_get_city(REF, OUT) :- 
 	object_call(REF, getCity, [], OUT).
 
-webpro_address_to_string(REF, OUT) :- 
-	object_call(REF, toString, [], OUT).
-
 webpro_address_notify(REF) :- 
 	object_call(REF, notify, [], _).
+
+webpro_address_to_string(REF, OUT) :- 
+	object_call(REF, toString, [], OUT).
 
 webpro_address_equals(REF, ARG0, OUT) :- 
 	object_call(REF, equals, '.'(ARG0, []), OUT).

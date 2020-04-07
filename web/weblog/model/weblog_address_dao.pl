@@ -1,4 +1,4 @@
-% Copyright (c) 2019 Prolobjectlink Project
+% Copyright (c) 2020 Prolobjectlink Project
 
 % Permission is hereby granted, free of charge, to any person obtaining a copy
 % of this software and associated documentation files (the "Software"), to deal
@@ -28,17 +28,17 @@ weblog_address_dao(OUT) :-
 weblog_address_dao_query_all(REF, ARG0, OUT) :- 
 	object_call(REF, queryAll, '.'(ARG0, []), OUT).
 
-weblog_address_dao_query_one(REF, ARG0, OUT) :- 
-	object_call(REF, queryOne, '.'(ARG0, []), OUT).
-
 weblog_address_dao_notify_all(REF) :- 
 	object_call(REF, notifyAll, [], _).
 
-weblog_address_dao_close(REF) :- 
-	object_call(REF, close, [], _).
+weblog_address_dao_query_one(REF, ARG0, OUT) :- 
+	object_call(REF, queryOne, '.'(ARG0, []), OUT).
 
 weblog_address_dao_query_all(REF, ARG0, ARG1, ARG2, OUT) :- 
 	object_call(REF, queryAll, '.'(ARG0, '.'(ARG1, '.'(ARG2, []))), OUT).
+
+weblog_address_dao_close(REF) :- 
+	object_call(REF, close, [], _).
 
 weblog_address_dao_retrieve_one(REF, ARG0, OUT) :- 
 	object_call(REF, retrieveOne, '.'(ARG0, []), OUT).

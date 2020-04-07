@@ -59,10 +59,10 @@ webpro_department_create(NAME, ENTITY) :-
 	webpro_department_create(ENTITY),
 	render('view/webpro_department/show.html').
 
-webpro_department_delete(ID, ENTITY) :- 
+webpro_department_delete(ID, LIST) :- 
 	integer_parse_int(ID, A),
 	webpro_department_retrieve_one(A, ENTITY),
 	webpro_department_delete(ENTITY),
-	webpro_department_retrieve_all(ENTITY),
+	webpro_department_retrieve_all(LIST),
 	render('view/webpro_department/list.html').
 

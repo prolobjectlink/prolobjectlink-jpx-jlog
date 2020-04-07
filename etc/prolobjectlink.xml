@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-<entry key="org.prolobjectlink.db.etc.containerFactory">org.prolobjectlink.db.prolog.jlog.JLogContainerFactory</entry>
-<entry key="org.prolobjectlink.db.etc.password"/>
-<entry key="org.prolobjectlink.db.etc.lock.granularity">80</entry>
-<entry key="org.prolobjectlink.db.etc.lock.timegap">1</entry>
-<entry key="org.prolobjectlink.db.etc.prologProvider">org.prolobjectlink.db.prolog.jlog.JLogDatabaseProvider</entry>
-<entry key="org.prolobjectlink.db.etc.storage.mode">STORAGE_POOL</entry>
-<entry key="org.prolobjectlink.db.etc.server.port">5370</entry>
-<entry key="org.prolobjectlink.db.etc.lock.sleep">40</entry>
-<entry key="org.prolobjectlink.db.etc.user">sa</entry>
+<entry key="io.github.prolobjectlink.db.etc.containerFactory">io.github.prolobjectlink.db.prolog.jlog.JLogContainerFactory</entry>
+<entry key="io.github.prolobjectlink.db.etc.prologProvider">io.github.prolobjectlink.db.prolog.jlog.JLogDatabaseProvider</entry>
+<entry key="io.github.prolobjectlink.db.etc.lock.granularity">80</entry>
+<entry key="io.github.prolobjectlink.db.etc.password"/>
+<entry key="io.github.prolobjectlink.db.etc.server.port">5370</entry>
+<entry key="io.github.prolobjectlink.db.etc.storage.mode">STORAGE_POOL</entry>
+<entry key="io.github.prolobjectlink.db.etc.lock.sleep">40</entry>
+<entry key="io.github.prolobjectlink.db.etc.user">sa</entry>
+<entry key="io.github.prolobjectlink.db.etc.lock.timegap">1</entry>
 </properties>

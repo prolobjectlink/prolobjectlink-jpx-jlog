@@ -1,4 +1,4 @@
-% Copyright (c) 2019 Prolobjectlink Project
+% Copyright (c) 2020 Prolobjectlink Project
 
 % Permission is hereby granted, free of charge, to any person obtaining a copy
 % of this software and associated documentation files (the "Software"), to deal
@@ -27,6 +27,9 @@
 weblog_department(OUT) :- 
 	object_new('weblog.model.WeblogDepartment', [], OUT).
 
+weblog_department(ARG0, ARG1, OUT) :- 
+	object_new('weblog.model.WeblogDepartment', '.'(ARG0, '.'(ARG1, [])), OUT).
+
 weblog_department_set_name(REF, ARG0) :- 
 	object_call(REF, setName, '.'(ARG0, []), _).
 
@@ -54,17 +57,17 @@ weblog_department_wait(REF, ARG0, ARG1) :-
 weblog_department_get_id(REF, OUT) :- 
 	object_call(REF, getId, [], OUT).
 
-weblog_department_equals(REF, ARG0, OUT) :- 
-	object_call(REF, equals, '.'(ARG0, []), OUT).
-
 weblog_department_get_class(REF, OUT) :- 
 	object_call(REF, getClass, [], OUT).
 
-weblog_department_create(REF) :- 
-	object_call(REF, create, [], _).
+weblog_department_equals(REF, ARG0, OUT) :- 
+	object_call(REF, equals, '.'(ARG0, []), OUT).
 
 weblog_department_hash_code(REF, OUT) :- 
 	object_call(REF, hashCode, [], OUT).
+
+weblog_department_create(REF) :- 
+	object_call(REF, create, [], _).
 
 weblog_department_update(REF) :- 
 	object_call(REF, update, [], _).

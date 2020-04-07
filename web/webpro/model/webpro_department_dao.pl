@@ -1,4 +1,4 @@
-% Copyright (c) 2019 Prolobjectlink Project
+% Copyright (c) 2020 Prolobjectlink Project
 
 % Permission is hereby granted, free of charge, to any person obtaining a copy
 % of this software and associated documentation files (the "Software"), to deal
@@ -55,11 +55,11 @@ webpro_department_dao_retrieve_all(REF, ARG0, ARG1, OUT) :-
 webpro_department_dao_retrieve_one(REF, ARG0, OUT) :- 
 	object_call(REF, retrieveOne, '.'(ARG0, []), OUT).
 
-webpro_department_dao_delete(REF, ARG0) :- 
-	object_call(REF, delete, '.'(ARG0, []), _).
-
 webpro_department_dao_retrieve_all(REF, OUT) :- 
 	object_call(REF, retrieveAll, [], OUT).
+
+webpro_department_dao_delete(REF, ARG0) :- 
+	object_call(REF, delete, '.'(ARG0, []), _).
 
 webpro_department_dao_equals(REF, ARG0, OUT) :- 
 	object_call(REF, equals, '.'(ARG0, []), OUT).
@@ -70,11 +70,11 @@ webpro_department_dao_wait(REF, ARG0, ARG1) :-
 webpro_department_dao_hash_code(REF, OUT) :- 
 	object_call(REF, hashCode, [], OUT).
 
-webpro_department_dao_wait(REF, ARG0) :- 
-	object_call(REF, wait, '.'(ARG0, []), _).
-
 webpro_department_dao_get_class(REF, OUT) :- 
 	object_call(REF, getClass, [], OUT).
+
+webpro_department_dao_wait(REF, ARG0) :- 
+	object_call(REF, wait, '.'(ARG0, []), _).
 
 webpro_department_dao_notify_all(REF) :- 
 	object_call(REF, notifyAll, [], _).

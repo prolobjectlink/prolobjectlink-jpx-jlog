@@ -1,0 +1,6 @@
+'io.github.prolobjectlink.domain.geometry.Segment'(ab,'io.github.prolobjectlink.domain.geometry.Point'(a,3,14),'io.github.prolobjectlink.domain.geometry.Point'(b,3,14)).
+'io.github.prolobjectlink.domain.geometry.Segment'(bc,'io.github.prolobjectlink.domain.geometry.Point'(b,3,14),'io.github.prolobjectlink.domain.geometry.Point'(c,3,14)).
+'io.github.prolobjectlink.domain.geometry.Segment'(ca,'io.github.prolobjectlink.domain.geometry.Point'(c,3,14),'io.github.prolobjectlink.domain.geometry.Point'(a,3,14)).
+'io.github.prolobjectlink.domain.geometry.Segment'(ab,'io.github.prolobjectlink.domain.geometry.Point'(a,6,28),'io.github.prolobjectlink.domain.geometry.Point'(b,6,28)).
+'io.github.prolobjectlink.domain.geometry.Segment'(bc,'io.github.prolobjectlink.domain.geometry.Point'(b,6,28),'io.github.prolobjectlink.domain.geometry.Point'(c,6,28)).
+'io.github.prolobjectlink.domain.geometry.Segment'(ca,'io.github.prolobjectlink.domain.geometry.Point'(c,6,28),'io.github.prolobjectlink.domain.geometry.Point'(a,6,28)).

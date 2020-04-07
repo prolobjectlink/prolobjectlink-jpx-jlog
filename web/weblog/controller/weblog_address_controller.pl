@@ -67,10 +67,10 @@ weblog_address_create(ZIP, COUNTRY, CITY, STREET, STATE, ENTITY) :-
 	weblog_address_create(ENTITY),
 	render('view/weblog_address/show.html').
 
-weblog_address_delete(ID, ENTITY) :- 
+weblog_address_delete(ID, LIST) :- 
 	integer_parse_int(ID, A),
 	weblog_address_retrieve_one(A, ENTITY),
 	weblog_address_delete(ENTITY),
-	weblog_address_retrieve_all(ENTITY),
+	weblog_address_retrieve_all(LIST),
 	render('view/weblog_address/list.html').
 
